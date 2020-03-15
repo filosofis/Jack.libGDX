@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.TimeUtils;
@@ -19,14 +20,15 @@ import static com.olundqvist.woody.util.Constants.JACK_DAMPING;
 import static com.olundqvist.woody.util.Constants.JACK_WIDTH;
 import static com.olundqvist.woody.util.Constants.JUMP_SPEED;
 import static com.olundqvist.woody.util.Enums.JumpState.GROUNDED;
+import static java.lang.Enum.valueOf;
 
 
 public class Jack {
     public static final String TAG = Jack.class.getName();
 
     private Vector2 spawnLocation;
-    public Vector2 position;
-    public Vector2 velocity;
+    private Vector2 position;
+    private Vector2 velocity;
     private Direction facing;
     private WalkState walkState;
     private JumpState jumpState;
@@ -83,60 +85,71 @@ public class Jack {
         bounds = new Rectangle(position.x, position.y, Constants.JACK_WIDTH, Constants.JACK_HEIGHT);
     }
 
-    // TODO: Fix the landing bounce
+    private void updateState(){
+        if(velocity.y < 0){
+            animationState = AnimState.FALL;
+        }else if(velocity.y > 0){
+            animationState = AnimState.JUMP;
+        }else{
+            animationState = AnimState.IDLE;
+        }
+        if(jumpState == GROUNDED){
+            if(Math.abs(velocity.x)>0){
+                animationState = AnimState.RUN;
+            }
+        }
+    }
+    // TODO: Fix collisions
     public void update(float delta){
+  //      Gdx.app.log(TAG, "Y = " + velocity.y);
+        handleInput();
         velocity.y -= Constants.GRAVITY;
-        Vector2 bouncePosition = position;
-        bounds.setPosition(position.mulAdd(velocity, delta));
-
-        Rectangle collisionRect = level.collideY(velocity, bounds, delta);
+        velocity.scl(delta);
+        bounds.setPosition(position);
+        bounds.y += velocity.y;
+        Rectangle collisionRect = level.collideY(velocity, bounds);
         //Vertical Collision
         if(collisionRect != null){
-            //Gdx.app.log(TAG, "Collision Y" + position.y);
-            //falling
             if(velocity.y < 0){
                 position.y = collisionRect.y + collisionRect.height;
-                //Gdx.app.log(TAG, "Landed on platform");
                 land();
             }else{ //jumping
                 position.y = collisionRect.y - Constants.JACK_HEIGHT;
                 velocity.y = 0;
             }
-        }else if(position.y < 10){
+        }else if(bounds.y < 10){
             position.y = 10;
             land();
         }
 
-        //Animation states
-        animationState = AnimState.IDLE;
-        if(velocity.y < 0){
-            animationState = AnimState.FALL;
-        }else if(velocity.y > 0){
-            animationState = AnimState.JUMP;
-        }
-        handleInput(delta);
-
-        collisionRect = level.collideX(velocity, bounds, delta);
+        collisionRect = level.collideX(velocity, bounds);
         if(collisionRect != null){
-            //Gdx.app.log(TAG, "Collision X " + position.x);
-            //Moving left
             if(velocity.x < 0){
-                position.x = collisionRect.x + collisionRect.width;
                 velocity.x = 0;
             }else{//moving right
-                position.x = collisionRect.x - (JACK_WIDTH);
                 velocity.x = 0;
             }
-
         }
-
+        updateState();
+        position.add(velocity);
+        velocity.scl(1/delta);
         dampen();
     }
-    private void dampen(){
-        velocity.x *= JACK_DAMPING;
+
+    private void land() {
+        velocity.y = 0;
+        jumpState = GROUNDED;
     }
 
-    private void handleInput(float delta){
+    private void dampen(){
+        if(Math.abs(velocity.x) < 1){
+            velocity.x = 0;
+        }else{
+            velocity.x *= JACK_DAMPING;
+        }
+    }
+
+    private void handleInput(){
         left = Gdx.input.isKeyPressed(Keys.LEFT);
         right = Gdx.input.isKeyPressed(Keys.RIGHT);
 
@@ -154,9 +167,6 @@ public class Jack {
                 Gdx.app.log(TAG, "Jumped");
             }
         }
-        if(Gdx.input.isKeyJustPressed(Keys.X)){
-            level.testTiles();
-        }
     }
 
     private void move(Direction direction){
@@ -170,32 +180,9 @@ public class Jack {
                 facing = Direction.RIGHT;
                 break;
         }
-
-        if(jumpState == GROUNDED){
-            animationState = AnimState.RUN;
-        }
     }
 
-    public Direction getFacing(){
-        return facing;
-    }
     public Vector2 getPosition(){
         return position;
-    }
-    public Vector2 getVelocity(){
-        return velocity;
-    }
-    public void setPosition(float x, float y){
-        position.x = x;
-        position.y = y;
-    }
-    public void land() {
-        velocity.y = 0;
-        jumpState = GROUNDED;
-    }
-
-    public void setVelocity(float x, float y) {
-        velocity.x = x;
-        velocity.y = y;
     }
 }

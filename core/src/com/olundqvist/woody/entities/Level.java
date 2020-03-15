@@ -83,16 +83,14 @@ public class Level {
         }
     }
     //TODO: Use rectpool for emeny bounds
-    public Rectangle collideY(Vector2 velocity, Rectangle bounds, float delta){
+    public Rectangle collideY(Vector2 velocity, Rectangle bounds){
         int startX, startY, endX, endY;
         startX = (int)bounds.x;
         endX = (int)(bounds.x + bounds.height);
-        //velocity.scl(delta);
-        //+velocity?
         if(velocity.y > 0){
-            startY = endY = (int)(bounds.y + bounds.height + velocity.y*delta);
+            startY = endY = (int)(bounds.y + bounds.height + velocity.y);
         }else{
-            startY = endY = (int)(bounds.y + velocity.y*delta);
+            startY = endY = (int)(bounds.y + velocity.y);
         }
 
         getTiles(startX/16, startY/16, endX/16, endY/16);
@@ -104,19 +102,18 @@ public class Level {
         return null;
     }
 
-    public Rectangle collideX(Vector2 velocity, Rectangle bounds, float delta){
+    public Rectangle collideX(Vector2 velocity, Rectangle bounds){
         int startX, startY, endX, endY;
         startY = (int)bounds.y;
         endY = (int)(bounds.y + bounds.width);
 
         if(velocity.x > 0){
-            startX = endX = (int)(bounds.x + bounds.width + velocity.x*delta);
+            startX = endX = (int)(bounds.x + bounds.width + velocity.x);
         }else{
-            startX = endX = (int)(bounds.x + velocity.x*delta);
+            startX = endX = (int)(bounds.x + velocity.x);
         }
 
-        bounds.y +=2;
-        //bounds.height -=1;
+
         getTiles(startX/16, startY/16, endX/16, endY/16);
         for(Rectangle tile : tiles){
             if(bounds.overlaps(tile)){
