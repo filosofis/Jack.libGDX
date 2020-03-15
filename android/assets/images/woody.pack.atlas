@@ -1,0 +1,359 @@
+
+woody.pack.png
+size: 128,256
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+woody/woody_falling0
+  rotate: false
+  xy: 2, 77
+  size: 22, 37
+  orig: 22, 37
+  offset: 0, 0
+  index: -1
+woody/woody_falling1
+  rotate: false
+  xy: 26, 121
+  size: 22, 37
+  orig: 22, 37
+  offset: 0, 0
+  index: -1
+woody/woody_grab0
+  rotate: false
+  xy: 2, 204
+  size: 22, 42
+  orig: 22, 42
+  offset: 0, 0
+  index: -1
+woody/woody_grab1
+  rotate: false
+  xy: 2, 160
+  size: 22, 42
+  orig: 22, 42
+  offset: 0, 0
+  index: -1
+woody/woody_grab2
+  rotate: false
+  xy: 26, 204
+  size: 22, 42
+  orig: 22, 42
+  offset: 0, 0
+  index: -1
+woody/woody_grab3
+  rotate: false
+  xy: 2, 116
+  size: 22, 42
+  orig: 22, 42
+  offset: 0, 0
+  index: -1
+woody/woody_grab4
+  rotate: false
+  xy: 26, 160
+  size: 22, 42
+  orig: 22, 42
+  offset: 0, 0
+  index: -1
+woody/woody_grab5
+  rotate: false
+  xy: 50, 204
+  size: 22, 42
+  orig: 22, 42
+  offset: 0, 0
+  index: -1
+woody/woody_idle00
+  rotate: false
+  xy: 2, 40
+  size: 21, 35
+  orig: 21, 35
+  offset: 0, 0
+  index: -1
+woody/woody_idle01
+  rotate: false
+  xy: 26, 84
+  size: 21, 35
+  orig: 21, 35
+  offset: 0, 0
+  index: -1
+woody/woody_idle02
+  rotate: false
+  xy: 50, 128
+  size: 21, 35
+  orig: 21, 35
+  offset: 0, 0
+  index: -1
+woody/woody_idle03
+  rotate: false
+  xy: 2, 3
+  size: 21, 35
+  orig: 21, 35
+  offset: 0, 0
+  index: -1
+woody/woody_idle04
+  rotate: false
+  xy: 25, 2
+  size: 21, 35
+  orig: 21, 35
+  offset: 0, 0
+  index: -1
+woody/woody_idle05
+  rotate: false
+  xy: 49, 84
+  size: 21, 35
+  orig: 21, 35
+  offset: 0, 0
+  index: -1
+woody/woody_idle06
+  rotate: false
+  xy: 48, 11
+  size: 21, 35
+  orig: 21, 35
+  offset: 0, 0
+  index: -1
+woody/woody_idle07
+  rotate: false
+  xy: 73, 128
+  size: 21, 35
+  orig: 21, 35
+  offset: 0, 0
+  index: -1
+woody/woody_idle08
+  rotate: false
+  xy: 72, 91
+  size: 21, 35
+  orig: 21, 35
+  offset: 0, 0
+  index: -1
+woody/woody_idle09
+  rotate: false
+  xy: 71, 47
+  size: 21, 35
+  orig: 21, 35
+  offset: 0, 0
+  index: -1
+woody/woody_idle10
+  rotate: false
+  xy: 71, 10
+  size: 21, 35
+  orig: 21, 35
+  offset: 0, 0
+  index: -1
+woody/woody_idle11
+  rotate: false
+  xy: 95, 91
+  size: 21, 35
+  orig: 21, 35
+  offset: 0, 0
+  index: -1
+woody/woody_jumping
+  rotate: false
+  xy: 25, 39
+  size: 19, 36
+  orig: 19, 36
+  offset: 0, 0
+  index: -1
+woody/woody_landing
+  rotate: false
+  xy: 50, 165
+  size: 22, 37
+  orig: 22, 37
+  offset: 0, 0
+  index: -1
+woody/woody_run0
+  rotate: false
+  xy: 74, 212
+  size: 23, 34
+  orig: 23, 34
+  offset: 0, 0
+  index: -1
+woody/woody_run1
+  rotate: false
+  xy: 74, 176
+  size: 23, 34
+  orig: 23, 34
+  offset: 0, 0
+  index: -1
+woody/woody_run2
+  rotate: false
+  xy: 99, 212
+  size: 23, 34
+  orig: 23, 34
+  offset: 0, 0
+  index: -1
+woody/woody_run3
+  rotate: false
+  xy: 99, 176
+  size: 23, 34
+  orig: 23, 34
+  offset: 0, 0
+  index: -1
+woody/woody_run4
+  rotate: false
+  xy: 46, 48
+  size: 23, 34
+  orig: 23, 34
+  offset: 0, 0
+  index: -1
+woody/woody_run5
+  rotate: false
+  xy: 96, 140
+  size: 23, 34
+  orig: 23, 34
+  offset: 0, 0
+  index: -1
+woody/woody_run6
+  rotate: false
+  xy: 94, 55
+  size: 23, 34
+  orig: 23, 34
+  offset: 0, 0
+  index: -1
+woody/woody_run7
+  rotate: false
+  xy: 94, 19
+  size: 23, 34
+  orig: 23, 34
+  offset: 0, 0
+  index: -1
+
+woody.pack2.png
+size: 1024,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+background/Layer_0000
+  rotate: false
+  xy: 2, 2
+  size: 928, 793
+  orig: 928, 793
+  offset: 0, 0
+  index: 9
+
+woody.pack3.png
+size: 1024,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+background/Layer_0001
+  rotate: false
+  xy: 2, 2
+  size: 928, 793
+  orig: 928, 793
+  offset: 0, 0
+  index: 8
+
+woody.pack4.png
+size: 1024,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+background/Layer_0002
+  rotate: false
+  xy: 2, 2
+  size: 928, 793
+  orig: 928, 793
+  offset: 0, 0
+  index: 7
+
+woody.pack5.png
+size: 1024,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+background/Layer_0003
+  rotate: false
+  xy: 2, 2
+  size: 928, 793
+  orig: 928, 793
+  offset: 0, 0
+  index: 6
+
+woody.pack6.png
+size: 1024,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+background/Layer_0004_Lights
+  rotate: false
+  xy: 2, 2
+  size: 928, 793
+  orig: 928, 793
+  offset: 0, 0
+  index: -1
+
+woody.pack7.png
+size: 1024,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+background/Layer_0005
+  rotate: false
+  xy: 2, 2
+  size: 928, 793
+  orig: 928, 793
+  offset: 0, 0
+  index: 5
+
+woody.pack8.png
+size: 1024,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+background/Layer_0006
+  rotate: false
+  xy: 2, 2
+  size: 928, 793
+  orig: 928, 793
+  offset: 0, 0
+  index: 4
+
+woody.pack9.png
+size: 1024,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+background/Layer_0007_Lights
+  rotate: false
+  xy: 2, 2
+  size: 928, 793
+  orig: 928, 793
+  offset: 0, 0
+  index: -1
+
+woody.pack10.png
+size: 1024,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+background/Layer_0008
+  rotate: false
+  xy: 2, 2
+  size: 928, 793
+  orig: 928, 793
+  offset: 0, 0
+  index: 3
+
+woody.pack11.png
+size: 1024,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+background/Layer_0009
+  rotate: false
+  xy: 2, 2
+  size: 928, 793
+  orig: 928, 793
+  offset: 0, 0
+  index: 2
+
+woody.pack12.png
+size: 1024,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+background/Layer_0010
+  rotate: false
+  xy: 2, 2
+  size: 928, 793
+  orig: 928, 793
+  offset: 0, 0
+  index: 1
