@@ -106,9 +106,21 @@ public class Jack {
         velocity.y -= Constants.GRAVITY;
         velocity.scl(delta);
         bounds.setPosition(position);
+
+        bounds.x += velocity.x;
+        Rectangle collisionRect = level.collideX(velocity, bounds);
+        if(collisionRect != null){
+            if(velocity.x < 0){
+                velocity.x = 0;
+            }else{//moving right
+                velocity.x = 0;
+            }
+        }
+        bounds.x = position.x;
+
         bounds.y += velocity.y;
-        Rectangle collisionRect = level.collideY(velocity, bounds);
         //Vertical Collision
+        collisionRect = level.collideY(velocity, bounds);
         if(collisionRect != null){
             if(velocity.y < 0){
                 position.y = collisionRect.y + collisionRect.height;
@@ -122,14 +134,6 @@ public class Jack {
             land();
         }
 
-        collisionRect = level.collideX(velocity, bounds);
-        if(collisionRect != null){
-            if(velocity.x < 0){
-                velocity.x = 0;
-            }else{//moving right
-                velocity.x = 0;
-            }
-        }
         updateState();
         position.add(velocity);
         velocity.scl(1/delta);
