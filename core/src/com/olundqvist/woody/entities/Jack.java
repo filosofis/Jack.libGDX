@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.TimeUtils;
@@ -17,14 +16,12 @@ import com.olundqvist.woody.util.Enums.AnimState;
 import com.olundqvist.woody.util.Utils;
 
 import static com.olundqvist.woody.util.Constants.JACK_DAMPING;
-import static com.olundqvist.woody.util.Constants.JACK_WIDTH;
 import static com.olundqvist.woody.util.Constants.JUMP_SPEED;
 import static com.olundqvist.woody.util.Enums.JumpState.GROUNDED;
-import static java.lang.Enum.valueOf;
 
 
 public class Jack {
-    public static final String TAG = Jack.class.getName();
+    private static final String TAG = Jack.class.getName();
 
     private Vector2 spawnLocation;
     private Vector2 position;
@@ -50,7 +47,7 @@ public class Jack {
         init();
     }
 
-    public void render(SpriteBatch batch){
+    void render(SpriteBatch batch){
         TextureRegion region;
        float idleTimeSec = Utils.secondsSince(idleStartTime);
 
@@ -71,7 +68,6 @@ public class Jack {
                 region = Assets.instance.woodyAssets.idleAnimation.getKeyFrame(idleTimeSec);
                 break;
         }
-
         Utils.drawTextureRegion(batch, region, position, facing);
     }
 
@@ -99,14 +95,21 @@ public class Jack {
             }
         }
     }
-    // TODO: Fix collisions
-    public void update(float delta){
-  //      Gdx.app.log(TAG, "Y = " + velocity.y);
+
+    void update(float delta){
         handleInput();
         velocity.y -= Constants.GRAVITY;
         velocity.scl(delta);
         bounds.setPosition(position);
+        collisionCheck();
+        updateState();
+        position.add(velocity);
+        velocity.scl(1/delta);
+        dampen();
+    }
 
+    private void collisionCheck(){
+        //Horizontal Collision check
         bounds.x += velocity.x;
         Rectangle collisionRect = level.collideX(velocity, bounds);
         if(collisionRect != null){
@@ -118,8 +121,8 @@ public class Jack {
         }
         bounds.x = position.x;
 
+        //Vertical collision check
         bounds.y += velocity.y;
-        //Vertical Collision
         collisionRect = level.collideY(velocity, bounds);
         if(collisionRect != null){
             if(velocity.y < 0){
@@ -133,11 +136,6 @@ public class Jack {
             position.y = 10;
             land();
         }
-
-        updateState();
-        position.add(velocity);
-        velocity.scl(1/delta);
-        dampen();
     }
 
     private void land() {

@@ -3,9 +3,7 @@ package com.olundqvist.woody;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.olundqvist.woody.entities.Jack;
 import com.olundqvist.woody.entities.Level;
@@ -17,9 +15,9 @@ import static com.olundqvist.woody.util.Constants.BACKGROUND_COLOR;
 
 public class GameplayScreen extends ScreenAdapter {
     public static final String TAG = GameplayScreen.class.getName();
-    SpriteBatch batch;
-    ChaseCam chaseCam;
-    Level level;
+    private SpriteBatch batch;
+    private ChaseCam chaseCam;
+    private Level level;
 
     @Override
     public void show(){
@@ -55,7 +53,7 @@ public class GameplayScreen extends ScreenAdapter {
         Assets.instance.dispose();
     }
 
-    public void startLevel(){
+    private void startLevel(){
         level = new Level();
         level.setJack(new Jack(Constants.DEFAULT_SPAWN_LOCATION, level));
         chaseCam.camera = level.viewport.getCamera();

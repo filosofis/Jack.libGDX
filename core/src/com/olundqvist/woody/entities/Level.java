@@ -23,7 +23,7 @@ import com.olundqvist.woody.util.Constants;
 import com.olundqvist.woody.util.Enums;
 
 public class Level {
-    public static final String TAG = Level.class.getName();
+    private static final String TAG = Level.class.getName();
     public Viewport viewport;
     public Jack jack;
     private ParallaxBackground parallaxBackground;
@@ -136,7 +136,6 @@ public class Level {
         this.jack = jack;
     }
 
-    // TODO: Handle foreground
     public void createLayers(){
 
         float oneDimen = 928;
