@@ -31,6 +31,7 @@ public class Level {
     TiledMap map;
     OrthogonalTiledMapRenderer tmr;
     private Array<Rectangle> tiles = new Array<Rectangle>();
+    private TiledMapTileLayer tileLayer;
     private ShapeRenderer debugRenderer;
 
     private Pool<Rectangle> rectPool = new Pool<Rectangle>() {
@@ -44,6 +45,7 @@ public class Level {
         viewport = new ExtendViewport(Constants.WORLD_WIDTH, Constants.WORLD_HEIGHT);
         createLayers();
         map = new TmxMapLoader().load("maps/test_map.tmx");
+        tileLayer = (TiledMapTileLayer)map.getLayers().get("TileLayer");
         tmr = new OrthogonalTiledMapRenderer(map);
         debugRenderer = new ShapeRenderer();
     }
@@ -67,14 +69,12 @@ public class Level {
     }
 
     private void getTiles (int startX, int startY, int endX, int endY) {
-        TiledMapTileLayer layer = (TiledMapTileLayer)map.getLayers().get("TileLayer");
         rectPool.freeAll(tiles);
         tiles.clear();
         for (int y = startY; y <= endY; y++) {
             for (int x = startX; x <= endX; x++) {
-                TiledMapTileLayer.Cell cell = layer.getCell(x, y);
+                TiledMapTileLayer.Cell cell = tileLayer.getCell(x, y);
                 if (cell != null) {
-                    Gdx.app.debug(TAG, "Cell wasent null");
                     Rectangle rect = rectPool.obtain();
                     rect.set(x*16, y*16, 16, 16);
                     tiles.add(rect);
@@ -82,6 +82,16 @@ public class Level {
             }
         }
     }
+
+    public boolean isCorner(Rectangle rect){
+        int x = (int)(rect.x/16);
+        int y = (int)(rect.y/16);
+        if(
+                tileLayer.getCell(x,y+1) == null
+        ){return true;}
+        else return false;
+    }
+
     //TODO: Use rectpool for emeny bounds
     public Rectangle collideY(Vector2 velocity, Rectangle bounds){
         int startX, startY, endX, endY;

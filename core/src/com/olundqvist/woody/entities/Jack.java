@@ -17,6 +17,8 @@ import com.olundqvist.woody.util.Utils;
 
 import static com.olundqvist.woody.util.Constants.JACK_DAMPING;
 import static com.olundqvist.woody.util.Constants.JUMP_SPEED;
+import static com.olundqvist.woody.util.Enums.JumpState.FALLING;
+import static com.olundqvist.woody.util.Enums.JumpState.GRABING;
 import static com.olundqvist.woody.util.Enums.JumpState.GROUNDED;
 
 
@@ -31,7 +33,7 @@ public class Jack {
     private JumpState jumpState;
     private AnimState animationState;
     private long idleStartTime;
-    private long jumpStartTime;
+    private long grabStartTime;
     private long runStartTime;
     private Direction direction;
     boolean xcollision, left, right;
@@ -50,7 +52,6 @@ public class Jack {
     void render(SpriteBatch batch){
         TextureRegion region;
        float idleTimeSec = Utils.secondsSince(idleStartTime);
-
         switch (animationState){
             case RUN:
                 region = Assets.instance.woodyAssets.runAnimation.getKeyFrame(idleTimeSec);
@@ -59,7 +60,8 @@ public class Jack {
                 region = Assets.instance.woodyAssets.fallingAnimation.getKeyFrame(idleTimeSec);
                 break;
             case GRAB:
-                region = Assets.instance.woodyAssets.grabAnimation.getKeyFrame(idleTimeSec);
+                region = Assets.instance.woodyAssets.grabAnimation.getKeyFrame(
+                        Utils.secondsSince(grabStartTime));
                 break;
             case JUMP:
                 region = Assets.instance.woodyAssets.jumpSprite;
@@ -78,6 +80,7 @@ public class Jack {
         // TODO: Review Animation start times
         idleStartTime = TimeUtils.nanoTime();
         animationState = AnimState.IDLE;
+        jumpState = FALLING;
         bounds = new Rectangle(position.x, position.y, Constants.JACK_WIDTH, Constants.JACK_HEIGHT);
     }
 
@@ -89,10 +92,15 @@ public class Jack {
         }else{
             animationState = AnimState.IDLE;
         }
-        if(jumpState == GROUNDED){
-            if(Math.abs(velocity.x)>0){
-                animationState = AnimState.RUN;
-            }
+        switch (jumpState){
+            case GROUNDED:
+                if(Math.abs(velocity.x)>0){
+                    animationState = AnimState.RUN;
+                }
+                break;
+            case GRABING:
+                animationState = AnimState.GRAB;
+                break;
         }
     }
 
@@ -101,13 +109,26 @@ public class Jack {
         velocity.y -= Constants.GRAVITY;
         velocity.scl(delta);
         bounds.setPosition(position);
-        collisionCheck();
+        if(jumpState != GRABING){
+            collisionCheck();
+        }else{
+            velocity.setZero();
+        }
         updateState();
         position.add(velocity);
         velocity.scl(1/delta);
         dampen();
     }
 
+    private void ledge(Rectangle rect){
+        if(level.isCorner(rect)){
+            Gdx.app.log(TAG, "Corner Rect = " + rect.toString());
+            velocity.setZero();
+            position.y = rect.y - 16;
+            jumpState = GRABING;
+            grabStartTime = TimeUtils.nanoTime();
+        }
+    }
     private void collisionCheck(){
         //Horizontal Collision check
         bounds.x += velocity.x;
@@ -118,6 +139,7 @@ public class Jack {
             }else{//moving right
                 velocity.x = 0;
             }
+            ledge(collisionRect);
         }
         bounds.x = position.x;
 
@@ -155,18 +177,48 @@ public class Jack {
         left = Gdx.input.isKeyPressed(Keys.LEFT);
         right = Gdx.input.isKeyPressed(Keys.RIGHT);
 
-        //If both left and right keys are active dont move
-        if (left && !right) {
-            move(Direction.LEFT);
-        } else if (right && !left) {
-            move(Direction.RIGHT);
+        switch(jumpState){
+            case GROUNDED:
+            case FALLING:
+                //Allow air controle?
+                if (left && !right) {
+                    move(Direction.LEFT);
+                } else if (right && !left) {
+                    move(Direction.RIGHT);
+                }
+                break;
+            case GRABING:
+                if(facing == Direction.RIGHT && left){
+                    jumpState = FALLING;
+                    Gdx.app.log(TAG, "Let go");
+                }
+                break;
         }
 
+        //If both left and right keys are active dont move
         if(Gdx.input.isKeyPressed(Keys.UP)){
-            if(jumpState == GROUNDED){
-                jumpState = JumpState.JUMPING;
-                velocity.y += JUMP_SPEED;
-                Gdx.app.log(TAG, "Jumped");
+            switch (jumpState){
+                case GROUNDED:
+                    jumpState = FALLING;
+                    velocity.y += JUMP_SPEED;
+                    Gdx.app.log(TAG, "Jumped");
+                    break;
+                case GRABING:
+                    jumpState = FALLING;
+                    velocity.y += JUMP_SPEED;
+                    Gdx.app.log(TAG, "Climbed");
+                    break;
+            }
+        }
+        if(Gdx.input.isKeyPressed(Keys.DOWN)){
+            switch(jumpState){
+                case GROUNDED:
+                    Gdx.app.log(TAG, "Ducking?");
+                    break;
+                case GRABING:
+                    jumpState = FALLING;
+                    Gdx.app.log(TAG, "Let go of ledge");
+                    break;
             }
         }
     }

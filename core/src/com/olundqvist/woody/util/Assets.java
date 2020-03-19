@@ -90,7 +90,7 @@ public class Assets implements Disposable, AssetErrorListener {
             return new Animation<AtlasRegion>(
                     Constants.GRAB_ANIMATION_DURATION,
                     grabAnimation,
-                    Animation.PlayMode.LOOP
+                    Animation.PlayMode.NORMAL
             );
         }
         private Animation<AtlasRegion> initFallingAnimation(TextureAtlas atlas){
