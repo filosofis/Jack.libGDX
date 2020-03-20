@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.bullet.linearmath.SWIGTYPE_p_btAlignedObjectArrayT_btCollisionObjectDoubleData_p_t;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.olundqvist.woody.util.Assets;
 import com.olundqvist.woody.util.Constants;
@@ -16,7 +17,11 @@ import com.olundqvist.woody.util.Enums.AnimState;
 import com.olundqvist.woody.util.Utils;
 
 import static com.olundqvist.woody.util.Constants.JACK_DAMPING;
+import static com.olundqvist.woody.util.Constants.JACK_HEIGHT;
+import static com.olundqvist.woody.util.Constants.JACK_WIDTH;
 import static com.olundqvist.woody.util.Constants.JUMP_SPEED;
+import static com.olundqvist.woody.util.Enums.Direction.LEFT;
+import static com.olundqvist.woody.util.Enums.Direction.RIGHT;
 import static com.olundqvist.woody.util.Enums.JumpState.FALLING;
 import static com.olundqvist.woody.util.Enums.JumpState.GRABING;
 import static com.olundqvist.woody.util.Enums.JumpState.GROUNDED;
@@ -76,7 +81,7 @@ public class Jack {
     public void init(){
         position = spawnLocation;
         velocity.setZero();
-        facing = Direction.RIGHT;
+        facing = RIGHT;
         // TODO: Review Animation start times
         idleStartTime = TimeUtils.nanoTime();
         animationState = AnimState.IDLE;
@@ -121,25 +126,38 @@ public class Jack {
     }
 
     private void ledge(Rectangle rect){
-        if(level.isCorner(rect)){
-            Gdx.app.log(TAG, "Corner Rect = " + rect.toString());
+        Gdx.app.log(TAG, "Rectangle " + (int)rect.y );
+        Gdx.app.log(TAG, "Position "  + (int)(position.y+16) );
+        Gdx.app.log(TAG, "------------------");
+        //Grab ledge if the top of the corner is below jacks height
+        //and within 4 units reach
+        if (((position.y + 16) > (rect.y)) &&
+                ((position.y + 12) < (rect.y))
+        ) {
+            switch (facing) {
+                case LEFT:
+                    position.x = rect.x + 16;
+                    break;
+                case RIGHT:
+                    position.x = rect.x - JACK_WIDTH;
+            }
             velocity.setZero();
             position.y = rect.y - 16;
             jumpState = GRABING;
             grabStartTime = TimeUtils.nanoTime();
         }
     }
+
     private void collisionCheck(){
         //Horizontal Collision check
         bounds.x += velocity.x;
         Rectangle collisionRect = level.collideX(velocity, bounds);
         if(collisionRect != null){
-            if(velocity.x < 0){
-                velocity.x = 0;
-            }else{//moving right
-                velocity.x = 0;
+            Rectangle corner = level.isCorner(collisionRect);
+            if(corner != null){
+                ledge(corner);
             }
-            ledge(collisionRect);
+            velocity.x = 0;
         }
         bounds.x = position.x;
 
@@ -180,15 +198,15 @@ public class Jack {
         switch(jumpState){
             case GROUNDED:
             case FALLING:
-                //Allow air controle?
+                //Allow air control?
                 if (left && !right) {
-                    move(Direction.LEFT);
+                    move(LEFT);
                 } else if (right && !left) {
-                    move(Direction.RIGHT);
+                    move(RIGHT);
                 }
                 break;
             case GRABING:
-                if(facing == Direction.RIGHT && left){
+                if(facing == RIGHT && left){
                     jumpState = FALLING;
                     Gdx.app.log(TAG, "Let go");
                 }
@@ -227,11 +245,11 @@ public class Jack {
         switch(direction){
             case LEFT:
                 velocity.x = -Constants.JACK_MOVE_SPEED;
-                facing = Direction.LEFT;
+                facing = LEFT;
                 break;
             case RIGHT:
                 velocity.x = Constants.JACK_MOVE_SPEED;
-                facing = Direction.RIGHT;
+                facing = RIGHT;
                 break;
         }
     }

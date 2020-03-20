@@ -33,7 +33,7 @@ public class Assets implements Disposable, AssetErrorListener {
         backgroundAssets = new BackgroundAssets(atlas);
     }
 
-    public class BackgroundAssets{
+    public static class BackgroundAssets{
 
         public final AtlasRegion layer0;
         public final AtlasRegion layer1;
@@ -47,7 +47,7 @@ public class Assets implements Disposable, AssetErrorListener {
         public final AtlasRegion layer9;
         public final AtlasRegion layer10;
 
-        public BackgroundAssets(TextureAtlas atlas) {
+        BackgroundAssets(TextureAtlas atlas) {
 
             layer0 = atlas.findRegion(Constants.BG_LAYER_10);
             layer1 = atlas.findRegion(Constants.BG_LAYER_9);
@@ -64,14 +64,14 @@ public class Assets implements Disposable, AssetErrorListener {
         }
     }
 
-    public class WoodyAssets {
+    public static class WoodyAssets {
         public final Animation<AtlasRegion> idleAnimation;
         public final Animation<AtlasRegion> runAnimation;
         public final Animation<AtlasRegion> fallingAnimation;
         public final Animation<AtlasRegion> grabAnimation;
         public final TextureRegion jumpSprite;
 
-        public WoodyAssets(TextureAtlas atlas) {
+        WoodyAssets(TextureAtlas atlas) {
             idleAnimation = initIdleFrames(atlas);
             runAnimation = initRunAnimation(atlas);
             fallingAnimation = initFallingAnimation(atlas);
@@ -87,7 +87,7 @@ public class Assets implements Disposable, AssetErrorListener {
             grabAnimation.add(atlas.findRegion(Constants.WOODY_GRAB_4));
             grabAnimation.add(atlas.findRegion(Constants.WOODY_GRAB_5));
 
-            return new Animation<AtlasRegion>(
+            return new Animation<>(
                     Constants.GRAB_ANIMATION_DURATION,
                     grabAnimation,
                     Animation.PlayMode.NORMAL
@@ -98,7 +98,7 @@ public class Assets implements Disposable, AssetErrorListener {
             fallingAnimation.add(atlas.findRegion(Constants.WOODY_FALL_0));
             fallingAnimation.add(atlas.findRegion(Constants.WOODY_FALL_1));
 
-            return new Animation<AtlasRegion>(
+            return new Animation<>(
                     Constants.FALL_ANIMATION_DURATION,
                     fallingAnimation,
                     Animation.PlayMode.LOOP
@@ -115,7 +115,7 @@ public class Assets implements Disposable, AssetErrorListener {
             runAnimation.add(atlas.findRegion(Constants.WOODY_RUN_6));
             runAnimation.add(atlas.findRegion(Constants.WOODY_RUN_7));
 
-            return new Animation<AtlasRegion>(
+            return new Animation<>(
                     Constants.RUN_ANIMATION_DURATION,
                     runAnimation,
                     Animation.PlayMode.LOOP
@@ -135,7 +135,7 @@ public class Assets implements Disposable, AssetErrorListener {
             idleFrames.add(atlas.findRegion(Constants.WOODY_IDLE_9));
             idleFrames.add(atlas.findRegion(Constants.WOODY_IDLE_10));
             idleFrames.add(atlas.findRegion(Constants.WOODY_IDLE_11));
-            return new Animation<AtlasRegion>(
+            return new Animation<>(
                     Constants.IDLE_ANIMATION_DURATION,
                     idleFrames,
                     Animation.PlayMode.LOOP

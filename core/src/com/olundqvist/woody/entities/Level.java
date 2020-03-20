@@ -83,13 +83,21 @@ public class Level {
         }
     }
 
-    public boolean isCorner(Rectangle rect){
+    public Rectangle isCorner(Rectangle rect){
         int x = (int)(rect.x/16);
         int y = (int)(rect.y/16);
-        if(
-                tileLayer.getCell(x,y+1) == null
-        ){return true;}
-        else return false;
+        if(tileLayer.getCell(x,y+1) == null){
+            Rectangle corner = rectPool.obtain();
+            corner.set(x*16, y*16, 16,16);
+            Gdx.app.log(TAG, "is a corner " +  x + ", " + y);
+            return corner;
+        } else if(tileLayer.getCell(x, y+2) == null){
+            Rectangle corner = rectPool.obtain();
+            corner.set(x*16, (y+1)*16, 16,16);
+            Gdx.app.log(TAG, "below a corner " + x + ", " + y);
+            return corner;
+        }
+        return null;
     }
 
     //TODO: Use rectpool for emeny bounds
