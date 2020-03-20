@@ -20,7 +20,7 @@ public class Constants {
     //Jack
     public static final float JACK_MOVE_SPEED = 150;
     public static final float JUMP_SPEED = 300;
-    public static final float JACK_WIDTH = 24;
+    public static final float JACK_WIDTH = 20;
     public static final float JACK_HEIGHT = 32;
     public static final float JACK_DAMPING = 0.75f;
     public static final Vector2 KNOCKBACK_VELOCITY = new Vector2(200, 200);

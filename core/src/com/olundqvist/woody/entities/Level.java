@@ -83,6 +83,10 @@ public class Level {
         }
     }
 
+    /*
+        Since Jack is larger then 1 tile, Collisions can occur
+        on two tiles at the same time, both requiring ledge check
+     */
     public Rectangle isCorner(Rectangle rect){
         int x = (int)(rect.x/16);
         int y = (int)(rect.y/16);
@@ -123,7 +127,7 @@ public class Level {
     public Rectangle collideX(Vector2 velocity, Rectangle bounds){
         int startX, startY, endX, endY;
         startY = (int)bounds.y;
-        endY = (int)(bounds.y + bounds.width);
+        endY = (int)(bounds.y + bounds.height);
 
         if(velocity.x > 0){
             startX = endX = (int)(bounds.x + bounds.width + velocity.x);
