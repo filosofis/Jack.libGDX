@@ -209,6 +209,8 @@ public class Jack {
                 if(facing == RIGHT && left){
                     jumpState = FALLING;
                     Gdx.app.log(TAG, "Let go");
+                }else if(facing == LEFT && right){
+                    Gdx.app.log(TAG,"let go");
                 }
                 break;
         }
@@ -222,9 +224,22 @@ public class Jack {
                     Gdx.app.log(TAG, "Jumped");
                     break;
                 case GRABING:
-                    jumpState = FALLING;
-                    velocity.y += JUMP_SPEED;
-                    Gdx.app.log(TAG, "Climbed");
+                    switch(facing){
+                        case LEFT:
+                            jumpState = FALLING;
+                            velocity.y = 0;
+                            position.x -= 16;
+                            position.y += 34;
+                            Gdx.app.log(TAG, "Climbed Left");
+                            break;
+                        case RIGHT:
+                            jumpState = FALLING;
+                            velocity.y = 0;
+                            position.x += 16;
+                            position.y += 34;
+                            Gdx.app.log(TAG, "Climbed Right");
+                            break;
+                    }
                     break;
             }
         }
