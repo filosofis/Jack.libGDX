@@ -34,7 +34,7 @@ public class Level {
     private Array<Rectangle> tiles = new Array<Rectangle>();
     private TiledMapTileLayer tileLayer;
     private ShapeRenderer debugRenderer;
-
+    boolean debug;
     private Pool<Rectangle> rectPool = new Pool<Rectangle>() {
         @Override
         protected Rectangle newObject () {
@@ -49,6 +49,7 @@ public class Level {
         tileLayer = (TiledMapTileLayer)map.getLayers().get("TileLayer");
         tmr = new OrthogonalTiledMapRenderer(map);
         debugRenderer = new ShapeRenderer();
+        debug=false;
     }
 
     public void render() {
@@ -65,7 +66,9 @@ public class Level {
         jack.render(batch);
         parallaxForground.draw(ocam, batch);
         batch.end();
-        renderDebug(viewport.getCamera());
+        if(debug){
+            renderDebug(viewport.getCamera());
+        }
     }
 
     public void update(float delta){

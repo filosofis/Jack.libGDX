@@ -19,6 +19,7 @@ import com.olundqvist.woody.util.Utils;
 import static com.olundqvist.woody.util.Constants.JACK_DAMPING;
 import static com.olundqvist.woody.util.Constants.JACK_WIDTH;
 import static com.olundqvist.woody.util.Constants.JUMP_SPEED;
+import static com.olundqvist.woody.util.Constants.RVOS_WIDTH;
 import static com.olundqvist.woody.util.Enums.Direction.LEFT;
 import static com.olundqvist.woody.util.Enums.Direction.RIGHT;
 import static com.olundqvist.woody.util.Enums.JumpState.CLIMBING;
@@ -112,10 +113,6 @@ public class Jack {
                 break;
             case CLIMBING:
                 animationState = AnimState.CLIMB;
-                if(Utils.secondsSince(actionStartTime) > 0.5){
-                    Gdx.app.log(TAG, "Climb ended");
-                    jumpState = FALLING;
-                }
                 break;
         }
     }
@@ -156,10 +153,12 @@ public class Jack {
         ) {
             switch (facing) {
                 case LEFT:
-                    position.x = rect.x + 16;
+                    position.x = rect.x + 15;
                     break;
                 case RIGHT:
-                    position.x = rect.x - JACK_WIDTH;
+                    //Workaround for better appearance of mirrored grab animation
+                    position.x = rect.x - 14;
+                    break;
             }
             velocity.setZero();
             position.y = rect.y - 16;
@@ -182,19 +181,21 @@ public class Jack {
         bounds.x = position.x;
 
         //Vertical collision check
-        bounds.y += velocity.y;
-        collisionRect = level.collideY(velocity, bounds);
-        if(collisionRect != null){
-            if(velocity.y < 0){
-                position.y = collisionRect.y + collisionRect.height;
+        if(Math.abs(velocity.y)>0) {
+            bounds.y += velocity.y;
+            collisionRect = level.collideY(velocity, bounds);
+            if (collisionRect != null) {
+                if (velocity.y < 0) {
+                    position.y = collisionRect.y + collisionRect.height;
+                    land();
+                } else { //jumping
+                    position.y = collisionRect.y - Constants.JACK_HEIGHT;
+                    velocity.y = 0;
+                }
+            } else if (bounds.y < 10) {
+                position.y = 10;
                 land();
-            }else{ //jumping
-                position.y = collisionRect.y - Constants.JACK_HEIGHT;
-                velocity.y = 0;
             }
-        }else if(bounds.y < 10){
-            position.y = 10;
-            land();
         }
     }
 
@@ -214,6 +215,10 @@ public class Jack {
     private void handleInput(){
         left = Gdx.input.isKeyPressed(Keys.LEFT);
         right = Gdx.input.isKeyPressed(Keys.RIGHT);
+
+        if(Gdx.input.isKeyJustPressed(Keys.ENTER)){
+            level.debug = true;
+        }
 
         switch(jumpState){
             case GROUNDED:
@@ -270,14 +275,20 @@ public class Jack {
         }
     }
     private void climb(float delta){
-        switch(facing){
-            case LEFT:
-                position.add(-25*delta,40*delta);
-                break;
-            case RIGHT:
-                position.add(25*delta,40*delta);
-                break;
+        position.add(0,60*delta);
+        if(Utils.secondsSince(actionStartTime) > 0.5){
+            Gdx.app.log(TAG, "Climb ended");
+            jumpState = FALLING;
+            switch(facing){
+                case LEFT:
+                    position.add(-8,0);
+                    break;
+                case RIGHT:
+                    position.add(8,0);
+                    break;
+            }
         }
+
         velocity.setZero();
     }
     private void initClimb(){
