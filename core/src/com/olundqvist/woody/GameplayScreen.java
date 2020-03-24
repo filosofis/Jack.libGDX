@@ -24,7 +24,6 @@ public class GameplayScreen extends ScreenAdapter {
         Gdx.graphics.setWindowedMode(1280, 720);
         AssetManager am = new AssetManager();
         Assets.instance.init(am);
-        batch = new SpriteBatch();
         chaseCam = new ChaseCam();
         startLevel();
     }
@@ -39,7 +38,7 @@ public class GameplayScreen extends ScreenAdapter {
                 BACKGROUND_COLOR.b,
                 BACKGROUND_COLOR.a);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        level.render(batch);
+        level.render();
     }
 
     @Override

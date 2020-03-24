@@ -1,5 +1,515 @@
 
 woody.pack.png
+size: 1024,128
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+rvros/adventurer-attack1-00
+  rotate: false
+  xy: 54, 42
+  size: 42, 36
+  orig: 42, 36
+  offset: 0, 0
+  index: -1
+rvros/adventurer-attack1-01
+  rotate: false
+  xy: 106, 81
+  size: 42, 36
+  orig: 42, 36
+  offset: 0, 0
+  index: -1
+rvros/adventurer-attack1-02
+  rotate: false
+  xy: 54, 4
+  size: 42, 36
+  orig: 42, 36
+  offset: 0, 0
+  index: -1
+rvros/adventurer-attack1-03
+  rotate: false
+  xy: 150, 81
+  size: 42, 36
+  orig: 42, 36
+  offset: 0, 0
+  index: -1
+rvros/adventurer-attack1-04
+  rotate: false
+  xy: 194, 81
+  size: 42, 36
+  orig: 42, 36
+  offset: 0, 0
+  index: -1
+rvros/adventurer-attack2-00
+  rotate: false
+  xy: 550, 88
+  size: 46, 29
+  orig: 46, 29
+  offset: 0, 0
+  index: -1
+rvros/adventurer-attack2-01
+  rotate: false
+  xy: 598, 88
+  size: 46, 29
+  orig: 46, 29
+  offset: 0, 0
+  index: -1
+rvros/adventurer-attack2-02
+  rotate: false
+  xy: 646, 88
+  size: 46, 29
+  orig: 46, 29
+  offset: 0, 0
+  index: -1
+rvros/adventurer-attack2-03
+  rotate: false
+  xy: 694, 88
+  size: 46, 29
+  orig: 46, 29
+  offset: 0, 0
+  index: -1
+rvros/adventurer-attack2-04
+  rotate: false
+  xy: 742, 88
+  size: 46, 29
+  orig: 46, 29
+  offset: 0, 0
+  index: -1
+rvros/adventurer-attack2-05
+  rotate: false
+  xy: 790, 88
+  size: 46, 29
+  orig: 46, 29
+  offset: 0, 0
+  index: -1
+rvros/adventurer-attack3-00
+  rotate: false
+  xy: 238, 91
+  size: 50, 26
+  orig: 50, 26
+  offset: 0, 0
+  index: -1
+rvros/adventurer-attack3-01
+  rotate: false
+  xy: 290, 91
+  size: 50, 26
+  orig: 50, 26
+  offset: 0, 0
+  index: -1
+rvros/adventurer-attack3-02
+  rotate: false
+  xy: 342, 91
+  size: 50, 26
+  orig: 50, 26
+  offset: 0, 0
+  index: -1
+rvros/adventurer-attack3-03
+  rotate: false
+  xy: 394, 91
+  size: 50, 26
+  orig: 50, 26
+  offset: 0, 0
+  index: -1
+rvros/adventurer-attack3-04
+  rotate: false
+  xy: 446, 91
+  size: 50, 26
+  orig: 50, 26
+  offset: 0, 0
+  index: -1
+rvros/adventurer-attack3-05
+  rotate: false
+  xy: 498, 91
+  size: 50, 26
+  orig: 50, 26
+  offset: 0, 0
+  index: -1
+rvros/adventurer-crnr-clmb-00
+  rotate: false
+  xy: 207, 50
+  size: 17, 29
+  orig: 17, 29
+  offset: 0, 0
+  index: -1
+rvros/adventurer-crnr-clmb-01
+  rotate: false
+  xy: 187, 18
+  size: 17, 29
+  orig: 17, 29
+  offset: 0, 0
+  index: -1
+rvros/adventurer-crnr-clmb-02
+  rotate: false
+  xy: 270, 43
+  size: 17, 29
+  orig: 17, 29
+  offset: 0, 0
+  index: -1
+rvros/adventurer-crnr-clmb-03
+  rotate: false
+  xy: 289, 43
+  size: 17, 29
+  orig: 17, 29
+  offset: 0, 0
+  index: -1
+rvros/adventurer-crnr-clmb-04
+  rotate: false
+  xy: 308, 41
+  size: 17, 29
+  orig: 17, 29
+  offset: 0, 0
+  index: -1
+rvros/adventurer-crnr-grb-00
+  rotate: false
+  xy: 98, 44
+  size: 15, 34
+  orig: 15, 34
+  offset: 0, 0
+  index: -1
+rvros/adventurer-crnr-grb-01
+  rotate: false
+  xy: 98, 8
+  size: 15, 34
+  orig: 15, 34
+  offset: 0, 0
+  index: -1
+rvros/adventurer-crnr-grb-02
+  rotate: false
+  xy: 115, 13
+  size: 15, 34
+  orig: 15, 34
+  offset: 0, 0
+  index: -1
+rvros/adventurer-crnr-grb-03
+  rotate: false
+  xy: 132, 13
+  size: 15, 34
+  orig: 15, 34
+  offset: 0, 0
+  index: -1
+rvros/adventurer-crnr-jmp-00
+  rotate: false
+  xy: 838, 88
+  size: 23, 29
+  orig: 23, 29
+  offset: 0, 0
+  index: -1
+rvros/adventurer-crnr-jmp-01
+  rotate: false
+  xy: 863, 88
+  size: 23, 29
+  orig: 23, 29
+  offset: 0, 0
+  index: -1
+rvros/adventurer-crnr-jmp-02
+  rotate: false
+  xy: 863, 88
+  size: 23, 29
+  orig: 23, 29
+  offset: 0, 0
+  index: -1
+rvros/adventurer-crouch-00
+  rotate: false
+  xy: 836, 64
+  size: 20, 22
+  orig: 20, 22
+  offset: 0, 0
+  index: -1
+rvros/adventurer-crouch-01
+  rotate: false
+  xy: 858, 64
+  size: 20, 22
+  orig: 20, 22
+  offset: 0, 0
+  index: -1
+rvros/adventurer-crouch-02
+  rotate: false
+  xy: 226, 50
+  size: 20, 22
+  orig: 20, 22
+  offset: 0, 0
+  index: -1
+rvros/adventurer-crouch-03
+  rotate: false
+  xy: 248, 50
+  size: 20, 22
+  orig: 20, 22
+  offset: 0, 0
+  index: -1
+rvros/adventurer-die-00
+  rotate: false
+  xy: 540, 62
+  size: 22, 24
+  orig: 22, 24
+  offset: 0, 0
+  index: -1
+rvros/adventurer-die-01
+  rotate: false
+  xy: 564, 62
+  size: 22, 24
+  orig: 22, 24
+  offset: 0, 0
+  index: -1
+rvros/adventurer-hurt-01
+  rotate: false
+  xy: 564, 62
+  size: 22, 24
+  orig: 22, 24
+  offset: 0, 0
+  index: -1
+rvros/adventurer-die-02
+  rotate: false
+  xy: 588, 62
+  size: 22, 24
+  orig: 22, 24
+  offset: 0, 0
+  index: -1
+rvros/adventurer-die-03
+  rotate: false
+  xy: 612, 62
+  size: 22, 24
+  orig: 22, 24
+  offset: 0, 0
+  index: -1
+rvros/adventurer-die-04
+  rotate: false
+  xy: 636, 62
+  size: 22, 24
+  orig: 22, 24
+  offset: 0, 0
+  index: -1
+rvros/adventurer-die-06
+  rotate: false
+  xy: 636, 62
+  size: 22, 24
+  orig: 22, 24
+  offset: 0, 0
+  index: -1
+rvros/adventurer-die-05
+  rotate: false
+  xy: 660, 62
+  size: 22, 24
+  orig: 22, 24
+  offset: 0, 0
+  index: -1
+rvros/adventurer-fall-00
+  rotate: false
+  xy: 149, 16
+  size: 17, 31
+  orig: 17, 31
+  offset: 0, 0
+  index: -1
+rvros/adventurer-fall-01
+  rotate: false
+  xy: 168, 16
+  size: 17, 31
+  orig: 17, 31
+  offset: 0, 0
+  index: -1
+rvros/adventurer-hurt-00
+  rotate: false
+  xy: 684, 62
+  size: 22, 24
+  orig: 22, 24
+  offset: 0, 0
+  index: -1
+rvros/adventurer-hurt-02
+  rotate: false
+  xy: 708, 62
+  size: 22, 24
+  orig: 22, 24
+  offset: 0, 0
+  index: -1
+rvros/adventurer-idle-00
+  rotate: false
+  xy: 115, 49
+  size: 21, 30
+  orig: 21, 30
+  offset: 0, 0
+  index: -1
+rvros/adventurer-idle-01
+  rotate: false
+  xy: 138, 49
+  size: 21, 30
+  orig: 21, 30
+  offset: 0, 0
+  index: -1
+rvros/adventurer-idle-02
+  rotate: false
+  xy: 161, 49
+  size: 21, 30
+  orig: 21, 30
+  offset: 0, 0
+  index: -1
+rvros/adventurer-idle-03
+  rotate: false
+  xy: 184, 49
+  size: 21, 30
+  orig: 21, 30
+  offset: 0, 0
+  index: -1
+rvros/adventurer-idle-2-00
+  rotate: false
+  xy: 2, 80
+  size: 50, 37
+  orig: 50, 37
+  offset: 0, 0
+  index: -1
+rvros/adventurer-idle-2-01
+  rotate: false
+  xy: 2, 41
+  size: 50, 37
+  orig: 50, 37
+  offset: 0, 0
+  index: -1
+rvros/adventurer-idle-2-02
+  rotate: false
+  xy: 54, 80
+  size: 50, 37
+  orig: 50, 37
+  offset: 0, 0
+  index: -1
+rvros/adventurer-idle-2-03
+  rotate: false
+  xy: 2, 2
+  size: 50, 37
+  orig: 50, 37
+  offset: 0, 0
+  index: -1
+rvros/adventurer-jump-00
+  rotate: false
+  xy: 444, 58
+  size: 22, 31
+  orig: 22, 31
+  offset: 0, 0
+  index: -1
+rvros/adventurer-jump-01
+  rotate: false
+  xy: 468, 58
+  size: 22, 31
+  orig: 22, 31
+  offset: 0, 0
+  index: -1
+rvros/adventurer-jump-02
+  rotate: false
+  xy: 492, 58
+  size: 22, 31
+  orig: 22, 31
+  offset: 0, 0
+  index: -1
+rvros/adventurer-jump-03
+  rotate: false
+  xy: 516, 58
+  size: 22, 31
+  orig: 22, 31
+  offset: 0, 0
+  index: -1
+rvros/adventurer-run-00
+  rotate: false
+  xy: 888, 89
+  size: 24, 28
+  orig: 24, 28
+  offset: 0, 0
+  index: -1
+rvros/adventurer-run-01
+  rotate: false
+  xy: 914, 89
+  size: 24, 28
+  orig: 24, 28
+  offset: 0, 0
+  index: -1
+rvros/adventurer-run-02
+  rotate: false
+  xy: 940, 89
+  size: 24, 28
+  orig: 24, 28
+  offset: 0, 0
+  index: -1
+rvros/adventurer-run-03
+  rotate: false
+  xy: 966, 89
+  size: 24, 28
+  orig: 24, 28
+  offset: 0, 0
+  index: -1
+rvros/adventurer-run-04
+  rotate: false
+  xy: 992, 89
+  size: 24, 28
+  orig: 24, 28
+  offset: 0, 0
+  index: -1
+rvros/adventurer-run-05
+  rotate: false
+  xy: 418, 61
+  size: 24, 28
+  orig: 24, 28
+  offset: 0, 0
+  index: -1
+rvros/adventurer-slide-00
+  rotate: false
+  xy: 238, 74
+  size: 34, 15
+  orig: 34, 15
+  offset: 0, 0
+  index: -1
+rvros/adventurer-slide-01
+  rotate: false
+  xy: 274, 74
+  size: 34, 15
+  orig: 34, 15
+  offset: 0, 0
+  index: -1
+rvros/adventurer-smrslt-00
+  rotate: false
+  xy: 732, 64
+  size: 24, 22
+  orig: 24, 22
+  offset: 0, 0
+  index: -1
+rvros/adventurer-smrslt-01
+  rotate: false
+  xy: 758, 64
+  size: 24, 22
+  orig: 24, 22
+  offset: 0, 0
+  index: -1
+rvros/adventurer-smrslt-02
+  rotate: false
+  xy: 784, 64
+  size: 24, 22
+  orig: 24, 22
+  offset: 0, 0
+  index: -1
+rvros/adventurer-smrslt-03
+  rotate: false
+  xy: 810, 64
+  size: 24, 22
+  orig: 24, 22
+  offset: 0, 0
+  index: -1
+rvros/adventurer-stand-00
+  rotate: false
+  xy: 310, 72
+  size: 34, 17
+  orig: 34, 17
+  offset: 0, 0
+  index: -1
+rvros/adventurer-stand-01
+  rotate: false
+  xy: 346, 72
+  size: 34, 17
+  orig: 34, 17
+  offset: 0, 0
+  index: -1
+rvros/adventurer-stand-02
+  rotate: false
+  xy: 382, 72
+  size: 34, 17
+  orig: 34, 17
+  offset: 0, 0
+  index: -1
+
+woody.pack2.png
 size: 128,256
 format: RGBA8888
 filter: Nearest,Nearest
@@ -215,7 +725,7 @@ woody/woody_run7
   offset: 0, 0
   index: -1
 
-woody.pack2.png
+woody.pack3.png
 size: 1024,1024
 format: RGBA8888
 filter: Nearest,Nearest
@@ -228,7 +738,7 @@ background/Layer_0000
   offset: 0, 0
   index: 9
 
-woody.pack3.png
+woody.pack4.png
 size: 1024,1024
 format: RGBA8888
 filter: Nearest,Nearest
@@ -241,7 +751,7 @@ background/Layer_0001
   offset: 0, 0
   index: 8
 
-woody.pack4.png
+woody.pack5.png
 size: 1024,1024
 format: RGBA8888
 filter: Nearest,Nearest
@@ -254,7 +764,7 @@ background/Layer_0002
   offset: 0, 0
   index: 7
 
-woody.pack5.png
+woody.pack6.png
 size: 1024,1024
 format: RGBA8888
 filter: Nearest,Nearest
@@ -267,7 +777,7 @@ background/Layer_0003
   offset: 0, 0
   index: 6
 
-woody.pack6.png
+woody.pack7.png
 size: 1024,1024
 format: RGBA8888
 filter: Nearest,Nearest
@@ -280,7 +790,7 @@ background/Layer_0004_Lights
   offset: 0, 0
   index: -1
 
-woody.pack7.png
+woody.pack8.png
 size: 1024,1024
 format: RGBA8888
 filter: Nearest,Nearest
@@ -293,7 +803,7 @@ background/Layer_0005
   offset: 0, 0
   index: 5
 
-woody.pack8.png
+woody.pack9.png
 size: 1024,1024
 format: RGBA8888
 filter: Nearest,Nearest
@@ -306,7 +816,7 @@ background/Layer_0006
   offset: 0, 0
   index: 4
 
-woody.pack9.png
+woody.pack10.png
 size: 1024,1024
 format: RGBA8888
 filter: Nearest,Nearest
@@ -319,7 +829,7 @@ background/Layer_0007_Lights
   offset: 0, 0
   index: -1
 
-woody.pack10.png
+woody.pack11.png
 size: 1024,1024
 format: RGBA8888
 filter: Nearest,Nearest
@@ -332,7 +842,7 @@ background/Layer_0008
   offset: 0, 0
   index: 3
 
-woody.pack11.png
+woody.pack12.png
 size: 1024,1024
 format: RGBA8888
 filter: Nearest,Nearest
@@ -345,7 +855,7 @@ background/Layer_0009
   offset: 0, 0
   index: 2
 
-woody.pack12.png
+woody.pack13.png
 size: 1024,1024
 format: RGBA8888
 filter: Nearest,Nearest

@@ -1,5 +1,6 @@
 package com.olundqvist.woody.util;
 
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
@@ -10,10 +11,10 @@ import static com.olundqvist.woody.util.Enums.Direction;
 
 public class Utils {
 
-    public static void drawTextureRegion(SpriteBatch batch, TextureRegion region, Vector2 position) {
+    public static void drawTextureRegion(Batch batch, TextureRegion region, Vector2 position) {
         drawTextureRegion(batch, region, position.x, position.y);
     }
-    public static void drawTextureRegion(SpriteBatch batch,
+    public static void drawTextureRegion(Batch batch,
                                          TextureRegion region,
                                          Vector2 position,
                                          Enums.Direction direction) {
@@ -41,11 +42,11 @@ public class Utils {
                 false);
     }
 
-    public static void drawTextureRegion(SpriteBatch batch, TextureRegion region, Vector2 position, Vector2 offset) {
+    public static void drawTextureRegion(Batch batch, TextureRegion region, Vector2 position, Vector2 offset) {
         drawTextureRegion(batch, region, position.x - offset.x, position.y - offset.y);
     }
 
-    public static void drawTextureRegion(SpriteBatch batch, TextureRegion region, float x, float y) {
+    public static void drawTextureRegion(Batch batch, TextureRegion region, float x, float y) {
         batch.draw(
                 region.getTexture(),
                 x,

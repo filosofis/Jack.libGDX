@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -50,17 +51,20 @@ public class Level {
         debugRenderer = new ShapeRenderer();
     }
 
-    public void render(SpriteBatch batch) {
+    public void render() {
         viewport.apply();
-        batch.setProjectionMatrix(viewport.getCamera().combined);
-        batch.begin();
         OrthographicCamera ocam = (OrthographicCamera) viewport.getCamera();
+        tmr.setView(ocam);
+        Batch batch = tmr.getBatch();
+        batch.begin();
         parallaxBackground.draw(ocam, batch);
+        tmr.setView(ocam);
+        batch.end();
+        tmr.render();
+        batch.begin();
         jack.render(batch);
         parallaxForground.draw(ocam, batch);
         batch.end();
-        tmr.setView(ocam);
-        tmr.render();
         renderDebug(viewport.getCamera());
     }
 
@@ -177,51 +181,55 @@ public class Level {
         TextureRegionParallaxLayer layer2 = new TextureRegionParallaxLayer(
                 Assets.instance.backgroundAssets.layer2,
                 oneDimen,
-                new Vector2(1f,1),
+                new Vector2(1f,0.4f),
                 Enums.WH.HEIGHT
         );
         TextureRegionParallaxLayer layer3 = new TextureRegionParallaxLayer(
                 Assets.instance.backgroundAssets.layer3,
                 oneDimen,
-                new Vector2(1.1f,1),
+                new Vector2(1.1f,0.4f),
                 Enums.WH.HEIGHT
         );
         TextureRegionParallaxLayer layer4 = new TextureRegionParallaxLayer(
                 Assets.instance.backgroundAssets.layer4,
                 oneDimen,
-                new Vector2(1.15f,1),
+                new Vector2(1.15f,0.5f),
                 Enums.WH.HEIGHT
         );
         TextureRegionParallaxLayer layer5 = new TextureRegionParallaxLayer(
                 Assets.instance.backgroundAssets.layer5,
                 oneDimen,
-                new Vector2(1.2f,1),
+                new Vector2(1.2f,0.6f),
                 Enums.WH.HEIGHT
         );
         TextureRegionParallaxLayer layer6 = new TextureRegionParallaxLayer(
                 Assets.instance.backgroundAssets.layer6,
                 oneDimen,
-                new Vector2(1.25f,1),
+                new Vector2(1.25f,0.7f),
                 Enums.WH.HEIGHT
         );
         TextureRegionParallaxLayer layer7 = new TextureRegionParallaxLayer(
                 Assets.instance.backgroundAssets.layer7,
                 oneDimen,
-                new Vector2(1.3f, 1),
+                new Vector2(1.3f, 0.8f),
                 Enums.WH.HEIGHT
         );
         TextureRegionParallaxLayer layer8 = new TextureRegionParallaxLayer(
                 Assets.instance.backgroundAssets.layer8,
                 oneDimen,
-                new Vector2(1.4f,1),
+                new Vector2(1.4f,0.9f),
                 Enums.WH.HEIGHT
         );
+
+        //Player plane (loaded as background)
         TextureRegionParallaxLayer layer9 = new TextureRegionParallaxLayer(
                 Assets.instance.backgroundAssets.layer9,
                 oneDimen,
-                new Vector2(1,1),
+                new Vector2(1,0.9f),
                 Enums.WH.HEIGHT
         );
+
+        //Forground
         TextureRegionParallaxLayer layer10 = new TextureRegionParallaxLayer(
                 Assets.instance.backgroundAssets.layer10,
                 oneDimen,
@@ -244,7 +252,7 @@ public class Level {
         debugRenderer.rect(
                 jack.getPosition().x,
                 jack.getPosition().y,
-                Constants.JACK_WIDTH,
+                Constants.RVOS_WIDTH,
                 Constants.JACK_HEIGHT);
 
         debugRenderer.setColor(Color.YELLOW);

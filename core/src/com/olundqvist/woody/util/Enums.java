@@ -14,7 +14,8 @@ public class Enums {
     public enum JumpState{
         FALLING,
         GRABING,
-        GROUNDED
+        GROUNDED,
+        CLIMBING
     }
 
     public enum WH{
@@ -27,6 +28,7 @@ public class Enums {
         IDLE,
         FALL,
         GRAB,
-        JUMP
+        JUMP,
+        CLIMB
     }
 }

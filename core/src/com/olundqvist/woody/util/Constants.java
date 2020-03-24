@@ -19,13 +19,71 @@ public class Constants {
 
     //Jack
     public static final float JACK_MOVE_SPEED = 150;
-    public static final float JUMP_SPEED = 300;
+    public static final float JUMP_SPEED = 200;
     public static final float JACK_WIDTH = 20;
+    public static final float RVOS_WIDTH = 20;
     public static final float JACK_HEIGHT = 32;
     public static final float JACK_DAMPING = 0.75f;
     public static final Vector2 KNOCKBACK_VELOCITY = new Vector2(200, 200);
     public static final float MAX_JUMP_DURATION = .2f;
 
+    /*
+        rvros
+     */
+    //Idle
+    static final String RVROS_IDLE_0 = "rvros/adventurer-idle-00";
+    static final String RVROS_IDLE_1 = "rvros/adventurer-idle-01";
+    static final String RVROS_IDLE_2 = "rvros/adventurer-idle-02";
+    static final String RVROS_IDLE_3 = "rvros/adventurer-idle-03";
+    static final float RVROS_IDLE_DURATION = 0.10f;
+
+    static final String RVROS_IDLE_2_0 = "rvros/adventurer-idle-2-00";
+    static final String RVROS_IDLE_2_1 = "rvros/adventurer-idle-2-01";
+    static final String RVROS_IDLE_2_2 = "rvros/adventurer-idle-2-02";
+    static final String RVROS_IDLE_2_3 = "rvros/adventurer-idle-2-03";
+
+    //Run
+    static final String RVROS_RUN_0 = "rvros/adventurer-run-00";
+    static final String RVROS_RUN_1 = "rvros/adventurer-run-01";
+    static final String RVROS_RUN_2 = "rvros/adventurer-run-02";
+    static final String RVROS_RUN_3 = "rvros/adventurer-run-03";
+    static final String RVROS_RUN_4 = "rvros/adventurer-run-04";
+    static final String RVROS_RUN_5 = "rvros/adventurer-run-05";
+    static final float RVROS_RUN_DURATION = 0.10f;
+
+    //Jump
+    static final String RVROS_JUMP_0 = "rvros/adventurer-jump-00";
+    static final String RVROS_JUMP_1 = "rvros/adventurer-jump-01";
+    static final String RVROS_JUMP_2 = "rvros/adventurer-jump-02";
+    static final String RVROS_JUMP_3 = "rvros/adventurer-jump-03";
+
+    //fall
+    static final String RVROS_FALL_0 = "rvros/adventurer-fall-00";
+    static final String RVROS_FALL_1 = "rvros/adventurer-fall-01";
+    static final float RVROS_FALL_DURATION = 0.10f;
+
+    //Corner grab
+    static final String RVROS_CRNR_GRAB_0 = "rvros/adventurer-crnr-grb-00";
+    static final String RVROS_CRNR_GRAB_1 = "rvros/adventurer-crnr-grb-01";
+    static final String RVROS_CRNR_GRAB_2 = "rvros/adventurer-crnr-grb-02";
+    static final String RVROS_CRNR_GRAB_3 = "rvros/adventurer-crnr-grb-03";
+    static final float RVROS_GRAB_DURATION = 0.10f;
+
+    //Corner climb
+    static final String RVROS_CRNR_CLMB_0 = "rvros/adventurer-crnr-clmb-00";
+    static final String RVROS_CRNR_CLMB_1 = "rvros/adventurer-crnr-clmb-01";
+    static final String RVROS_CRNR_CLMB_2 = "rvros/adventurer-crnr-clmb-02";
+    static final String RVROS_CRNR_CLMB_3 = "rvros/adventurer-crnr-clmb-03";
+    static final String RVROS_CRNR_CLMB_4 = "rvros/adventurer-crnr-clmb-04";
+    static final float RVROS_CLIMB_DURATION = 0.10f;
+
+    //Corner jump
+    static final String RVROS_CRNR_JMP_0 = "rvros/adventurer-crnr-jmp-00";
+    static final String RVROS_CRNR_JMP_1 = "rvros/adventurer-crnr-jmp-01";
+    static final String RVROS_CRNR_JMP_2 = "rvros/adventurer-crnr-jmp-02";
+    /*
+        Woody
+     */
     //Jump
     public static final String WOODY_JUMP = "woody/woody_jumping";
 

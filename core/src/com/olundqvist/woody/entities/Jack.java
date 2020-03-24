@@ -2,11 +2,11 @@ package com.olundqvist.woody.entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.bullet.linearmath.SWIGTYPE_p_btAlignedObjectArrayT_btCollisionObjectDoubleData_p_t;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.olundqvist.woody.util.Assets;
 import com.olundqvist.woody.util.Constants;
@@ -17,11 +17,11 @@ import com.olundqvist.woody.util.Enums.AnimState;
 import com.olundqvist.woody.util.Utils;
 
 import static com.olundqvist.woody.util.Constants.JACK_DAMPING;
-import static com.olundqvist.woody.util.Constants.JACK_HEIGHT;
 import static com.olundqvist.woody.util.Constants.JACK_WIDTH;
 import static com.olundqvist.woody.util.Constants.JUMP_SPEED;
 import static com.olundqvist.woody.util.Enums.Direction.LEFT;
 import static com.olundqvist.woody.util.Enums.Direction.RIGHT;
+import static com.olundqvist.woody.util.Enums.JumpState.CLIMBING;
 import static com.olundqvist.woody.util.Enums.JumpState.FALLING;
 import static com.olundqvist.woody.util.Enums.JumpState.GRABING;
 import static com.olundqvist.woody.util.Enums.JumpState.GROUNDED;
@@ -38,7 +38,7 @@ public class Jack {
     private JumpState jumpState;
     private AnimState animationState;
     private long idleStartTime;
-    private long grabStartTime;
+    private long actionStartTime;
     private long runStartTime;
     private Direction direction;
     boolean xcollision, left, right;
@@ -54,25 +54,29 @@ public class Jack {
         init();
     }
 
-    void render(SpriteBatch batch){
+    void render(Batch batch){
         TextureRegion region;
        float idleTimeSec = Utils.secondsSince(idleStartTime);
         switch (animationState){
             case RUN:
-                region = Assets.instance.woodyAssets.runAnimation.getKeyFrame(idleTimeSec);
+                region = Assets.instance.rvrosAssets.runAnimation.getKeyFrame(idleTimeSec);
                 break;
             case FALL:
-                region = Assets.instance.woodyAssets.fallingAnimation.getKeyFrame(idleTimeSec);
+                region = Assets.instance.rvrosAssets.fallAnimation.getKeyFrame(idleTimeSec);
                 break;
             case GRAB:
-                region = Assets.instance.woodyAssets.grabAnimation.getKeyFrame(
-                        Utils.secondsSince(grabStartTime));
+                region = Assets.instance.rvrosAssets.grabAnimation.getKeyFrame(
+                        Utils.secondsSince(actionStartTime));
                 break;
             case JUMP:
-                region = Assets.instance.woodyAssets.jumpSprite;
+                region = Assets.instance.rvrosAssets.jumpSprite;
+                break;
+            case CLIMB:
+                region = Assets.instance.rvrosAssets.climbAnimation.getKeyFrame(
+                        Utils.secondsSince(actionStartTime));
                 break;
             default:
-                region = Assets.instance.woodyAssets.idleAnimation.getKeyFrame(idleTimeSec);
+                region = Assets.instance.rvrosAssets.idleAnimation.getKeyFrame(idleTimeSec);
                 break;
         }
         Utils.drawTextureRegion(batch, region, position, facing);
@@ -90,21 +94,28 @@ public class Jack {
     }
 
     private void updateState(){
-        if(velocity.y < 0){
+        if (velocity.y < 0) {
             animationState = AnimState.FALL;
-        }else if(velocity.y > 0){
+        } else if (velocity.y > 0) {
             animationState = AnimState.JUMP;
-        }else{
+        } else {
             animationState = AnimState.IDLE;
         }
-        switch (jumpState){
+        switch (jumpState) {
             case GROUNDED:
-                if(Math.abs(velocity.x)>0){
+                if (Math.abs(velocity.x) > 0) {
                     animationState = AnimState.RUN;
                 }
                 break;
             case GRABING:
                 animationState = AnimState.GRAB;
+                break;
+            case CLIMBING:
+                animationState = AnimState.CLIMB;
+                if(Utils.secondsSince(actionStartTime) > 0.5){
+                    Gdx.app.log(TAG, "Climb ended");
+                    jumpState = FALLING;
+                }
                 break;
         }
     }
@@ -114,10 +125,19 @@ public class Jack {
         velocity.y -= Constants.GRAVITY;
         velocity.scl(delta);
         bounds.setPosition(position);
-        if(jumpState != GRABING){
-            collisionCheck();
-        }else{
-            velocity.setZero();
+        switch(jumpState){
+            case GRABING:
+                velocity.setZero();
+                break;
+            case CLIMBING:
+                climb(delta);
+                break;
+            case FALLING:
+                collisionCheck();
+                break;
+            case GROUNDED:
+                collisionCheck();
+                break;
         }
         updateState();
         position.add(velocity);
@@ -144,7 +164,7 @@ public class Jack {
             velocity.setZero();
             position.y = rect.y - 16;
             jumpState = GRABING;
-            grabStartTime = TimeUtils.nanoTime();
+            actionStartTime = TimeUtils.nanoTime();
         }
     }
 
@@ -226,17 +246,11 @@ public class Jack {
                 case GRABING:
                     switch(facing){
                         case LEFT:
-                            jumpState = FALLING;
-                            velocity.y = 0;
-                            position.x -= 16;
-                            position.y += 34;
+                            initClimb();
                             Gdx.app.log(TAG, "Climbed Left");
                             break;
                         case RIGHT:
-                            jumpState = FALLING;
-                            velocity.y = 0;
-                            position.x += 16;
-                            position.y += 34;
+                            initClimb();
                             Gdx.app.log(TAG, "Climbed Right");
                             break;
                     }
@@ -254,6 +268,22 @@ public class Jack {
                     break;
             }
         }
+    }
+    private void climb(float delta){
+        switch(facing){
+            case LEFT:
+                position.add(-25*delta,40*delta);
+                break;
+            case RIGHT:
+                position.add(25*delta,40*delta);
+                break;
+        }
+        velocity.setZero();
+    }
+    private void initClimb(){
+        actionStartTime = TimeUtils.nanoTime();
+        animationState = AnimState.CLIMB;
+        jumpState = CLIMBING;
     }
 
     private void move(Direction direction){

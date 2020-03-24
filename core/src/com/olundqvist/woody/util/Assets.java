@@ -11,6 +11,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 
+import javax.swing.table.AbstractTableModel;
+
 public class Assets implements Disposable, AssetErrorListener {
 
     public static final String TAG = Assets.class.getName();
@@ -18,6 +20,7 @@ public class Assets implements Disposable, AssetErrorListener {
     private AssetManager assetManager;
     public WoodyAssets woodyAssets;
     public BackgroundAssets backgroundAssets;
+    public RvrosAssets rvrosAssets;
 
     public Assets() {
     }
@@ -31,6 +34,7 @@ public class Assets implements Disposable, AssetErrorListener {
         TextureAtlas atlas = assetManager.get(Constants.TEXTURE_ATLAS);
         woodyAssets = new WoodyAssets(atlas);
         backgroundAssets = new BackgroundAssets(atlas);
+        rvrosAssets = new RvrosAssets(atlas);
     }
 
     public static class BackgroundAssets{
@@ -64,17 +68,101 @@ public class Assets implements Disposable, AssetErrorListener {
         }
     }
 
+    public static class RvrosAssets{
+        public final Animation<AtlasRegion> idleAnimation;
+        public final Animation<AtlasRegion> runAnimation;
+        public final Animation<AtlasRegion> fallAnimation;
+        public final Animation<AtlasRegion> grabAnimation;
+        public final Animation<AtlasRegion> climbAnimation;
+        public final TextureRegion jumpSprite;
+
+        RvrosAssets(TextureAtlas atlas){
+            idleAnimation = initIdleAnimation(atlas);
+            runAnimation = initRunAnimation(atlas);
+            fallAnimation = initFallAnimation(atlas);
+            grabAnimation = initGrabAnimation(atlas);
+            climbAnimation = initClimbAnimation(atlas);
+            jumpSprite = atlas.findRegion(Constants.RVROS_JUMP_2);
+        }
+
+        private Animation<AtlasRegion> initClimbAnimation(TextureAtlas atlas){
+            Array<AtlasRegion> climbFrames = new Array<>();
+            climbFrames.add(atlas.findRegion(Constants.RVROS_CRNR_CLMB_0));
+            climbFrames.add(atlas.findRegion(Constants.RVROS_CRNR_CLMB_1));
+            climbFrames.add(atlas.findRegion(Constants.RVROS_CRNR_CLMB_2));
+            climbFrames.add(atlas.findRegion(Constants.RVROS_CRNR_CLMB_3));
+            climbFrames.add(atlas.findRegion(Constants.RVROS_CRNR_CLMB_4));
+
+            return new Animation<>(
+                    Constants.RVROS_CLIMB_DURATION,
+                    climbFrames,
+                    Animation.PlayMode.NORMAL
+            );
+        }
+        private Animation<AtlasRegion> initIdleAnimation(TextureAtlas atlas){
+            Array<AtlasRegion> idleFrames = new Array<>();
+            idleFrames.add(atlas.findRegion(Constants.RVROS_IDLE_0));
+            idleFrames.add(atlas.findRegion(Constants.RVROS_IDLE_1));
+            idleFrames.add(atlas.findRegion(Constants.RVROS_IDLE_2));
+            idleFrames.add(atlas.findRegion(Constants.RVROS_IDLE_3));
+            return new Animation<>(
+              Constants.RVROS_IDLE_DURATION,
+              idleFrames,
+              Animation.PlayMode.LOOP
+            );
+        }
+        private Animation<AtlasRegion> initRunAnimation(TextureAtlas atlas){
+            Array<AtlasRegion> runFrames = new Array<>();
+            runFrames.add(atlas.findRegion(Constants.RVROS_RUN_0));
+            runFrames.add(atlas.findRegion(Constants.RVROS_RUN_1));
+            runFrames.add(atlas.findRegion(Constants.RVROS_RUN_2));
+            runFrames.add(atlas.findRegion(Constants.RVROS_RUN_3));
+            runFrames.add(atlas.findRegion(Constants.RVROS_RUN_4));
+            runFrames.add(atlas.findRegion(Constants.RVROS_RUN_5));
+
+            return new Animation<AtlasRegion>(
+                    Constants.RVROS_RUN_DURATION,
+                    runFrames,
+                    Animation.PlayMode.LOOP
+            );
+        }
+        private Animation<AtlasRegion> initFallAnimation(TextureAtlas atlas){
+            Array<AtlasRegion> fallFrames = new Array<>();
+            fallFrames.add(atlas.findRegion(Constants.RVROS_FALL_0));
+            fallFrames.add(atlas.findRegion(Constants.RVROS_FALL_1));
+
+            return new Animation<>(
+                    Constants.RVROS_FALL_DURATION,
+                    fallFrames,
+                    Animation.PlayMode.LOOP
+            );
+        }
+        private Animation<AtlasRegion> initGrabAnimation(TextureAtlas atlas){
+            Array<AtlasRegion> grabFrames = new Array<>();
+            grabFrames.add(atlas.findRegion(Constants.RVROS_CRNR_GRAB_0));
+            grabFrames.add(atlas.findRegion(Constants.RVROS_CRNR_GRAB_1));
+            grabFrames.add(atlas.findRegion(Constants.RVROS_CRNR_GRAB_2));
+            grabFrames.add(atlas.findRegion(Constants.RVROS_CRNR_GRAB_3));
+
+            return new Animation<>(
+                    Constants.RVROS_GRAB_DURATION,
+                    grabFrames,
+                    Animation.PlayMode.LOOP
+            );
+        }
+    }
+
     public static class WoodyAssets {
         public final Animation<AtlasRegion> idleAnimation;
         public final Animation<AtlasRegion> runAnimation;
-        public final Animation<AtlasRegion> fallingAnimation;
+        public final Animation<AtlasRegion> fallAnimation;
         public final Animation<AtlasRegion> grabAnimation;
         public final TextureRegion jumpSprite;
 
         WoodyAssets(TextureAtlas atlas) {
             idleAnimation = initIdleFrames(atlas);
             runAnimation = initRunAnimation(atlas);
-            fallingAnimation = initFallingAnimation(atlas);
+            fallAnimation = initFallAnimation(atlas);
             grabAnimation = initGrabAnimation(atlas);
             jumpSprite = atlas.findRegion(Constants.WOODY_JUMP);
         }
@@ -93,7 +181,7 @@ public class Assets implements Disposable, AssetErrorListener {
                     Animation.PlayMode.NORMAL
             );
         }
-        private Animation<AtlasRegion> initFallingAnimation(TextureAtlas atlas){
+        private Animation<AtlasRegion> initFallAnimation(TextureAtlas atlas){
             Array<AtlasRegion> fallingAnimation = new Array<>();
             fallingAnimation.add(atlas.findRegion(Constants.WOODY_FALL_0));
             fallingAnimation.add(atlas.findRegion(Constants.WOODY_FALL_1));
