@@ -74,6 +74,9 @@ public class Assets implements Disposable, AssetErrorListener {
         public final Animation<AtlasRegion> fallAnimation;
         public final Animation<AtlasRegion> grabAnimation;
         public final Animation<AtlasRegion> climbAnimation;
+        public final Animation<AtlasRegion> attack1Animation;
+        public final Animation<AtlasRegion> attack2Animation;
+        public final Animation<AtlasRegion> attack3Animation;
         public final TextureRegion jumpSprite;
 
         RvrosAssets(TextureAtlas atlas){
@@ -82,8 +85,58 @@ public class Assets implements Disposable, AssetErrorListener {
             fallAnimation = initFallAnimation(atlas);
             grabAnimation = initGrabAnimation(atlas);
             climbAnimation = initClimbAnimation(atlas);
+            attack1Animation = initAttack1(atlas);
+            attack2Animation = initAttack2(atlas);
+            attack3Animation = initAttack3(atlas);
             jumpSprite = atlas.findRegion(Constants.RVROS_JUMP_2);
         }
+
+        private Animation<AtlasRegion> initAttack1(TextureAtlas atlas){
+            Array<AtlasRegion> attackFrames = new Array<>();
+            attackFrames.add(atlas.findRegion(Constants.RVROS_ATTACK_1_0));
+            attackFrames.add(atlas.findRegion(Constants.RVROS_ATTACK_1_1));
+            attackFrames.add(atlas.findRegion(Constants.RVROS_ATTACK_1_2));
+            attackFrames.add(atlas.findRegion(Constants.RVROS_ATTACK_1_3));
+            attackFrames.add(atlas.findRegion(Constants.RVROS_ATTACK_1_4));
+
+            return new Animation<>(
+                    Constants.RVROS_ATTACK_DURATION,
+                    attackFrames,
+                    Animation.PlayMode.NORMAL
+            );
+        }
+        private Animation<AtlasRegion> initAttack2(TextureAtlas atlas){
+            Array<AtlasRegion> attackFrames = new Array<>();
+            attackFrames.add(atlas.findRegion(Constants.RVROS_ATTACK_2_0));
+            attackFrames.add(atlas.findRegion(Constants.RVROS_ATTACK_2_1));
+            attackFrames.add(atlas.findRegion(Constants.RVROS_ATTACK_2_2));
+            attackFrames.add(atlas.findRegion(Constants.RVROS_ATTACK_2_3));
+            attackFrames.add(atlas.findRegion(Constants.RVROS_ATTACK_2_4));
+            attackFrames.add(atlas.findRegion(Constants.RVROS_ATTACK_2_5));
+
+            return new Animation<>(
+                    Constants.RVROS_ATTACK_DURATION,
+                    attackFrames,
+                    Animation.PlayMode.NORMAL
+            );
+        }
+        private Animation<AtlasRegion> initAttack3(TextureAtlas atlas){
+            Array<AtlasRegion> attackFrames = new Array<>();
+            attackFrames.add(atlas.findRegion(Constants.RVROS_ATTACK_3_0));
+            attackFrames.add(atlas.findRegion(Constants.RVROS_ATTACK_3_1));
+            attackFrames.add(atlas.findRegion(Constants.RVROS_ATTACK_3_2));
+            attackFrames.add(atlas.findRegion(Constants.RVROS_ATTACK_3_3));
+            attackFrames.add(atlas.findRegion(Constants.RVROS_ATTACK_3_4));
+            attackFrames.add(atlas.findRegion(Constants.RVROS_ATTACK_3_5));
+
+            return new Animation<>(
+                    Constants.RVROS_ATTACK_DURATION,
+                    attackFrames,
+                    Animation.PlayMode.NORMAL
+            );
+        }
+
+
 
         private Animation<AtlasRegion> initClimbAnimation(TextureAtlas atlas){
             Array<AtlasRegion> climbFrames = new Array<>();

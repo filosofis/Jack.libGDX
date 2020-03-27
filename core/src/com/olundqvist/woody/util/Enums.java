@@ -6,16 +6,12 @@ public class Enums {
         LEFT, RIGHT
     }
 
-    public enum WalkState {
-        WALKING,
-        NOT_WALKING
-    }
-
-    public enum JumpState{
+    public enum ActionState {
         FALLING,
-        GRABING,
+        GRABBING,
         GROUNDED,
-        CLIMBING
+        CLIMBING,
+        ATTACKING
     }
 
     public enum WH{
@@ -29,6 +25,9 @@ public class Enums {
         FALL,
         GRAB,
         JUMP,
-        CLIMB
+        CLIMB,
+        ATTACK1,
+        ATTACK2,
+        ATTACK3
     }
 }

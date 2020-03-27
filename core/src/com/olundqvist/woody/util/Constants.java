@@ -28,7 +28,7 @@ public class Constants {
     public static final float MAX_JUMP_DURATION = .2f;
 
     /*
-        rvros
+        Rvros
      */
     //Idle
     static final String RVROS_IDLE_0 = "rvros/adventurer-idle-00";
@@ -81,6 +81,32 @@ public class Constants {
     static final String RVROS_CRNR_JMP_0 = "rvros/adventurer-crnr-jmp-00";
     static final String RVROS_CRNR_JMP_1 = "rvros/adventurer-crnr-jmp-01";
     static final String RVROS_CRNR_JMP_2 = "rvros/adventurer-crnr-jmp-02";
+
+    static final float RVROS_ATTACK_DURATION = 0.10f;
+
+    //Attack1
+    static final String RVROS_ATTACK_1_0 = "rvros/adventurer-attack1-00";
+    static final String RVROS_ATTACK_1_1 = "rvros/adventurer-attack1-01";
+    static final String RVROS_ATTACK_1_2 = "rvros/adventurer-attack1-02";
+    static final String RVROS_ATTACK_1_3 = "rvros/adventurer-attack1-03";
+    static final String RVROS_ATTACK_1_4 = "rvros/adventurer-attack1-04";
+
+    //Attack2
+    static final String RVROS_ATTACK_2_0 = "rvros/adventurer-attack2-00";
+    static final String RVROS_ATTACK_2_1 = "rvros/adventurer-attack2-01";
+    static final String RVROS_ATTACK_2_2 = "rvros/adventurer-attack2-02";
+    static final String RVROS_ATTACK_2_3 = "rvros/adventurer-attack2-03";
+    static final String RVROS_ATTACK_2_4 = "rvros/adventurer-attack2-04";
+    static final String RVROS_ATTACK_2_5 = "rvros/adventurer-attack2-05";
+
+    //Attack3
+    static final String RVROS_ATTACK_3_0 = "rvros/adventurer-attack3-00";
+    static final String RVROS_ATTACK_3_1 = "rvros/adventurer-attack3-01";
+    static final String RVROS_ATTACK_3_2 = "rvros/adventurer-attack3-02";
+    static final String RVROS_ATTACK_3_3 = "rvros/adventurer-attack3-03";
+    static final String RVROS_ATTACK_3_4 = "rvros/adventurer-attack3-04";
+    static final String RVROS_ATTACK_3_5 = "rvros/adventurer-attack3-05";
+
     /*
         Woody
      */
