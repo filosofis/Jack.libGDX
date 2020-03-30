@@ -11,8 +11,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 
-import javax.swing.table.AbstractTableModel;
-
 public class Assets implements Disposable, AssetErrorListener {
 
     public static final String TAG = Assets.class.getName();
@@ -21,6 +19,7 @@ public class Assets implements Disposable, AssetErrorListener {
     public WoodyAssets woodyAssets;
     public BackgroundAssets backgroundAssets;
     public RvrosAssets rvrosAssets;
+    public EnemyAssets enemyAssets;
 
     public Assets() {
     }
@@ -35,6 +34,34 @@ public class Assets implements Disposable, AssetErrorListener {
         woodyAssets = new WoodyAssets(atlas);
         backgroundAssets = new BackgroundAssets(atlas);
         rvrosAssets = new RvrosAssets(atlas);
+        enemyAssets = new EnemyAssets(atlas);
+    }
+
+    public static class EnemyAssets{
+
+        public final Animation<AtlasRegion> idleAnimation;
+
+        EnemyAssets(TextureAtlas atlas){
+            idleAnimation = initIdleAnimation(atlas);
+        }
+
+        private Animation<AtlasRegion> initIdleAnimation(TextureAtlas atlas){
+            Array<AtlasRegion> idleFrames = new Array<>();
+            idleFrames.add(atlas.findRegion(Constants.ANDRO_IDLE_0));
+            idleFrames.add(atlas.findRegion(Constants.ANDRO_IDLE_1));
+            idleFrames.add(atlas.findRegion(Constants.ANDRO_IDLE_2));
+            idleFrames.add(atlas.findRegion(Constants.ANDRO_IDLE_3));
+            idleFrames.add(atlas.findRegion(Constants.ANDRO_IDLE_4));
+            idleFrames.add(atlas.findRegion(Constants.ANDRO_IDLE_5));
+            idleFrames.add(atlas.findRegion(Constants.ANDRO_IDLE_6));
+            idleFrames.add(atlas.findRegion(Constants.ANDRO_IDLE_7));
+
+            return new Animation<>(
+                    Constants.IDLE_ANIMATION_DURATION,
+                    idleFrames,
+                    Animation.PlayMode.LOOP
+            );
+        }
     }
 
     public static class BackgroundAssets{

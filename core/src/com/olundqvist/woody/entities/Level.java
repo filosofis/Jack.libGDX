@@ -41,6 +41,7 @@ public class Level {
             return new Rectangle();
         }
     };
+    public Enemy andro;
 
     public Level() {
         viewport = new ExtendViewport(Constants.WORLD_WIDTH, Constants.WORLD_HEIGHT);
@@ -50,6 +51,7 @@ public class Level {
         tmr = new OrthogonalTiledMapRenderer(map);
         debugRenderer = new ShapeRenderer();
         debug=false;
+        andro = new Enemy(new Vector2(50,50));
     }
 
     public void render() {
@@ -64,6 +66,7 @@ public class Level {
         tmr.render();
         batch.begin();
         jack.render(batch);
+        andro.render(batch);
         parallaxForground.draw(ocam, batch);
         batch.end();
         if(debug){
@@ -165,6 +168,7 @@ public class Level {
         this.jack = jack;
     }
 
+    //TODO: Fix the ground in the background on vertical parallax scrolling
     public void createLayers(){
 
         float oneDimen = 928;

@@ -33,9 +33,7 @@ public class Jack {
     private AnimState animationState;
     private long idleStartTime;
     private long actionStartTime;
-    private long runStartTime;
-    private Direction direction;
-    boolean xcollision, left, right, attack;
+    boolean left, right, attack;
     private Level level;
     private Rectangle bounds;
     private Random random;
@@ -109,6 +107,7 @@ public class Jack {
         } else if (actionState != ATTACKING){
             animationState = AnimState.IDLE;
         }
+
         switch (actionState) {
             case ATTACKING:
                 break;
@@ -233,6 +232,7 @@ public class Jack {
         }
 
         switch(actionState){
+            //Only allow attacks While grounded?
             case GROUNDED:
                 if(attack){
                     initAttack();
@@ -246,6 +246,9 @@ public class Jack {
                 }
             case FALLING:
                 //Allow air control?
+                if(attack){
+                    initAttack();
+                }
                 if (left && !right) {
                     move(LEFT);
                 } else if (right && !left) {
@@ -317,8 +320,7 @@ public class Jack {
         }
     }
     private void attack(){
-//        animationState = AnimState.ATTACK1;
-//        Gdx.app.log(TAG, " attack --");
+        //End attack after 0.5s
         if(Utils.secondsSince(actionStartTime) > 0.5){
             actionState = GROUNDED;
         }

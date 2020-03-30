@@ -1,5 +1,179 @@
 
 woody.pack.png
+size: 1024,256
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+andromalius/action-0
+  rotate: false
+  xy: 2, 92
+  size: 57, 88
+  orig: 57, 88
+  offset: 0, 0
+  index: -1
+andromalius/action-1
+  rotate: false
+  xy: 2, 2
+  size: 57, 88
+  orig: 57, 88
+  offset: 0, 0
+  index: -1
+andromalius/action-2
+  rotate: false
+  xy: 61, 92
+  size: 57, 88
+  orig: 57, 88
+  offset: 0, 0
+  index: -1
+andromalius/action-3
+  rotate: false
+  xy: 61, 2
+  size: 57, 88
+  orig: 57, 88
+  offset: 0, 0
+  index: -1
+andromalius/action-4
+  rotate: false
+  xy: 120, 92
+  size: 57, 88
+  orig: 57, 88
+  offset: 0, 0
+  index: -1
+andromalius/action-5
+  rotate: false
+  xy: 120, 2
+  size: 57, 88
+  orig: 57, 88
+  offset: 0, 0
+  index: -1
+andromalius/action-6
+  rotate: false
+  xy: 179, 92
+  size: 57, 88
+  orig: 57, 88
+  offset: 0, 0
+  index: -1
+andromalius/action-7
+  rotate: false
+  xy: 179, 2
+  size: 57, 88
+  orig: 57, 88
+  offset: 0, 0
+  index: -1
+andromalius/front-0
+  rotate: false
+  xy: 238, 92
+  size: 57, 88
+  orig: 57, 88
+  offset: 0, 0
+  index: -1
+andromalius/front-1
+  rotate: false
+  xy: 238, 2
+  size: 57, 88
+  orig: 57, 88
+  offset: 0, 0
+  index: -1
+andromalius/front-2
+  rotate: false
+  xy: 297, 92
+  size: 57, 88
+  orig: 57, 88
+  offset: 0, 0
+  index: -1
+andromalius/front-3
+  rotate: false
+  xy: 297, 2
+  size: 57, 88
+  orig: 57, 88
+  offset: 0, 0
+  index: -1
+andromalius/idle-0
+  rotate: false
+  xy: 356, 92
+  size: 57, 88
+  orig: 57, 88
+  offset: 0, 0
+  index: -1
+andromalius/idle-1
+  rotate: false
+  xy: 356, 2
+  size: 57, 88
+  orig: 57, 88
+  offset: 0, 0
+  index: -1
+andromalius/idle-2
+  rotate: false
+  xy: 415, 92
+  size: 57, 88
+  orig: 57, 88
+  offset: 0, 0
+  index: -1
+andromalius/idle-3
+  rotate: false
+  xy: 415, 2
+  size: 57, 88
+  orig: 57, 88
+  offset: 0, 0
+  index: -1
+andromalius/idle-4
+  rotate: false
+  xy: 474, 92
+  size: 57, 88
+  orig: 57, 88
+  offset: 0, 0
+  index: -1
+andromalius/idle-5
+  rotate: false
+  xy: 474, 2
+  size: 57, 88
+  orig: 57, 88
+  offset: 0, 0
+  index: -1
+andromalius/idle-6
+  rotate: false
+  xy: 533, 92
+  size: 57, 88
+  orig: 57, 88
+  offset: 0, 0
+  index: -1
+andromalius/idle-7
+  rotate: false
+  xy: 533, 2
+  size: 57, 88
+  orig: 57, 88
+  offset: 0, 0
+  index: -1
+andromalius/left-0
+  rotate: false
+  xy: 592, 92
+  size: 57, 88
+  orig: 57, 88
+  offset: 0, 0
+  index: -1
+andromalius/left-1
+  rotate: false
+  xy: 592, 2
+  size: 57, 88
+  orig: 57, 88
+  offset: 0, 0
+  index: -1
+andromalius/right-0
+  rotate: false
+  xy: 651, 92
+  size: 57, 88
+  orig: 57, 88
+  offset: 0, 0
+  index: -1
+andromalius/right-1
+  rotate: false
+  xy: 651, 2
+  size: 57, 88
+  orig: 57, 88
+  offset: 0, 0
+  index: -1
+
+woody.pack2.png
 size: 1024,128
 format: RGBA8888
 filter: Nearest,Nearest
@@ -509,7 +683,7 @@ rvros/adventurer-stand-02
   offset: 0, 0
   index: -1
 
-woody.pack2.png
+woody.pack3.png
 size: 128,256
 format: RGBA8888
 filter: Nearest,Nearest
@@ -725,7 +899,7 @@ woody/woody_run7
   offset: 0, 0
   index: -1
 
-woody.pack3.png
+woody.pack4.png
 size: 1024,1024
 format: RGBA8888
 filter: Nearest,Nearest
@@ -738,7 +912,7 @@ background/Layer_0000
   offset: 0, 0
   index: 9
 
-woody.pack4.png
+woody.pack5.png
 size: 1024,1024
 format: RGBA8888
 filter: Nearest,Nearest
@@ -751,7 +925,7 @@ background/Layer_0001
   offset: 0, 0
   index: 8
 
-woody.pack5.png
+woody.pack6.png
 size: 1024,1024
 format: RGBA8888
 filter: Nearest,Nearest
@@ -764,7 +938,7 @@ background/Layer_0002
   offset: 0, 0
   index: 7
 
-woody.pack6.png
+woody.pack7.png
 size: 1024,1024
 format: RGBA8888
 filter: Nearest,Nearest
@@ -777,7 +951,7 @@ background/Layer_0003
   offset: 0, 0
   index: 6
 
-woody.pack7.png
+woody.pack8.png
 size: 1024,1024
 format: RGBA8888
 filter: Nearest,Nearest
@@ -790,7 +964,7 @@ background/Layer_0004_Lights
   offset: 0, 0
   index: -1
 
-woody.pack8.png
+woody.pack9.png
 size: 1024,1024
 format: RGBA8888
 filter: Nearest,Nearest
@@ -803,7 +977,7 @@ background/Layer_0005
   offset: 0, 0
   index: 5
 
-woody.pack9.png
+woody.pack10.png
 size: 1024,1024
 format: RGBA8888
 filter: Nearest,Nearest
@@ -816,7 +990,7 @@ background/Layer_0006
   offset: 0, 0
   index: 4
 
-woody.pack10.png
+woody.pack11.png
 size: 1024,1024
 format: RGBA8888
 filter: Nearest,Nearest
@@ -829,7 +1003,7 @@ background/Layer_0007_Lights
   offset: 0, 0
   index: -1
 
-woody.pack11.png
+woody.pack12.png
 size: 1024,1024
 format: RGBA8888
 filter: Nearest,Nearest
@@ -842,7 +1016,7 @@ background/Layer_0008
   offset: 0, 0
   index: 3
 
-woody.pack12.png
+woody.pack13.png
 size: 1024,1024
 format: RGBA8888
 filter: Nearest,Nearest
@@ -855,7 +1029,7 @@ background/Layer_0009
   offset: 0, 0
   index: 2
 
-woody.pack13.png
+woody.pack14.png
 size: 1024,1024
 format: RGBA8888
 filter: Nearest,Nearest

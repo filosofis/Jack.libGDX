@@ -28,6 +28,37 @@ public class Constants {
     public static final float MAX_JUMP_DURATION = .2f;
 
     /*
+        Andromalius (enemy)
+     */
+    //Idle
+    static final String ANDRO_IDLE_0 = "andromalius/idle-0";
+    static final String ANDRO_IDLE_1 = "andromalius/idle-1";
+    static final String ANDRO_IDLE_2 = "andromalius/idle-2";
+    static final String ANDRO_IDLE_3 = "andromalius/idle-3";
+    static final String ANDRO_IDLE_4 = "andromalius/idle-4";
+    static final String ANDRO_IDLE_5 = "andromalius/idle-5";
+    static final String ANDRO_IDLE_6 = "andromalius/idle-6";
+    static final String ANDRO_IDLE_7 = "andromalius/idle-7";
+
+    //Action
+    static final String ANDRO_ACTION_0 = "andromalius/action-0";
+    static final String ANDRO_ACTION_1 = "andromalius/action-1";
+    static final String ANDRO_ACTION_2 = "andromalius/action-2";
+    static final String ANDRO_ACTION_3 = "andromalius/action-3";
+    static final String ANDRO_ACTION_4 = "andromalius/action-4";
+    static final String ANDRO_ACTION_5 = "andromalius/action-5";
+    static final String ANDRO_ACTION_6 = "andromalius/action-6";
+    static final String ANDRO_ACTION_7 = "andromalius/action-7";
+
+    //left turn
+    static final String ANDRO_LEFT_0 = "andromalius/left-0";
+    static final String ANDRO_LEFT_1 = "andromalius/left-0";
+
+    //right turn
+    static final String ANDRO_RIGHT_0 = "andromalius/right-0";
+    static final String ANDRO_RIGHT_1 = "andromalius/right-0";
+
+    /*
         Rvros
      */
     //Idle
