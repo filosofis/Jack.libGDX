@@ -100,12 +100,14 @@ public class Jack {
     }
 
     private void updateState(){
-        if (velocity.y < 0) {
-            animationState = AnimState.FALL;
-        } else if (velocity.y > 0) {
-            animationState = AnimState.JUMP;
-        } else if (actionState != ATTACKING){
-            animationState = AnimState.IDLE;
+        if(actionState != ATTACKING){
+            if (velocity.y < 0) {
+                animationState = AnimState.FALL;
+            } else if (velocity.y > 0) {
+                animationState = AnimState.JUMP;
+            } else {
+                animationState = AnimState.IDLE;
+            }
         }
 
         switch (actionState) {
