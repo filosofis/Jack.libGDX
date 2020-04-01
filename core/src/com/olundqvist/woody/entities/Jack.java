@@ -18,6 +18,7 @@ import java.util.Random;
 
 import static com.olundqvist.woody.util.Constants.JACK_DAMPING;
 import static com.olundqvist.woody.util.Constants.JUMP_SPEED;
+import static com.olundqvist.woody.util.Constants.RVOS_WIDTH;
 import static com.olundqvist.woody.util.Enums.Direction.LEFT;
 import static com.olundqvist.woody.util.Enums.Direction.RIGHT;
 import static com.olundqvist.woody.util.Enums.ActionState.*;
@@ -28,11 +29,13 @@ public class Jack {
     private Vector2 spawnLocation;
     private Vector2 position;
     private Vector2 velocity;
+    private Vector2 offset;
     private Direction facing;
     private Enums.ActionState actionState;
     private AnimState animationState;
     private long idleStartTime;
     private long actionStartTime;
+    private float idleTimeSec;
     boolean left, right, attack;
     private Level level;
     private Rectangle bounds;
@@ -43,13 +46,15 @@ public class Jack {
         this.spawnLocation = spawnLocation;
         position = new Vector2();
         velocity = new Vector2();
+        offset = new Vector2();
         this.level = level;
         init();
     }
 
     void render(Batch batch){
         TextureRegion region;
-       float idleTimeSec = Utils.secondsSince(idleStartTime);
+        idleTimeSec = Utils.secondsSince(idleStartTime);
+        offset.setZero();
         switch (animationState){
             case RUN:
                 region = Assets.instance.rvrosAssets.runAnimation.getKeyFrame(idleTimeSec);
@@ -60,6 +65,9 @@ public class Jack {
             case GRAB:
                 region = Assets.instance.rvrosAssets.grabAnimation.getKeyFrame(
                         Utils.secondsSince(actionStartTime));
+                if(facing == RIGHT){
+                    offset.x = 5;
+                }
                 break;
             case JUMP:
                 region = Assets.instance.rvrosAssets.jumpSprite;
@@ -67,24 +75,37 @@ public class Jack {
             case CLIMB:
                 region = Assets.instance.rvrosAssets.climbAnimation.getKeyFrame(
                         Utils.secondsSince(actionStartTime));
+                if(facing == RIGHT){
+                    offset.x = 5;
+                }
                 break;
             case ATTACK1:
                 region = Assets.instance.rvrosAssets.attack1Animation.getKeyFrame(
                         Utils.secondsSince(actionStartTime));
+                if(facing == LEFT){
+                    offset.x = -25;
+                }
                 break;
             case ATTACK2:
                 region = Assets.instance.rvrosAssets.attack2Animation.getKeyFrame(
                         Utils.secondsSince(actionStartTime));
+                if(facing == LEFT){
+                    offset.x = -25;
+                }
                 break;
+
             case ATTACK3:
                 region = Assets.instance.rvrosAssets.attack3Animation.getKeyFrame(
                         Utils.secondsSince(actionStartTime));
+                if(facing == LEFT){
+                    offset.x = -30;
+                }
                 break;
             default:
                 region = Assets.instance.rvrosAssets.idleAnimation.getKeyFrame(idleTimeSec);
                 break;
         }
-        Utils.drawTextureRegion(batch, region, position, facing);
+        Utils.drawTextureRegion(batch, region, position, facing, offset);
     }
 
     private void init(){
@@ -163,11 +184,11 @@ public class Jack {
         ) {
             switch (facing) {
                 case LEFT:
-                    position.x = rect.x + 15;
+                    position.x = rect.x + 16;
                     break;
                 case RIGHT:
                     //Workaround for better appearance of mirrored grab animation
-                    position.x = rect.x - 14;
+                    position.x = rect.x - RVOS_WIDTH;
                     break;
             }
             velocity.setZero();

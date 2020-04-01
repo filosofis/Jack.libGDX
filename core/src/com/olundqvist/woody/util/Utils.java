@@ -42,8 +42,13 @@ public class Utils {
                 false);
     }
 
-    public static void drawTextureRegion(Batch batch, TextureRegion region, Vector2 position, Vector2 offset) {
-        drawTextureRegion(batch, region, position.x - offset.x, position.y - offset.y);
+    public static void drawTextureRegion(
+            Batch batch,
+            TextureRegion region,
+            Vector2 position,
+            Enums.Direction direction,
+            Vector2 offset) {
+        drawTextureRegion(batch, region, new Vector2(position.x + offset.x, position.y + offset.y), direction);
     }
 
     public static void drawTextureRegion(Batch batch, TextureRegion region, float x, float y) {

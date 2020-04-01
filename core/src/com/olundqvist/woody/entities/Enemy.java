@@ -31,6 +31,10 @@ public class Enemy {
         idleStartTime = TimeUtils.nanoTime();
     }
 
+    public Rectangle getBounds() {
+        return bounds;
+    }
+
     void render(Batch batch){
         float idleTimeSec = Utils.secondsSince(idleStartTime);
         TextureAtlas.AtlasRegion region =
@@ -44,6 +48,6 @@ public class Enemy {
     }
 
     public void update(float delta){
-        
+
     }
 }
