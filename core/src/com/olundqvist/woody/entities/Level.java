@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -41,7 +40,7 @@ public class Level {
             return new Rectangle();
         }
     };
-    public Enemy andro;
+    private Array<Enemy> enemies = new Array<>();
 
     public Level() {
         viewport = new ExtendViewport(Constants.WORLD_WIDTH, Constants.WORLD_HEIGHT);
@@ -51,7 +50,11 @@ public class Level {
         tmr = new OrthogonalTiledMapRenderer(map);
         debugRenderer = new ShapeRenderer();
         debug=false;
-        andro = new Enemy(new Vector2(50,50));
+        Enemy andro0 = new Enemy(new Vector2(250,150));
+        Enemy andro1 = new Enemy(new Vector2(150,50));
+        Enemy andro2 = new Enemy(new Vector2(250,50));
+        Enemy andro3 = new Enemy(new Vector2(350,50));
+        enemies.add(andro0, andro1, andro2, andro3);
     }
 
     public void render() {
@@ -66,7 +69,9 @@ public class Level {
         tmr.render();
         batch.begin();
         jack.render(batch);
-        andro.render(batch);
+        for(Enemy enemy : enemies){
+            enemy.render(batch);
+        }
         parallaxForground.draw(ocam, batch);
         batch.end();
         if(debug){
@@ -76,6 +81,10 @@ public class Level {
 
     public void update(float delta){
         jack.update(delta);
+        for(Enemy enemy : enemies){
+            enemy.facing(jack.getPosition());
+            enemy.update(delta);
+        }
     }
 
     private void getTiles (int startX, int startY, int endX, int endY) {
@@ -255,6 +264,7 @@ public class Level {
         debugRenderer.setProjectionMatrix(camera.combined);
         debugRenderer.begin(ShapeRenderer.ShapeType.Line);
 
+        //Jack debug box
         debugRenderer.setColor(Color.RED);
         debugRenderer.rect(
                 jack.getPosition().x,
@@ -262,6 +272,17 @@ public class Level {
                 Constants.RVOS_WIDTH,
                 Constants.JACK_HEIGHT);
 
+        //Enemy debug box
+        for(Enemy enemy : enemies){
+            debugRenderer.setColor(Color.BLUE);
+            debugRenderer.rect(
+                    enemy.getPosition().x,
+                    enemy.getPosition().y,
+                    enemy.getBounds().width,
+                    enemy.getBounds().height
+            );
+
+        }
         debugRenderer.setColor(Color.YELLOW);
         TiledMapTileLayer layer = (TiledMapTileLayer)map.getLayers().get("TileLayer");
         for (int y = 0; y <= layer.getHeight(); y++) {

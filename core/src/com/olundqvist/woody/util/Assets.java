@@ -38,14 +38,17 @@ public class Assets implements Disposable, AssetErrorListener {
     }
 
     public static class EnemyAssets{
-
-        public final Animation<AtlasRegion> idleAnimation;
+        //TODO: Add turn and attack animations for Andromalius
+        //TODO: Add more types of enemies, maybe the hellhound?
+        //TODO: Add projectiles
+        public final Animation<AtlasRegion> androIdleAnimation;
+        public final Animation<AtlasRegion> androActionAnimation;
 
         EnemyAssets(TextureAtlas atlas){
-            idleAnimation = initIdleAnimation(atlas);
+            androIdleAnimation = initAndroIdleAnimation(atlas);
+            androActionAnimation = initAndroActionAnimation(atlas);
         }
-
-        private Animation<AtlasRegion> initIdleAnimation(TextureAtlas atlas){
+        private Animation<AtlasRegion> initAndroIdleAnimation(TextureAtlas atlas){
             Array<AtlasRegion> idleFrames = new Array<>();
             idleFrames.add(atlas.findRegion(Constants.ANDRO_IDLE_0));
             idleFrames.add(atlas.findRegion(Constants.ANDRO_IDLE_1));
@@ -55,11 +58,26 @@ public class Assets implements Disposable, AssetErrorListener {
             idleFrames.add(atlas.findRegion(Constants.ANDRO_IDLE_5));
             idleFrames.add(atlas.findRegion(Constants.ANDRO_IDLE_6));
             idleFrames.add(atlas.findRegion(Constants.ANDRO_IDLE_7));
-
             return new Animation<>(
                     Constants.IDLE_ANIMATION_DURATION,
                     idleFrames,
                     Animation.PlayMode.LOOP
+            );
+        }
+        private Animation<AtlasRegion> initAndroActionAnimation(TextureAtlas atlas){
+            Array<AtlasRegion> actionFrames = new Array<>();
+            actionFrames.add(atlas.findRegion(Constants.ANDRO_ACTION_0));
+            actionFrames.add(atlas.findRegion(Constants.ANDRO_ACTION_1));
+            actionFrames.add(atlas.findRegion(Constants.ANDRO_ACTION_2));
+            actionFrames.add(atlas.findRegion(Constants.ANDRO_ACTION_3));
+            actionFrames.add(atlas.findRegion(Constants.ANDRO_ACTION_4));
+            actionFrames.add(atlas.findRegion(Constants.ANDRO_ACTION_5));
+            actionFrames.add(atlas.findRegion(Constants.ANDRO_ACTION_6));
+            actionFrames.add(atlas.findRegion(Constants.ANDRO_ACTION_7));
+            return new Animation<>(
+                    Constants.IDLE_ANIMATION_DURATION,
+                    actionFrames,
+                    Animation.PlayMode.NORMAL
             );
         }
     }

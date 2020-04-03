@@ -30,6 +30,9 @@ public class Constants {
     /*
         Andromalius (enemy)
      */
+
+    public static final float ANDRO_WIDTH = 57;
+    public static final float ANDRO_height = 88;
     //Idle
     static final String ANDRO_IDLE_0 = "andromalius/idle-0";
     static final String ANDRO_IDLE_1 = "andromalius/idle-1";

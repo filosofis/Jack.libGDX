@@ -13,9 +13,7 @@ import com.olundqvist.woody.util.Enums;
 import com.olundqvist.woody.util.Enums.Direction;
 import com.olundqvist.woody.util.Enums.AnimState;
 import com.olundqvist.woody.util.Utils;
-
 import java.util.Random;
-
 import static com.olundqvist.woody.util.Constants.JACK_DAMPING;
 import static com.olundqvist.woody.util.Constants.JUMP_SPEED;
 import static com.olundqvist.woody.util.Constants.RVOS_WIDTH;
