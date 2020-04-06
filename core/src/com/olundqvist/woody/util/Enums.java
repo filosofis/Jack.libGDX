@@ -11,7 +11,8 @@ public class Enums {
         GRABBING,
         GROUNDED,
         CLIMBING,
-        ATTACKING
+        ATTACKING,
+        TURNING
     }
 
     public enum WH{
@@ -28,6 +29,7 @@ public class Enums {
         CLIMB,
         ATTACK1,
         ATTACK2,
-        ATTACK3
+        ATTACK3,
+        TURN
     }
 }

@@ -9,8 +9,6 @@ import com.olundqvist.woody.util.Assets;
 import com.olundqvist.woody.util.Enums;
 import com.olundqvist.woody.util.Utils;
 
-import java.sql.Time;
-
 import static com.olundqvist.woody.util.Constants.ANDRO_WIDTH;
 import static com.olundqvist.woody.util.Constants.ANDRO_height;
 
@@ -21,10 +19,12 @@ public class Enemy {
     private Vector2 position;
     private Vector2 velocity;
     private Enums.AnimState animState;
+    private Enums.ActionState actionState;
     private Rectangle bounds;
     private long idleStartTime;
     private long actionStartTime;
     private Enums.Direction direction;
+    private float idleTimeSec;
 
     public Enemy(Vector2 spawnLocation){
         position = new Vector2();
@@ -37,6 +37,7 @@ public class Enemy {
         position = spawnLocation;
         animState = Enums.AnimState.IDLE;
         idleStartTime = TimeUtils.nanoTime();
+        actionState = Enums.ActionState.GROUNDED;
     }
 
     public Rectangle getBounds() {
@@ -44,9 +45,18 @@ public class Enemy {
     }
 
     void render(Batch batch){
-        float idleTimeSec = Utils.secondsSince(idleStartTime);
-        TextureAtlas.AtlasRegion region =
-                Assets.instance.enemyAssets.androIdleAnimation.getKeyFrame(idleTimeSec);
+        TextureAtlas.AtlasRegion region;
+        idleTimeSec = Utils.secondsSince(idleStartTime);
+        switch(animState){
+            case TURN:
+                region = Assets.instance.enemyAssets.androTurnAnimation.getKeyFrame(
+                        Utils.secondsSince(actionStartTime)
+                );
+                break;
+            default:
+                region = Assets.instance.enemyAssets.androIdleAnimation.getKeyFrame(idleTimeSec);
+                break;
+        }
         Utils.drawTextureRegion(
                 batch,
                 region,
@@ -56,22 +66,36 @@ public class Enemy {
     }
 
     public void update(float delta){
-
+        switch (actionState){
+            case TURNING:
+                turn();
+                break;
+            default:
+                animState = Enums.AnimState.IDLE;
+        }
     }
 
     public void turn(){
-
+        actionState = Enums.ActionState.TURNING;
+        animState = Enums.AnimState.TURN;
+        if(Utils.secondsSince(actionStartTime) > 0.5){
+            actionState = Enums.ActionState.GROUNDED;
+        }
     }
     public void facing(Vector2 focus){
         if(focus.x < position.x){
             if(direction == Enums.Direction.RIGHT){
                 actionStartTime = TimeUtils.nanoTime();
+                actionState = Enums.ActionState.TURNING;
+                System.out.println("Turning Left");
                 turn();
             }
             direction = Enums.Direction.LEFT;
         }else{
             if(direction == Enums.Direction.LEFT){
                 actionStartTime = TimeUtils.nanoTime();
+                actionState = Enums.ActionState.TURNING;
+                System.out.println("Turning Right");
                 turn();
             }
             direction = Enums.Direction.RIGHT;

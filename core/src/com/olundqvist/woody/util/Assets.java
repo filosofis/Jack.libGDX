@@ -43,10 +43,25 @@ public class Assets implements Disposable, AssetErrorListener {
         //TODO: Add projectiles
         public final Animation<AtlasRegion> androIdleAnimation;
         public final Animation<AtlasRegion> androActionAnimation;
+        public final Animation<AtlasRegion> androTurnAnimation;
 
         EnemyAssets(TextureAtlas atlas){
             androIdleAnimation = initAndroIdleAnimation(atlas);
             androActionAnimation = initAndroActionAnimation(atlas);
+            androTurnAnimation = initAndroTurnAnimation(atlas);
+        }
+        private Animation<AtlasRegion> initAndroTurnAnimation(TextureAtlas atlas){
+            Array<AtlasRegion> turnFrames = new Array<>();
+            turnFrames.add(atlas.findRegion(Constants.ANDRO_LEFT_1));
+            turnFrames.add(atlas.findRegion(Constants.ANDRO_LEFT_0));
+            turnFrames.add(atlas.findRegion(Constants.ANDRO_FRONT_0));
+            turnFrames.add(atlas.findRegion(Constants.ANDRO_RIGHT_0));
+            turnFrames.add(atlas.findRegion(Constants.ANDRO_RIGHT_1));
+            return new Animation<>(
+                    Constants.IDLE_ANIMATION_DURATION,
+                    turnFrames,
+                    Animation.PlayMode.NORMAL
+            );
         }
         private Animation<AtlasRegion> initAndroIdleAnimation(TextureAtlas atlas){
             Array<AtlasRegion> idleFrames = new Array<>();

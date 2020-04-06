@@ -43,6 +43,12 @@ public class Constants {
     static final String ANDRO_IDLE_6 = "andromalius/idle-6";
     static final String ANDRO_IDLE_7 = "andromalius/idle-7";
 
+    //Frong
+    static final String ANDRO_FRONT_0 = "andromalius/front-0";
+    static final String ANDRO_FRONT_1 = "andromalius/front-1";
+    static final String ANDRO_FRONT_2 = "andromalius/front-2";
+    static final String ANDRO_FRONT_3 = "andromalius/front-3";
+
     //Action
     static final String ANDRO_ACTION_0 = "andromalius/action-0";
     static final String ANDRO_ACTION_1 = "andromalius/action-1";
@@ -55,11 +61,11 @@ public class Constants {
 
     //left turn
     static final String ANDRO_LEFT_0 = "andromalius/left-0";
-    static final String ANDRO_LEFT_1 = "andromalius/left-0";
+    static final String ANDRO_LEFT_1 = "andromalius/left-1";
 
     //right turn
     static final String ANDRO_RIGHT_0 = "andromalius/right-0";
-    static final String ANDRO_RIGHT_1 = "andromalius/right-0";
+    static final String ANDRO_RIGHT_1 = "andromalius/right-1";
 
     /*
         Rvros
