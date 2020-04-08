@@ -6,13 +6,22 @@ public class Enums {
         LEFT, RIGHT
     }
 
-    public enum ActionState {
+    public enum EnemyState{
+        IDLE,
+        TURNING,
+        MOVING
+    }
+
+    public enum EnemyType{
+
+    }
+
+    public enum ActionState{
         FALLING,
         GRABBING,
         GROUNDED,
         CLIMBING,
         ATTACKING,
-        TURNING
     }
 
     public enum WH{

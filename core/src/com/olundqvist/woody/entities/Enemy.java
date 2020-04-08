@@ -11,6 +11,7 @@ import com.olundqvist.woody.util.Utils;
 
 import static com.olundqvist.woody.util.Constants.ANDRO_WIDTH;
 import static com.olundqvist.woody.util.Constants.ANDRO_height;
+import static com.olundqvist.woody.util.Constants.JACK_WIDTH;
 
 //:TODO Handle damage
 //:TODO More "ai"
@@ -19,7 +20,7 @@ public class Enemy {
     private Vector2 position;
     private Vector2 velocity;
     private Enums.AnimState animState;
-    private Enums.ActionState actionState;
+    private Enums.EnemyState actionState;
     private Rectangle bounds;
     private long idleStartTime;
     private long actionStartTime;
@@ -37,7 +38,7 @@ public class Enemy {
         position = spawnLocation;
         animState = Enums.AnimState.IDLE;
         idleStartTime = TimeUtils.nanoTime();
-        actionState = Enums.ActionState.GROUNDED;
+        actionState = Enums.EnemyState.IDLE;
     }
 
     public Rectangle getBounds() {
@@ -76,17 +77,19 @@ public class Enemy {
     }
 
     public void turn(){
-        actionState = Enums.ActionState.TURNING;
+        actionState = Enums.EnemyState.TURNING;
         animState = Enums.AnimState.TURN;
         if(Utils.secondsSince(actionStartTime) > 0.5){
-            actionState = Enums.ActionState.GROUNDED;
+            actionState = Enums.EnemyState.IDLE;
         }
     }
+
     public void facing(Vector2 focus){
-        if(focus.x < position.x){
+        //Check if the if jack has passed the middle of the enemy
+        if(focus.x < (position.x + (ANDRO_WIDTH - JACK_WIDTH)/2)){
             if(direction == Enums.Direction.RIGHT){
                 actionStartTime = TimeUtils.nanoTime();
-                actionState = Enums.ActionState.TURNING;
+                actionState = Enums.EnemyState.TURNING;
                 System.out.println("Turning Left");
                 turn();
             }
@@ -94,7 +97,7 @@ public class Enemy {
         }else{
             if(direction == Enums.Direction.LEFT){
                 actionStartTime = TimeUtils.nanoTime();
-                actionState = Enums.ActionState.TURNING;
+                actionState = Enums.EnemyState.IDLE;
                 System.out.println("Turning Right");
                 turn();
             }
