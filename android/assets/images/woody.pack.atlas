@@ -178,6 +178,250 @@ size: 1024,128
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
+hell-hound/idle1
+  rotate: false
+  xy: 341, 34
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+hell-hound/idle2
+  rotate: false
+  xy: 410, 68
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+hell-hound/idle11
+  rotate: false
+  xy: 410, 68
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+hell-hound/idle3
+  rotate: false
+  xy: 407, 34
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+hell-hound/idle5
+  rotate: false
+  xy: 407, 34
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+hell-hound/idle7
+  rotate: false
+  xy: 407, 34
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+hell-hound/idle9
+  rotate: false
+  xy: 407, 34
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+hell-hound/idle4
+  rotate: false
+  xy: 476, 68
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+hell-hound/idle8
+  rotate: false
+  xy: 476, 68
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+hell-hound/idle6
+  rotate: false
+  xy: 473, 34
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+hell-hound/idle10
+  rotate: false
+  xy: 473, 34
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+hell-hound/jump1
+  rotate: false
+  xy: 2, 52
+  size: 65, 48
+  orig: 65, 48
+  offset: 0, 0
+  index: -1
+hell-hound/jump2
+  rotate: false
+  xy: 2, 2
+  size: 65, 48
+  orig: 65, 48
+  offset: 0, 0
+  index: -1
+hell-hound/jump3
+  rotate: false
+  xy: 69, 52
+  size: 65, 48
+  orig: 65, 48
+  offset: 0, 0
+  index: -1
+hell-hound/jump4
+  rotate: false
+  xy: 69, 2
+  size: 65, 48
+  orig: 65, 48
+  offset: 0, 0
+  index: -1
+hell-hound/jump5
+  rotate: false
+  xy: 136, 52
+  size: 65, 48
+  orig: 65, 48
+  offset: 0, 0
+  index: -1
+hell-hound/jump6
+  rotate: false
+  xy: 136, 2
+  size: 65, 48
+  orig: 65, 48
+  offset: 0, 0
+  index: -1
+hell-hound/run1
+  rotate: false
+  xy: 203, 68
+  size: 67, 32
+  orig: 67, 32
+  offset: 0, 0
+  index: -1
+hell-hound/run2
+  rotate: false
+  xy: 203, 34
+  size: 67, 32
+  orig: 67, 32
+  offset: 0, 0
+  index: -1
+hell-hound/run3
+  rotate: false
+  xy: 272, 68
+  size: 67, 32
+  orig: 67, 32
+  offset: 0, 0
+  index: -1
+hell-hound/run4
+  rotate: false
+  xy: 272, 34
+  size: 67, 32
+  orig: 67, 32
+  offset: 0, 0
+  index: -1
+hell-hound/run5
+  rotate: false
+  xy: 341, 68
+  size: 67, 32
+  orig: 67, 32
+  offset: 0, 0
+  index: -1
+hell-hound/walk1
+  rotate: false
+  xy: 542, 68
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+hell-hound/walk10
+  rotate: false
+  xy: 803, 34
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+hell-hound/walk11
+  rotate: false
+  xy: 872, 68
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+hell-hound/walk12
+  rotate: false
+  xy: 869, 34
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+hell-hound/walk2
+  rotate: false
+  xy: 539, 34
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+hell-hound/walk3
+  rotate: false
+  xy: 608, 68
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+hell-hound/walk4
+  rotate: false
+  xy: 605, 34
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+hell-hound/walk5
+  rotate: false
+  xy: 674, 68
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+hell-hound/walk6
+  rotate: false
+  xy: 671, 34
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+hell-hound/walk7
+  rotate: false
+  xy: 740, 68
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+hell-hound/walk8
+  rotate: false
+  xy: 737, 34
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+hell-hound/walk9
+  rotate: false
+  xy: 806, 68
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+
+woody.pack3.png
+size: 1024,128
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
 rvros/adventurer-attack1-00
   rotate: false
   xy: 54, 42
@@ -683,7 +927,7 @@ rvros/adventurer-stand-02
   offset: 0, 0
   index: -1
 
-woody.pack3.png
+woody.pack4.png
 size: 128,256
 format: RGBA8888
 filter: Nearest,Nearest
@@ -899,31 +1143,32 @@ woody/woody_run7
   offset: 0, 0
   index: -1
 
-woody.pack4.png
+woody.pack5.png
 size: 1024,1024
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 background/Layer_0000
   rotate: false
-  xy: 2, 2
-  size: 928, 793
-  orig: 928, 793
+  xy: 2, 74
+  size: 928, 77
+  orig: 928, 77
   offset: 0, 0
   index: 9
-
-woody.pack5.png
-size: 1024,1024
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
 background/Layer_0001
   rotate: false
   xy: 2, 2
+  size: 928, 70
+  orig: 928, 70
+  offset: 0, 0
+  index: 8
+background/Layer_0010
+  rotate: false
+  xy: 2, 153
   size: 928, 793
   orig: 928, 793
   offset: 0, 0
-  index: 8
+  index: 1
 
 woody.pack6.png
 size: 1024,1024
@@ -932,11 +1177,25 @@ filter: Nearest,Nearest
 repeat: none
 background/Layer_0002
   rotate: false
-  xy: 2, 2
-  size: 928, 793
-  orig: 928, 793
+  xy: 2, 275
+  size: 928, 277
+  orig: 928, 277
   offset: 0, 0
   index: 7
+background/Layer_0005
+  rotate: false
+  xy: 2, 2
+  size: 928, 271
+  orig: 928, 271
+  offset: 0, 0
+  index: 5
+background/Layer_0009
+  rotate: false
+  xy: 2, 554
+  size: 928, 414
+  orig: 928, 414
+  offset: 0, 0
+  index: 2
 
 woody.pack7.png
 size: 1024,1024
@@ -945,99 +1204,42 @@ filter: Nearest,Nearest
 repeat: none
 background/Layer_0003
   rotate: false
-  xy: 2, 2
-  size: 928, 793
-  orig: 928, 793
+  xy: 2, 182
+  size: 898, 272
+  orig: 898, 272
   offset: 0, 0
   index: 6
+background/Layer_0006
+  rotate: false
+  xy: 2, 729
+  size: 928, 271
+  orig: 928, 271
+  offset: 0, 0
+  index: 4
+background/Layer_0007_Lights
+  rotate: false
+  xy: 2, 2
+  size: 479, 178
+  orig: 479, 178
+  offset: 0, 0
+  index: -1
+background/Layer_0008
+  rotate: false
+  xy: 2, 456
+  size: 928, 271
+  orig: 928, 271
+  offset: 0, 0
+  index: 3
 
 woody.pack8.png
-size: 1024,1024
+size: 1024,256
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 background/Layer_0004_Lights
   rotate: false
   xy: 2, 2
-  size: 928, 793
-  orig: 928, 793
+  size: 603, 220
+  orig: 603, 220
   offset: 0, 0
   index: -1
-
-woody.pack9.png
-size: 1024,1024
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-background/Layer_0005
-  rotate: false
-  xy: 2, 2
-  size: 928, 793
-  orig: 928, 793
-  offset: 0, 0
-  index: 5
-
-woody.pack10.png
-size: 1024,1024
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-background/Layer_0006
-  rotate: false
-  xy: 2, 2
-  size: 928, 793
-  orig: 928, 793
-  offset: 0, 0
-  index: 4
-
-woody.pack11.png
-size: 1024,1024
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-background/Layer_0007_Lights
-  rotate: false
-  xy: 2, 2
-  size: 928, 793
-  orig: 928, 793
-  offset: 0, 0
-  index: -1
-
-woody.pack12.png
-size: 1024,1024
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-background/Layer_0008
-  rotate: false
-  xy: 2, 2
-  size: 928, 793
-  orig: 928, 793
-  offset: 0, 0
-  index: 3
-
-woody.pack13.png
-size: 1024,1024
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-background/Layer_0009
-  rotate: false
-  xy: 2, 2
-  size: 928, 793
-  orig: 928, 793
-  offset: 0, 0
-  index: 2
-
-woody.pack14.png
-size: 1024,1024
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-background/Layer_0010
-  rotate: false
-  xy: 2, 2
-  size: 928, 793
-  orig: 928, 793
-  offset: 0, 0
-  index: 1

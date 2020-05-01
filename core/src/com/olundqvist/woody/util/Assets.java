@@ -8,8 +8,11 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
+import com.olundqvist.woody.background.ParallaxBackground;
+import com.olundqvist.woody.background.TextureRegionParallaxLayer;
 
 public class Assets implements Disposable, AssetErrorListener {
 
@@ -111,8 +114,22 @@ public class Assets implements Disposable, AssetErrorListener {
         public final AtlasRegion layer9;
         public final AtlasRegion layer10;
 
-        BackgroundAssets(TextureAtlas atlas) {
+        public final ParallaxBackground jungleBackground;
+        public final ParallaxBackground jungleForground;
 
+//        public final TextureRegionParallaxLayer parallaxLayer0;
+//        public final TextureRegionParallaxLayer parallaxLayer1;
+//        public final TextureRegionParallaxLayer parallaxLayer2;
+//        public final TextureRegionParallaxLayer parallaxLayer3;
+//        public final TextureRegionParallaxLayer parallaxLayer4;
+//        public final TextureRegionParallaxLayer parallaxLayer5;
+//        public final TextureRegionParallaxLayer parallaxLayer6;
+//        public final TextureRegionParallaxLayer parallaxLayer7;
+//        public final TextureRegionParallaxLayer parallaxLayer8;
+//        public final TextureRegionParallaxLayer parallaxLayer9;
+
+        BackgroundAssets(TextureAtlas atlas) {
+            //Renamed in the drawing order
             layer0 = atlas.findRegion(Constants.BG_LAYER_10);
             layer1 = atlas.findRegion(Constants.BG_LAYER_9);
             layer2 = atlas.findRegion(Constants.BG_LAYER_8);
@@ -125,6 +142,107 @@ public class Assets implements Disposable, AssetErrorListener {
             layer9 = atlas.findRegion(Constants.BG_LAYER_1);
             layer10 = atlas.findRegion(Constants.BG_LAYER_0);
 
+            jungleBackground = initJungleBackground(atlas);
+            jungleForground = initJungleForeground(atlas);
+
+        }
+        private ParallaxBackground initJungleForeground(TextureAtlas atlas){
+            float oneDimen = 928;
+            TextureRegionParallaxLayer layer10 = new TextureRegionParallaxLayer(
+                    atlas.findRegion(Constants.BG_LAYER_0),
+                    oneDimen,
+                    new Vector2(0.5f,1),
+                    Enums.WH.WIDTH
+            );
+            ParallaxBackground foreground = new ParallaxBackground();
+            foreground.addLayers(layer10);
+            return foreground;
+        }
+
+        private ParallaxBackground initJungleBackground(TextureAtlas atlas){
+            float oneDimen = 928;
+
+            TextureRegionParallaxLayer layer0 = new TextureRegionParallaxLayer(
+                    atlas.findRegion(Constants.BG_LAYER_10),
+                    oneDimen,
+                    new Vector2(.3f,.2f),
+                    Enums.WH.WIDTH
+            );
+            TextureRegionParallaxLayer layer1 = new TextureRegionParallaxLayer(
+                    atlas.findRegion(Constants.BG_LAYER_9),
+                    oneDimen,
+                    new Vector2(.5f,.3f),
+                    Enums.WH.WIDTH
+            );
+            TextureRegionParallaxLayer layer2 = new TextureRegionParallaxLayer(
+                    atlas.findRegion(Constants.BG_LAYER_8),
+                    oneDimen,
+                    new Vector2(.6f,.4f),
+                    Enums.WH.WIDTH
+            );
+            TextureRegionParallaxLayer layer3 = new TextureRegionParallaxLayer(
+                    atlas.findRegion(Constants.BG_LAYER_7),
+                    oneDimen,
+                    new Vector2(.7f,.4f),
+                    Enums.WH.WIDTH
+            );
+            TextureRegionParallaxLayer layer4 = new TextureRegionParallaxLayer(
+                    atlas.findRegion(Constants.BG_LAYER_6),
+                    oneDimen,
+                    new Vector2(.7f,.5f),
+                    Enums.WH.WIDTH
+            );
+            TextureRegionParallaxLayer layer5 = new TextureRegionParallaxLayer(
+                    atlas.findRegion(Constants.BG_LAYER_5),
+                    oneDimen,
+                    new Vector2(.8f,.6f),
+                    Enums.WH.WIDTH
+            );
+            TextureRegionParallaxLayer layer6 = new TextureRegionParallaxLayer(
+                    atlas.findRegion(Constants.BG_LAYER_4),
+                    oneDimen,
+                    new Vector2(.8f,.7f),
+                    Enums.WH.WIDTH
+            );
+            TextureRegionParallaxLayer layer7 = new TextureRegionParallaxLayer(
+                    atlas.findRegion(Constants.BG_LAYER_3),
+                    oneDimen,
+                    new Vector2(.8f,.7f),
+                    Enums.WH.WIDTH
+            );
+            TextureRegionParallaxLayer layer8 = new TextureRegionParallaxLayer(
+                    atlas.findRegion(Constants.BG_LAYER_2),
+                    oneDimen,
+                    new Vector2(.9f,.9f),
+                    Enums.WH.WIDTH
+            );
+            TextureRegionParallaxLayer layer9 = new TextureRegionParallaxLayer(
+                    atlas.findRegion(Constants.BG_LAYER_1),
+                    oneDimen,
+                    new Vector2(1f,.9f),
+                    Enums.WH.WIDTH
+            );
+            layer2.setPadBottom(64);
+            layer3.setPadBottom(64);
+            layer4.setPadBottom(64);
+            layer5.setPadBottom(64);
+            layer6.setPadBottom(64);
+            layer7.setPadBottom(64);
+            layer8.setPadBottom(325);
+
+            ParallaxBackground parallaxBackground = new ParallaxBackground();
+            parallaxBackground.addLayers(
+                    layer0,
+                    layer1,
+                    layer2,
+                    layer3,
+                    layer4,
+                    layer5,
+                    layer6,
+                    layer7,
+                    layer8,
+                    layer9);
+            return parallaxBackground;
         }
     }
 

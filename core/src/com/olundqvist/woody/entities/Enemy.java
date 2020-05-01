@@ -12,6 +12,8 @@ import com.olundqvist.woody.util.Utils;
 import static com.olundqvist.woody.util.Constants.ANDRO_WIDTH;
 import static com.olundqvist.woody.util.Constants.ANDRO_height;
 import static com.olundqvist.woody.util.Constants.JACK_WIDTH;
+import static com.olundqvist.woody.util.Enums.Direction.LEFT;
+import static com.olundqvist.woody.util.Enums.Direction.RIGHT;
 
 //:TODO Handle damage
 //:TODO More "ai"
@@ -26,11 +28,13 @@ public class Enemy {
     private long actionStartTime;
     private Enums.Direction direction;
     private float idleTimeSec;
+    private Vector2 spawnPosition;
 
     public Enemy(Vector2 spawnLocation){
         position = new Vector2();
-        velocity = new Vector2();
+        velocity = new Vector2(10, 0);
         bounds = new Rectangle(position.x, position.y, ANDRO_WIDTH,ANDRO_height);
+        spawnPosition = position;
         init(spawnLocation);
     }
 
@@ -55,7 +59,9 @@ public class Enemy {
                 );
                 break;
             default:
-                region = Assets.instance.enemyAssets.androIdleAnimation.getKeyFrame(idleTimeSec);
+                region = Assets.instance.enemyAssets.androIdleAnimation.getKeyFrame(
+                        idleTimeSec
+                );
                 break;
         }
         Utils.drawTextureRegion(
@@ -66,10 +72,21 @@ public class Enemy {
         );
     }
 
+    private void  move(float delta){
+        if(direction == LEFT){
+            position.mulAdd(velocity, -delta);
+        }else{
+            position.mulAdd(velocity, delta);
+        }
+    }
+
     public void update(float delta){
         switch (actionState){
             case TURNING:
                 turn();
+                break;
+            case MOVING:
+                move(delta);
                 break;
             default:
                 animState = Enums.AnimState.IDLE;
@@ -80,31 +97,31 @@ public class Enemy {
         actionState = Enums.EnemyState.TURNING;
         animState = Enums.AnimState.TURN;
         if(Utils.secondsSince(actionStartTime) > 0.5){
-            actionState = Enums.EnemyState.IDLE;
+            actionState = Enums.EnemyState.MOVING;
+            animState = Enums.AnimState.IDLE;
         }
     }
 
     public void facing(Vector2 focus){
-        //Check if the if jack has passed the middle of the enemy
-        if(focus.x < (position.x + (ANDRO_WIDTH - JACK_WIDTH)/2)){
-            if(direction == Enums.Direction.RIGHT){
+        //Check if jack has passed the middle of the enemy
+        if(focus.x < (position.x + (bounds.width - JACK_WIDTH)/2)){
+            if(direction == RIGHT){
                 actionStartTime = TimeUtils.nanoTime();
                 actionState = Enums.EnemyState.TURNING;
                 System.out.println("Turning Left");
                 turn();
             }
-            direction = Enums.Direction.LEFT;
+            direction = LEFT;
         }else{
-            if(direction == Enums.Direction.LEFT){
+            if(direction == LEFT){
                 actionStartTime = TimeUtils.nanoTime();
                 actionState = Enums.EnemyState.IDLE;
                 System.out.println("Turning Right");
                 turn();
             }
-            direction = Enums.Direction.RIGHT;
+            direction = RIGHT;
         }
     }
-
     public Vector2 getPosition() {
         return position;
     }

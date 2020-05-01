@@ -30,7 +30,6 @@ public class Constants {
     /*
         Andromalius (enemy)
      */
-
     public static final float ANDRO_WIDTH = 57;
     public static final float ANDRO_height = 88;
     //Idle
@@ -43,7 +42,7 @@ public class Constants {
     static final String ANDRO_IDLE_6 = "andromalius/idle-6";
     static final String ANDRO_IDLE_7 = "andromalius/idle-7";
 
-    //Frong
+    //Front
     static final String ANDRO_FRONT_0 = "andromalius/front-0";
     static final String ANDRO_FRONT_1 = "andromalius/front-1";
     static final String ANDRO_FRONT_2 = "andromalius/front-2";
@@ -66,6 +65,52 @@ public class Constants {
     //right turn
     static final String ANDRO_RIGHT_0 = "andromalius/right-0";
     static final String ANDRO_RIGHT_1 = "andromalius/right-1";
+
+    /*
+        Hell-Hound
+     */
+
+    //Idle
+    static final String HELL_HOUND_IDLE_0 = "hell-hound/idle1";
+    static final String HELL_HOUND_IDLE_1 = "hell-hound/idle2";
+    static final String HELL_HOUND_IDLE_2 = "hell-hound/idle3";
+    static final String HELL_HOUND_IDLE_3 = "hell-hound/idle4";
+    static final String HELL_HOUND_IDLE_4 = "hell-hound/idle5";
+    static final String HELL_HOUND_IDLE_5 = "hell-hound/idle6";
+    static final String HELL_HOUND_IDLE_6 = "hell-hound/idle7";
+    static final String HELL_HOUND_IDLE_7 = "hell-hound/idle8";
+    static final String HELL_HOUND_IDLE_8 = "hell-hound/idle9";
+    static final String HELL_HOUND_IDLE_9 = "hell-hound/idle10";
+    static final String HELL_HOUND_IDLE_10 = "hell-hound/idle11";
+
+    //Jump
+    static final String HELL_HOUND_JUMP_0 = "hell-hound/jump1";
+    static final String HELL_HOUND_JUMP_1 = "hell-hound/jump2";
+    static final String HELL_HOUND_JUMP_2 = "hell-hound/jump3";
+    static final String HELL_HOUND_JUMP_3 = "hell-hound/jump4";
+    static final String HELL_HOUND_JUMP_4 = "hell-hound/jump5";
+    static final String HELL_HOUND_JUMP_5 = "hell-hound/jump6";
+
+    //Walk
+    static final String HELL_HOUND_WALK_0 = "hell-hound/walk1";
+    static final String HELL_HOUND_WALK_1 = "hell-hound/walk2";
+    static final String HELL_HOUND_WALK_2 = "hell-hound/walk3";
+    static final String HELL_HOUND_WALK_3 = "hell-hound/walk4";
+    static final String HELL_HOUND_WALK_4 = "hell-hound/walk5";
+    static final String HELL_HOUND_WALK_5 = "hell-hound/walk6";
+    static final String HELL_HOUND_WALK_6 = "hell-hound/walk7";
+    static final String HELL_HOUND_WALK_7 = "hell-hound/walk8";
+    static final String HELL_HOUND_WALK_8 = "hell-hound/walk9";
+    static final String HELL_HOUND_WALK_9 = "hell-hound/walk10";
+    static final String HELL_HOUND_WALK_10 = "hell-hound/walk11";
+    static final String HELL_HOUND_WALK_11 = "hell-hound/walk12";
+
+    //Run
+    static final String HELL_HOUND_RUN_0 = "hell-hound/run1";
+    static final String HELL_HOUND_RUN_1 = "hell-hound/run2";
+    static final String HELL_HOUND_RUN_2 = "hell-hound/run3";
+    static final String HELL_HOUND_RUN_3 = "hell-hound/run4";
+    static final String HELL_HOUND_RUN_4 = "hell-hound/run5";
 
     /*
         Rvros
@@ -192,7 +237,6 @@ public class Constants {
     static final String WOODY_IDLE_10 = "woody/woody_idle10";
     static final String WOODY_IDLE_11 = "woody/woody_idle11";
     static final float IDLE_ANIMATION_DURATION = 0.10f;
-
 
     //Parallax Background
     static final String BG_LAYER_0 = "background/Layer_0000";

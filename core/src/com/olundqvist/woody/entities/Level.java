@@ -6,9 +6,12 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -28,8 +31,8 @@ public class Level {
     public Jack jack;
     private ParallaxBackground parallaxBackground;
     private ParallaxBackground parallaxForground;
-    TiledMap map;
-    OrthogonalTiledMapRenderer tmr;
+    private TiledMap map;
+    private OrthogonalTiledMapRenderer tmr;
     private Array<Rectangle> tiles = new Array<Rectangle>();
     private TiledMapTileLayer tileLayer;
     private ShapeRenderer debugRenderer;
@@ -44,17 +47,32 @@ public class Level {
 
     public Level() {
         viewport = new ExtendViewport(Constants.WORLD_WIDTH, Constants.WORLD_HEIGHT);
-        createLayers();
+        //createLayers();
+        parallaxForground = Assets.instance.backgroundAssets.jungleForground;
+        parallaxBackground = Assets.instance.backgroundAssets.jungleBackground;
         map = new TmxMapLoader().load("maps/test_map.tmx");
         tileLayer = (TiledMapTileLayer)map.getLayers().get("TileLayer");
         tmr = new OrthogonalTiledMapRenderer(map);
         debugRenderer = new ShapeRenderer();
         debug=false;
-        Enemy andro0 = new Enemy(new Vector2(250,150));
-        Enemy andro1 = new Enemy(new Vector2(150,50));
-        Enemy andro2 = new Enemy(new Vector2(250,50));
-        Enemy andro3 = new Enemy(new Vector2(350,50));
-        enemies.add(andro0, andro1, andro2, andro3);
+//        Enemy andro0 = new Enemy(new Vector2(250,150));
+//        Enemy andro1 = new Enemy(new Vector2(150,50));
+//        Enemy andro2 = new Enemy(new Vector2(250,50));
+//        Enemy andro3 = new Enemy(new Vector2(350,50));
+//        enemies.add(andro0, andro1, andro2, andro3);
+        laodEnemies();
+    }
+
+    private void laodEnemies(){
+        MapObjects objects = map.getLayers().get("Enemies").getObjects();
+        Float x,y;
+        for(MapObject obj : objects){
+            x = (Float)obj.getProperties().get("x");
+            y = (Float)obj.getProperties().get("y");
+                Gdx.app.log(TAG,
+                        "X,Y = " + x + ", " + y);
+                enemies.add(new Enemy(new Vector2(x, y)));
+        }
     }
 
     public void render() {
@@ -68,10 +86,10 @@ public class Level {
         batch.end();
         tmr.render();
         batch.begin();
-        jack.render(batch);
         for(Enemy enemy : enemies){
             enemy.render(batch);
         }
+        jack.render(batch);
         parallaxForground.draw(ocam, batch);
         batch.end();
         if(debug){
@@ -175,89 +193,6 @@ public class Level {
 
     public void setJack(Jack jack) {
         this.jack = jack;
-    }
-
-    //TODO: Fix the ground in the background on vertical parallax scrolling
-    public void createLayers(){
-
-        float oneDimen = 928;
-
-        TextureRegionParallaxLayer layer0 = new TextureRegionParallaxLayer(
-                Assets.instance.backgroundAssets.layer0,
-                oneDimen,
-                new Vector2(.3f,1),
-                Enums.WH.HEIGHT
-        );
-        TextureRegionParallaxLayer layer1 = new TextureRegionParallaxLayer(
-                Assets.instance.backgroundAssets.layer1,
-                oneDimen,
-                new Vector2(.5f,1),
-                Enums.WH.HEIGHT
-        );
-        TextureRegionParallaxLayer layer2 = new TextureRegionParallaxLayer(
-                Assets.instance.backgroundAssets.layer2,
-                oneDimen,
-                new Vector2(1f,0.4f),
-                Enums.WH.HEIGHT
-        );
-        TextureRegionParallaxLayer layer3 = new TextureRegionParallaxLayer(
-                Assets.instance.backgroundAssets.layer3,
-                oneDimen,
-                new Vector2(1.1f,0.4f),
-                Enums.WH.HEIGHT
-        );
-        TextureRegionParallaxLayer layer4 = new TextureRegionParallaxLayer(
-                Assets.instance.backgroundAssets.layer4,
-                oneDimen,
-                new Vector2(1.15f,0.5f),
-                Enums.WH.HEIGHT
-        );
-        TextureRegionParallaxLayer layer5 = new TextureRegionParallaxLayer(
-                Assets.instance.backgroundAssets.layer5,
-                oneDimen,
-                new Vector2(1.2f,0.6f),
-                Enums.WH.HEIGHT
-        );
-        TextureRegionParallaxLayer layer6 = new TextureRegionParallaxLayer(
-                Assets.instance.backgroundAssets.layer6,
-                oneDimen,
-                new Vector2(1.25f,0.7f),
-                Enums.WH.HEIGHT
-        );
-        TextureRegionParallaxLayer layer7 = new TextureRegionParallaxLayer(
-                Assets.instance.backgroundAssets.layer7,
-                oneDimen,
-                new Vector2(1.3f, 0.8f),
-                Enums.WH.HEIGHT
-        );
-        TextureRegionParallaxLayer layer8 = new TextureRegionParallaxLayer(
-                Assets.instance.backgroundAssets.layer8,
-                oneDimen,
-                new Vector2(1.4f,0.9f),
-                Enums.WH.HEIGHT
-        );
-
-        //Player plane (loaded as background)
-        TextureRegionParallaxLayer layer9 = new TextureRegionParallaxLayer(
-                Assets.instance.backgroundAssets.layer9,
-                oneDimen,
-                new Vector2(1,0.9f),
-                Enums.WH.HEIGHT
-        );
-
-        //Forground
-        TextureRegionParallaxLayer layer10 = new TextureRegionParallaxLayer(
-                Assets.instance.backgroundAssets.layer10,
-                oneDimen,
-                new Vector2(0.5f,1),
-                Enums.WH.HEIGHT
-        );
-
-        parallaxBackground = new ParallaxBackground();
-        parallaxForground = new ParallaxBackground();
-        parallaxBackground.addLayers(layer0,
-                layer1, layer2, layer3, layer4, layer5, layer6, layer7, layer8, layer9);
-        parallaxForground.addLayers(layer10);
     }
 
     private void renderDebug (Camera camera) {
