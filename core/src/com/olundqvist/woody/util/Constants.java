@@ -27,11 +27,15 @@ public class Constants {
     public static final Vector2 KNOCKBACK_VELOCITY = new Vector2(200, 200);
     public static final float MAX_JUMP_DURATION = .2f;
 
+    static final float SHORT_ANIMATION_DURATION = 0.10f;
+    static final float LONG_ANIMATION_DURATION = 0.2f;
+
     /*
         Andromalius (enemy)
      */
     public static final float ANDRO_WIDTH = 57;
-    public static final float ANDRO_height = 88;
+    public static final float ANDRO_HEIGHT = 88;
+    public static final String ANDRO_TYPE = "Andro";
     //Idle
     static final String ANDRO_IDLE_0 = "andromalius/idle-0";
     static final String ANDRO_IDLE_1 = "andromalius/idle-1";
@@ -69,6 +73,7 @@ public class Constants {
     /*
         Hell-Hound
      */
+    public static final String HELL_HOUND_TYPE = "Hound";
 
     //Idle
     static final String HELL_HOUND_IDLE_0 = "hell-hound/idle1";
@@ -236,7 +241,6 @@ public class Constants {
     static final String WOODY_IDLE_9 = "woody/woody_idle09";
     static final String WOODY_IDLE_10 = "woody/woody_idle10";
     static final String WOODY_IDLE_11 = "woody/woody_idle11";
-    static final float IDLE_ANIMATION_DURATION = 0.10f;
 
     //Parallax Background
     static final String BG_LAYER_0 = "background/Layer_0000";

@@ -340,6 +340,7 @@ public class Jack {
                 break;
         }
     }
+
     private void attack(){
         //End attack after 0.5s
         if(Utils.secondsSince(actionStartTime) > 0.5){

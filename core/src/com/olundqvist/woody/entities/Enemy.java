@@ -10,7 +10,7 @@ import com.olundqvist.woody.util.Enums;
 import com.olundqvist.woody.util.Utils;
 
 import static com.olundqvist.woody.util.Constants.ANDRO_WIDTH;
-import static com.olundqvist.woody.util.Constants.ANDRO_height;
+import static com.olundqvist.woody.util.Constants.ANDRO_HEIGHT;
 import static com.olundqvist.woody.util.Constants.JACK_WIDTH;
 import static com.olundqvist.woody.util.Enums.Direction.LEFT;
 import static com.olundqvist.woody.util.Enums.Direction.RIGHT;
@@ -18,23 +18,23 @@ import static com.olundqvist.woody.util.Enums.Direction.RIGHT;
 //:TODO Handle damage
 //:TODO More "ai"
 public class Enemy {
-    public static final String TAG = Jack.class.getName();
+    public static final String TAG = Enemy.class.getName();
     private Vector2 position;
     private Vector2 velocity;
     private Enums.AnimState animState;
     private Enums.EnemyState actionState;
+    private Enums.Direction direction;
+    private Enums.EnemyType enemyType;
     private Rectangle bounds;
     private long idleStartTime;
     private long actionStartTime;
-    private Enums.Direction direction;
     private float idleTimeSec;
-    private Vector2 spawnPosition;
 
-    public Enemy(Vector2 spawnLocation){
+    public Enemy(Vector2 spawnLocation, Enums.EnemyType enemyType){
         position = new Vector2();
+        this.enemyType = enemyType;
         velocity = new Vector2(10, 0);
-        bounds = new Rectangle(position.x, position.y, ANDRO_WIDTH,ANDRO_height);
-        spawnPosition = position;
+        bounds = new Rectangle(position.x, position.y, ANDRO_WIDTH, ANDRO_HEIGHT);
         init(spawnLocation);
     }
 
@@ -52,24 +52,39 @@ public class Enemy {
     void render(Batch batch){
         TextureAtlas.AtlasRegion region;
         idleTimeSec = Utils.secondsSince(idleStartTime);
-        switch(animState){
-            case TURN:
-                region = Assets.instance.enemyAssets.androTurnAnimation.getKeyFrame(
-                        Utils.secondsSince(actionStartTime)
-                );
+        switch(enemyType){
+            case ANDROMALIUS:
+                region = renderAndromalius();
+                break;
+            case HELLHOUND:
+                region = renderHellHound();
                 break;
             default:
-                region = Assets.instance.enemyAssets.androIdleAnimation.getKeyFrame(
-                        idleTimeSec
-                );
-                break;
+                region = renderHellHound();
         }
+
         Utils.drawTextureRegion(
                 batch,
                 region,
                 position,
                 direction
         );
+    }
+    private TextureAtlas.AtlasRegion renderAndromalius(){
+        switch(animState){
+            case TURN:
+                return Assets.instance.andromaliusAssets.androTurnAnimation.getKeyFrame(
+                        Utils.secondsSince(actionStartTime)
+                );
+            default:
+                return Assets.instance.andromaliusAssets.androIdleAnimation.getKeyFrame(
+                        idleTimeSec
+                );
+        }
+    }
+
+    private TextureAtlas.AtlasRegion renderHellHound(){
+        return Assets.instance.hellHoundAssets.idleAnimation.getKeyFrame(idleTimeSec);
     }
 
     private void  move(float delta){

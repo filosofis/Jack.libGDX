@@ -14,6 +14,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.olundqvist.woody.background.ParallaxBackground;
 import com.olundqvist.woody.background.TextureRegionParallaxLayer;
 
+//TODO: Review Animation times
 public class Assets implements Disposable, AssetErrorListener {
 
     public static final String TAG = Assets.class.getName();
@@ -22,7 +23,8 @@ public class Assets implements Disposable, AssetErrorListener {
     public WoodyAssets woodyAssets;
     public BackgroundAssets backgroundAssets;
     public RvrosAssets rvrosAssets;
-    public EnemyAssets enemyAssets;
+    public AndromaliusAssets andromaliusAssets;
+    public HellHoundAssets hellHoundAssets;
 
     public Assets() {
     }
@@ -37,18 +39,19 @@ public class Assets implements Disposable, AssetErrorListener {
         woodyAssets = new WoodyAssets(atlas);
         backgroundAssets = new BackgroundAssets(atlas);
         rvrosAssets = new RvrosAssets(atlas);
-        enemyAssets = new EnemyAssets(atlas);
+        andromaliusAssets = new AndromaliusAssets(atlas);
+        hellHoundAssets = new HellHoundAssets(atlas);
     }
 
-    public static class EnemyAssets{
-        //TODO: Add turn and attack animations for Andromalius
+    public static class AndromaliusAssets {
+        //TODO: Add attack animations for Andromalius
         //TODO: Add more types of enemies, maybe the hellhound?
         //TODO: Add projectiles
         public final Animation<AtlasRegion> androIdleAnimation;
         public final Animation<AtlasRegion> androActionAnimation;
         public final Animation<AtlasRegion> androTurnAnimation;
 
-        EnemyAssets(TextureAtlas atlas){
+        AndromaliusAssets(TextureAtlas atlas){
             androIdleAnimation = initAndroIdleAnimation(atlas);
             androActionAnimation = initAndroActionAnimation(atlas);
             androTurnAnimation = initAndroTurnAnimation(atlas);
@@ -61,7 +64,7 @@ public class Assets implements Disposable, AssetErrorListener {
             turnFrames.add(atlas.findRegion(Constants.ANDRO_RIGHT_0));
             turnFrames.add(atlas.findRegion(Constants.ANDRO_RIGHT_1));
             return new Animation<>(
-                    Constants.IDLE_ANIMATION_DURATION,
+                    Constants.SHORT_ANIMATION_DURATION,
                     turnFrames,
                     Animation.PlayMode.NORMAL
             );
@@ -77,7 +80,7 @@ public class Assets implements Disposable, AssetErrorListener {
             idleFrames.add(atlas.findRegion(Constants.ANDRO_IDLE_6));
             idleFrames.add(atlas.findRegion(Constants.ANDRO_IDLE_7));
             return new Animation<>(
-                    Constants.IDLE_ANIMATION_DURATION,
+                    Constants.SHORT_ANIMATION_DURATION,
                     idleFrames,
                     Animation.PlayMode.LOOP
             );
@@ -93,9 +96,74 @@ public class Assets implements Disposable, AssetErrorListener {
             actionFrames.add(atlas.findRegion(Constants.ANDRO_ACTION_6));
             actionFrames.add(atlas.findRegion(Constants.ANDRO_ACTION_7));
             return new Animation<>(
-                    Constants.IDLE_ANIMATION_DURATION,
+                    Constants.SHORT_ANIMATION_DURATION,
                     actionFrames,
                     Animation.PlayMode.NORMAL
+            );
+        }
+    }
+
+    public static class HellHoundAssets {
+        public final Animation<AtlasRegion> idleAnimation;
+        public final Animation<AtlasRegion> walkAnimation;
+        public final Animation<AtlasRegion> runAnimation;
+
+        HellHoundAssets(TextureAtlas atlas){
+            idleAnimation = initIdleAnimation(atlas);
+            walkAnimation = initWalkAnimation(atlas);
+            runAnimation = initRunAnimation(atlas);
+        }
+
+        private Animation<AtlasRegion> initIdleAnimation(TextureAtlas atlas){
+            Array<AtlasRegion> actionFrames = new Array<>();
+            actionFrames.add(atlas.findRegion(Constants.HELL_HOUND_IDLE_0));
+            actionFrames.add(atlas.findRegion(Constants.HELL_HOUND_IDLE_1));
+            actionFrames.add(atlas.findRegion(Constants.HELL_HOUND_IDLE_2));
+            actionFrames.add(atlas.findRegion(Constants.HELL_HOUND_IDLE_3));
+            actionFrames.add(atlas.findRegion(Constants.HELL_HOUND_IDLE_4));
+            actionFrames.add(atlas.findRegion(Constants.HELL_HOUND_IDLE_5));
+            actionFrames.add(atlas.findRegion(Constants.HELL_HOUND_IDLE_6));
+            actionFrames.add(atlas.findRegion(Constants.HELL_HOUND_IDLE_7));
+            actionFrames.add(atlas.findRegion(Constants.HELL_HOUND_IDLE_8));
+            actionFrames.add(atlas.findRegion(Constants.HELL_HOUND_IDLE_9));
+            actionFrames.add(atlas.findRegion(Constants.HELL_HOUND_IDLE_10));
+            return new Animation<>(
+                    Constants.LONG_ANIMATION_DURATION,
+                    actionFrames,
+                    Animation.PlayMode.LOOP
+            );
+        }
+        private Animation<AtlasRegion> initWalkAnimation(TextureAtlas atlas){
+            Array<AtlasRegion> actionFrames = new Array<>();
+            actionFrames.add(atlas.findRegion(Constants.HELL_HOUND_WALK_0));
+            actionFrames.add(atlas.findRegion(Constants.HELL_HOUND_WALK_1));
+            actionFrames.add(atlas.findRegion(Constants.HELL_HOUND_WALK_2));
+            actionFrames.add(atlas.findRegion(Constants.HELL_HOUND_WALK_3));
+            actionFrames.add(atlas.findRegion(Constants.HELL_HOUND_WALK_4));
+            actionFrames.add(atlas.findRegion(Constants.HELL_HOUND_WALK_5));
+            actionFrames.add(atlas.findRegion(Constants.HELL_HOUND_WALK_6));
+            actionFrames.add(atlas.findRegion(Constants.HELL_HOUND_WALK_7));
+            actionFrames.add(atlas.findRegion(Constants.HELL_HOUND_WALK_8));
+            actionFrames.add(atlas.findRegion(Constants.HELL_HOUND_WALK_9));
+            actionFrames.add(atlas.findRegion(Constants.HELL_HOUND_WALK_10));
+            actionFrames.add(atlas.findRegion(Constants.HELL_HOUND_WALK_11));
+            return new Animation<>(
+                    Constants.LONG_ANIMATION_DURATION,
+                    actionFrames,
+                    Animation.PlayMode.LOOP
+            );
+        }
+        private Animation<AtlasRegion> initRunAnimation(TextureAtlas atlas){
+            Array<AtlasRegion> actionFrames = new Array<>();
+            actionFrames.add(atlas.findRegion(Constants.HELL_HOUND_RUN_0));
+            actionFrames.add(atlas.findRegion(Constants.HELL_HOUND_RUN_1));
+            actionFrames.add(atlas.findRegion(Constants.HELL_HOUND_RUN_2));
+            actionFrames.add(atlas.findRegion(Constants.HELL_HOUND_RUN_3));
+            actionFrames.add(atlas.findRegion(Constants.HELL_HOUND_RUN_4));
+            return new Animation<>(
+                    Constants.LONG_ANIMATION_DURATION,
+                    actionFrames,
+                    Animation.PlayMode.LOOP
             );
         }
     }
@@ -117,17 +185,7 @@ public class Assets implements Disposable, AssetErrorListener {
         public final ParallaxBackground jungleBackground;
         public final ParallaxBackground jungleForground;
 
-//        public final TextureRegionParallaxLayer parallaxLayer0;
-//        public final TextureRegionParallaxLayer parallaxLayer1;
-//        public final TextureRegionParallaxLayer parallaxLayer2;
-//        public final TextureRegionParallaxLayer parallaxLayer3;
-//        public final TextureRegionParallaxLayer parallaxLayer4;
-//        public final TextureRegionParallaxLayer parallaxLayer5;
-//        public final TextureRegionParallaxLayer parallaxLayer6;
-//        public final TextureRegionParallaxLayer parallaxLayer7;
-//        public final TextureRegionParallaxLayer parallaxLayer8;
-//        public final TextureRegionParallaxLayer parallaxLayer9;
-
+        //TODO: Move Background data to TMX file
         BackgroundAssets(TextureAtlas atlas) {
             //Renamed in the drawing order
             layer0 = atlas.findRegion(Constants.BG_LAYER_10);
@@ -455,7 +513,7 @@ public class Assets implements Disposable, AssetErrorListener {
             idleFrames.add(atlas.findRegion(Constants.WOODY_IDLE_10));
             idleFrames.add(atlas.findRegion(Constants.WOODY_IDLE_11));
             return new Animation<>(
-                    Constants.IDLE_ANIMATION_DURATION,
+                    Constants.SHORT_ANIMATION_DURATION,
                     idleFrames,
                     Animation.PlayMode.LOOP
             );

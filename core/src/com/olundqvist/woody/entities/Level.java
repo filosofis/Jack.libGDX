@@ -11,7 +11,6 @@ import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -20,7 +19,6 @@ import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.olundqvist.woody.background.ParallaxBackground;
-import com.olundqvist.woody.background.TextureRegionParallaxLayer;
 import com.olundqvist.woody.util.Assets;
 import com.olundqvist.woody.util.Constants;
 import com.olundqvist.woody.util.Enums;
@@ -55,23 +53,32 @@ public class Level {
         tmr = new OrthogonalTiledMapRenderer(map);
         debugRenderer = new ShapeRenderer();
         debug=false;
-//        Enemy andro0 = new Enemy(new Vector2(250,150));
-//        Enemy andro1 = new Enemy(new Vector2(150,50));
-//        Enemy andro2 = new Enemy(new Vector2(250,50));
-//        Enemy andro3 = new Enemy(new Vector2(350,50));
-//        enemies.add(andro0, andro1, andro2, andro3);
-        laodEnemies();
+        loadEnemies();
     }
 
-    private void laodEnemies(){
+    //Enemies are stored as objects in the TMX file. These objects have
+    // A filed for X, and a for Y coordinate, as well as A Enemy Type
+    private void loadEnemies(){
         MapObjects objects = map.getLayers().get("Enemies").getObjects();
         Float x,y;
+        Enums.EnemyType enemyType;
         for(MapObject obj : objects){
             x = (Float)obj.getProperties().get("x");
             y = (Float)obj.getProperties().get("y");
+            Gdx.app.log(TAG, "EnemyType was "
+                    + obj.getProperties().get("Type"));
+            switch((String)obj.getProperties().get("Type")){
+                case Constants.ANDRO_TYPE:
+                    enemyType = Enums.EnemyType.ANDROMALIUS;
+                    break;
+                default:
+                    enemyType = Enums.EnemyType.HELLHOUND;
+                    break;
+
+            }
                 Gdx.app.log(TAG,
                         "X,Y = " + x + ", " + y);
-                enemies.add(new Enemy(new Vector2(x, y)));
+                enemies.add(new Enemy(new Vector2(x, y),enemyType));
         }
     }
 

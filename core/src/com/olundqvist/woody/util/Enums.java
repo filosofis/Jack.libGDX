@@ -13,7 +13,8 @@ public class Enums {
     }
 
     public enum EnemyType{
-
+        ANDROMALIUS,
+        HELLHOUND
     }
 
     public enum ActionState{
