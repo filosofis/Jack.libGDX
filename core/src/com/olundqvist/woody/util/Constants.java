@@ -24,6 +24,7 @@ public class Constants {
     public static final float RVOS_WIDTH = 20;
     public static final float JACK_HEIGHT = 32;
     public static final float JACK_DAMPING = 0.75f;
+    public static final float JACK_ATTACK_RANGE = 25;
     public static final Vector2 KNOCKBACK_VELOCITY = new Vector2(200, 200);
     public static final float MAX_JUMP_DURATION = .2f;
 
@@ -36,6 +37,7 @@ public class Constants {
     public static final float ANDRO_WIDTH = 57;
     public static final float ANDRO_HEIGHT = 88;
     public static final String ANDRO_TYPE = "Andro";
+
     //Idle
     static final String ANDRO_IDLE_0 = "andromalius/idle-0";
     static final String ANDRO_IDLE_1 = "andromalius/idle-1";
@@ -74,6 +76,8 @@ public class Constants {
         Hell-Hound
      */
     public static final String HELL_HOUND_TYPE = "Hound";
+    public static final float HELL_HOUND_WIDTH = 50;
+    public static final float HELL_HOUND_HEIGHT = 20;
 
     //Idle
     static final String HELL_HOUND_IDLE_0 = "hell-hound/idle1";

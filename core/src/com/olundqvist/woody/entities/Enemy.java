@@ -1,5 +1,6 @@
 package com.olundqvist.woody.entities;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Rectangle;
@@ -8,9 +9,6 @@ import com.badlogic.gdx.utils.TimeUtils;
 import com.olundqvist.woody.util.Assets;
 import com.olundqvist.woody.util.Enums;
 import com.olundqvist.woody.util.Utils;
-
-import static com.olundqvist.woody.util.Constants.ANDRO_WIDTH;
-import static com.olundqvist.woody.util.Constants.ANDRO_HEIGHT;
 import static com.olundqvist.woody.util.Constants.JACK_WIDTH;
 import static com.olundqvist.woody.util.Enums.Direction.LEFT;
 import static com.olundqvist.woody.util.Enums.Direction.RIGHT;
@@ -30,11 +28,11 @@ public class Enemy {
     private long actionStartTime;
     private float idleTimeSec;
 
-    public Enemy(Vector2 spawnLocation, Enums.EnemyType enemyType){
+    public Enemy(Vector2 spawnLocation, Enums.EnemyType enemyType, Rectangle bounds){
         position = new Vector2();
         this.enemyType = enemyType;
         velocity = new Vector2(10, 0);
-        bounds = new Rectangle(position.x, position.y, ANDRO_WIDTH, ANDRO_HEIGHT);
+        this.bounds = bounds;
         init(spawnLocation);
     }
 
@@ -93,6 +91,7 @@ public class Enemy {
         }else{
             position.mulAdd(velocity, delta);
         }
+        bounds.setPosition(position);
     }
 
     public void update(float delta){
@@ -123,7 +122,6 @@ public class Enemy {
             if(direction == RIGHT){
                 actionStartTime = TimeUtils.nanoTime();
                 actionState = Enums.EnemyState.TURNING;
-                System.out.println("Turning Left");
                 turn();
             }
             direction = LEFT;
@@ -131,7 +129,6 @@ public class Enemy {
             if(direction == LEFT){
                 actionStartTime = TimeUtils.nanoTime();
                 actionState = Enums.EnemyState.IDLE;
-                System.out.println("Turning Right");
                 turn();
             }
             direction = RIGHT;
@@ -139,5 +136,15 @@ public class Enemy {
     }
     public Vector2 getPosition() {
         return position;
+    }
+
+    @Override
+    public String toString() {
+        return "Enemy{" +
+                "position=" + position +
+                ", direction=" + direction +
+                ", enemyType=" + enemyType +
+                ", bounds=" + bounds +
+                '}';
     }
 }

@@ -69,14 +69,14 @@
   <object id="12" x="480.25" y="672.75" width="48.25" height="15.75"/>
  </objectgroup>
  <objectgroup id="3" name="Enemies">
-  <object id="13" type="Andro" x="505" y="646.333">
+  <object id="13" type="Andro" x="514" y="669.333">
    <properties>
     <property name="Path_End" type="int" value="10"/>
     <property name="Type" value="Andro"/>
    </properties>
    <point/>
   </object>
-  <object id="15" type="Hound" x="552.333" y="762.667">
+  <object id="15" type="Hound" x="13.333" y="797">
    <properties>
     <property name="Path_End" value="10"/>
     <property name="Type" value="Hound"/>

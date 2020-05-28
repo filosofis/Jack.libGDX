@@ -54,6 +54,9 @@ public class Level {
         debugRenderer = new ShapeRenderer();
         debug=false;
         loadEnemies();
+        for(Enemy enemy : enemies){
+            Gdx.app.log(TAG, enemy.toString());
+        }
     }
 
     //Enemies are stored as objects in the TMX file. These objects have
@@ -62,24 +65,35 @@ public class Level {
         MapObjects objects = map.getLayers().get("Enemies").getObjects();
         Float x,y;
         Enums.EnemyType enemyType;
+        Rectangle bounds = rectPool.obtain();
         for(MapObject obj : objects){
             x = (Float)obj.getProperties().get("x");
             y = (Float)obj.getProperties().get("y");
-            Gdx.app.log(TAG, "EnemyType was "
-                    + obj.getProperties().get("Type"));
-            switch((String)obj.getProperties().get("Type")){
+            bounds.x = x;
+            bounds.y = y;
+            switch((String)obj.getProperties().get("Type")) {
                 case Constants.ANDRO_TYPE:
                     enemyType = Enums.EnemyType.ANDROMALIUS;
+                    bounds.width = Constants.ANDRO_WIDTH;
+                    bounds.height = Constants.ANDRO_HEIGHT;
+                    break;
+                case Constants.HELL_HOUND_TYPE:
+                    enemyType = Enums.EnemyType.HELLHOUND;
+                    bounds.width = Constants.HELL_HOUND_WIDTH;
+                    bounds.height = Constants.HELL_HOUND_HEIGHT;
                     break;
                 default:
                     enemyType = Enums.EnemyType.HELLHOUND;
+                    bounds.width = 10;
+                    bounds.height = 10;
                     break;
-
             }
-                Gdx.app.log(TAG,
-                        "X,Y = " + x + ", " + y);
-                enemies.add(new Enemy(new Vector2(x, y),enemyType));
+            Enemy enemy = new Enemy(new Vector2(x, y),enemyType, new Rectangle(bounds));
+            enemies.add(enemy);
+            rectPool.free(bounds);
         }
+        Gdx.app.log(TAG, "Enemys loaded: " + enemies.size);
+        Gdx.app.log(TAG, enemies.toString());
     }
 
     public void render() {
@@ -137,12 +151,12 @@ public class Level {
         if(tileLayer.getCell(x,y+1) == null){
             Rectangle corner = rectPool.obtain();
             corner.set(x*16, y*16, 16,16);
-            Gdx.app.log(TAG, "is a corner " +  x + ", " + y);
+            //Gdx.app.log(TAG, "is a corner " +  x + ", " + y);
             return corner;
         } else if(tileLayer.getCell(x, y+2) == null){
             Rectangle corner = rectPool.obtain();
             corner.set(x*16, (y+1)*16, 16,16);
-            Gdx.app.log(TAG, "below a corner " + x + ", " + y);
+            //Gdx.app.log(TAG, "below a corner " + x + ", " + y);
             return corner;
         }
         return null;
@@ -214,16 +228,37 @@ public class Level {
                 Constants.RVOS_WIDTH,
                 Constants.JACK_HEIGHT);
 
+        debugRenderer.setColor(Color.WHITE);
+        float offset = Constants.JACK_ATTACK_RANGE;
+        if(jack.actionState == Enums.ActionState.ATTACKING){
+           switch(jack.facing){
+               case LEFT:
+                   debugRenderer.rect(
+                           jack.getPosition().x,
+                           jack.getPosition().y,
+                           -offset,
+                           Constants.JACK_HEIGHT);
+                   break;
+               case RIGHT:
+                   debugRenderer.rect(
+                           jack.getPosition().x + Constants.RVOS_WIDTH,
+                           jack.getPosition().y,
+                           offset,
+                           Constants.JACK_HEIGHT);
+                   break;
+           }
+        }
+
         //Enemy debug box
         for(Enemy enemy : enemies){
             debugRenderer.setColor(Color.BLUE);
             debugRenderer.rect(
-                    enemy.getPosition().x,
-                    enemy.getPosition().y,
+                    enemy.getBounds().x,
+                    enemy.getBounds().y,
                     enemy.getBounds().width,
                     enemy.getBounds().height
             );
-
+            //Gdx.app.log(TAG, enemy.toString());
         }
         debugRenderer.setColor(Color.YELLOW);
         TiledMapTileLayer layer = (TiledMapTileLayer)map.getLayers().get("TileLayer");

@@ -28,15 +28,15 @@ public class Jack {
     private Vector2 position;
     private Vector2 velocity;
     private Vector2 offset;
-    private Direction facing;
-    private Enums.ActionState actionState;
+    Direction facing;
+    Enums.ActionState actionState;
     private AnimState animationState;
     private long idleStartTime;
     private long actionStartTime;
     private float idleTimeSec;
     boolean left, right, attack;
     private Level level;
-    private Rectangle bounds;
+    private Rectangle bounds, attackBounds;
     private Random random;
 
 
@@ -172,9 +172,9 @@ public class Jack {
     }
 
     private void ledge(Rectangle rect){
-        Gdx.app.log(TAG, "Rectangle " + (int)rect.y );
+        /*Gdx.app.log(TAG, "Rectangle " + (int)rect.y );
         Gdx.app.log(TAG, "Position "  + (int)(position.y+16) );
-        Gdx.app.log(TAG, "------------------");
+        Gdx.app.log(TAG, "------------------");*/
         //Grab ledge if the top of the corner is below jacks height
         //and within 4 units reach
         if (((position.y + 16) > (rect.y)) &&
@@ -279,9 +279,9 @@ public class Jack {
             case GRABBING:
                 if(facing == RIGHT && left){
                     actionState = FALLING;
-                    Gdx.app.log(TAG, "Let go");
+                    //Gdx.app.log(TAG, "Let go");
                 }else if(facing == LEFT && right){
-                    Gdx.app.log(TAG,"let go");
+                    //Gdx.app.log(TAG,"let go");
                 }
                 break;
         }
@@ -292,17 +292,17 @@ public class Jack {
                 case GROUNDED:
                     actionState = FALLING;
                     velocity.y += JUMP_SPEED;
-                    Gdx.app.log(TAG, "Jumped");
+                    //Gdx.app.log(TAG, "Jumped");
                     break;
                 case GRABBING:
                     switch(facing){
                         case LEFT:
                             initClimb();
-                            Gdx.app.log(TAG, "Climbed Left");
+                            //Gdx.app.log(TAG, "Climbed Left");
                             break;
                         case RIGHT:
                             initClimb();
-                            Gdx.app.log(TAG, "Climbed Right");
+                            //Gdx.app.log(TAG, "Climbed Right");
                             break;
                     }
                     break;
@@ -312,11 +312,11 @@ public class Jack {
         if(Gdx.input.isKeyPressed(Keys.DOWN)){
             switch(actionState){
                 case GROUNDED:
-                    Gdx.app.log(TAG, "Ducking?");
+                    //Gdx.app.log(TAG, "Ducking?");
                     break;
                 case GRABBING:
                     actionState = FALLING;
-                    Gdx.app.log(TAG, "Let go of ledge");
+                    //Gdx.app.log(TAG, "Let go of ledge");
                     break;
             }
         }
@@ -328,15 +328,15 @@ public class Jack {
         switch(random.nextInt(3) + 1){
             case 1:
                 animationState = AnimState.ATTACK1;
-                Gdx.app.log(TAG, "Attack 1");
+                //Gdx.app.log(TAG, "Attack 1");
                 break;
             case 2:
                 animationState = AnimState.ATTACK2;
-                Gdx.app.log(TAG, "Attack 2");
+                //Gdx.app.log(TAG, "Attack 2");
                 break;
             case 3:
                 animationState = AnimState.ATTACK3;
-                Gdx.app.log(TAG, "Attack 3");
+                //Gdx.app.log(TAG, "Attack 3");
                 break;
         }
     }
@@ -346,12 +346,21 @@ public class Jack {
         if(Utils.secondsSince(actionStartTime) > 0.5){
             actionState = GROUNDED;
         }
+        attackBounds = bounds;
+        switch (facing){
+            case LEFT:
+                attackBounds.x -= 10;
+                break;
+            case RIGHT:
+                attackBounds.x += 10;
+                break;
+        }
     }
 
     private void climb(float delta){
         position.add(0,60*delta);
         if(Utils.secondsSince(actionStartTime) > 0.5){
-            Gdx.app.log(TAG, "Climb ended");
+            //Gdx.app.log(TAG, "Climb ended");
             actionState = FALLING;
             switch(facing){
                 case LEFT:
