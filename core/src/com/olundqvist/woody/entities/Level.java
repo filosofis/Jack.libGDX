@@ -121,7 +121,7 @@ public class Level {
     public void update(float delta){
         jack.update(delta);
         for(Enemy enemy : enemies){
-            enemy.facing(jack.getPosition());
+            //enemy.facing(jack.getPosition());
             enemy.update(delta);
         }
     }
@@ -160,6 +160,16 @@ public class Level {
             return corner;
         }
         return null;
+    }
+
+    public void attack(Rectangle bounds){
+        for(Enemy enemy: enemies){
+            Gdx.app.log(TAG, "Attack rect : " + bounds.width + ", ");
+            if(enemy.getBounds().overlaps(bounds)){
+                Gdx.app.log(TAG, "We got a Hit on " + enemy.getBounds().x +", " +
+                        enemy.getBounds().x + enemy.getBounds().width);
+            }
+        }
     }
 
     //TODO: Use rectpool for emeny bounds

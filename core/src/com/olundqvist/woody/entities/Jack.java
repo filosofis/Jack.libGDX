@@ -13,8 +13,13 @@ import com.olundqvist.woody.util.Enums;
 import com.olundqvist.woody.util.Enums.Direction;
 import com.olundqvist.woody.util.Enums.AnimState;
 import com.olundqvist.woody.util.Utils;
+
 import java.util.Random;
+
+import jdk.nashorn.internal.runtime.regexp.joni.ast.ConsAltNode;
+
 import static com.olundqvist.woody.util.Constants.JACK_DAMPING;
+import static com.olundqvist.woody.util.Constants.JACK_HEIGHT;
 import static com.olundqvist.woody.util.Constants.JUMP_SPEED;
 import static com.olundqvist.woody.util.Constants.RVOS_WIDTH;
 import static com.olundqvist.woody.util.Enums.Direction.LEFT;
@@ -49,11 +54,11 @@ public class Jack {
         init();
     }
 
-    void render(Batch batch){
+    void render(Batch batch) {
         TextureRegion region;
         idleTimeSec = Utils.secondsSince(idleStartTime);
         offset.setZero();
-        switch (animationState){
+        switch (animationState) {
             case RUN:
                 region = Assets.instance.rvrosAssets.runAnimation.getKeyFrame(idleTimeSec);
                 break;
@@ -63,7 +68,7 @@ public class Jack {
             case GRAB:
                 region = Assets.instance.rvrosAssets.grabAnimation.getKeyFrame(
                         Utils.secondsSince(actionStartTime));
-                if(facing == RIGHT){
+                if (facing == RIGHT) {
                     offset.x = 5;
                 }
                 break;
@@ -73,21 +78,21 @@ public class Jack {
             case CLIMB:
                 region = Assets.instance.rvrosAssets.climbAnimation.getKeyFrame(
                         Utils.secondsSince(actionStartTime));
-                if(facing == RIGHT){
+                if (facing == RIGHT) {
                     offset.x = 5;
                 }
                 break;
             case ATTACK1:
                 region = Assets.instance.rvrosAssets.attack1Animation.getKeyFrame(
                         Utils.secondsSince(actionStartTime));
-                if(facing == LEFT){
+                if (facing == LEFT) {
                     offset.x = -25;
                 }
                 break;
             case ATTACK2:
                 region = Assets.instance.rvrosAssets.attack2Animation.getKeyFrame(
                         Utils.secondsSince(actionStartTime));
-                if(facing == LEFT){
+                if (facing == LEFT) {
                     offset.x = -25;
                 }
                 break;
@@ -95,7 +100,7 @@ public class Jack {
             case ATTACK3:
                 region = Assets.instance.rvrosAssets.attack3Animation.getKeyFrame(
                         Utils.secondsSince(actionStartTime));
-                if(facing == LEFT){
+                if (facing == LEFT) {
                     offset.x = -30;
                 }
                 break;
@@ -106,7 +111,7 @@ public class Jack {
         Utils.drawTextureRegion(batch, region, position, facing, offset);
     }
 
-    private void init(){
+    private void init() {
         position = spawnLocation;
         velocity.setZero();
         facing = RIGHT;
@@ -115,11 +120,11 @@ public class Jack {
         idleStartTime = TimeUtils.nanoTime();
         animationState = AnimState.IDLE;
         actionState = FALLING;
-        bounds = new Rectangle(position.x, position.y, Constants.JACK_WIDTH, Constants.JACK_HEIGHT);
+        bounds = new Rectangle(position.x, position.y, Constants.JACK_WIDTH, JACK_HEIGHT);
     }
 
-    private void updateState(){
-        if(actionState != ATTACKING){
+    private void updateState() {
+        if (actionState != ATTACKING) {
             if (velocity.y < 0) {
                 animationState = AnimState.FALL;
             } else if (velocity.y > 0) {
@@ -146,12 +151,12 @@ public class Jack {
         }
     }
 
-    void update(float delta){
+    void update(float delta) {
         handleInput();
         velocity.y -= Constants.GRAVITY;
         velocity.scl(delta);
         bounds.setPosition(position);
-        switch(actionState){
+        switch (actionState) {
             case GRABBING:
                 velocity.setZero();
                 break;
@@ -167,11 +172,11 @@ public class Jack {
         }
         updateState();
         position.add(velocity);
-        velocity.scl(1/delta);
+        velocity.scl(1 / delta);
         dampen();
     }
 
-    private void ledge(Rectangle rect){
+    private void ledge(Rectangle rect) {
         /*Gdx.app.log(TAG, "Rectangle " + (int)rect.y );
         Gdx.app.log(TAG, "Position "  + (int)(position.y+16) );
         Gdx.app.log(TAG, "------------------");*/
@@ -196,13 +201,13 @@ public class Jack {
         }
     }
 
-    private void collisionCheck(){
+    private void collisionCheck() {
         //Horizontal Collision check
         bounds.x += velocity.x;
         Rectangle collisionRect = level.collideX(velocity, bounds);
-        if(collisionRect != null){
+        if (collisionRect != null) {
             Rectangle corner = level.isCorner(collisionRect);
-            if(corner != null){
+            if (corner != null) {
                 ledge(corner);
             }
             velocity.x = 0;
@@ -210,7 +215,7 @@ public class Jack {
         bounds.x = position.x;
 
         //Vertical collision check
-        if(Math.abs(velocity.y)>0) {
+        if (Math.abs(velocity.y) > 0) {
             bounds.y += velocity.y;
             collisionRect = level.collideY(velocity, bounds);
             if (collisionRect != null) {
@@ -218,7 +223,7 @@ public class Jack {
                     position.y = collisionRect.y + collisionRect.height;
                     land();
                 } else { //jumping
-                    position.y = collisionRect.y - Constants.JACK_HEIGHT;
+                    position.y = collisionRect.y - JACK_HEIGHT;
                     velocity.y = 0;
                 }
             } else if (bounds.y < 10) {
@@ -230,32 +235,32 @@ public class Jack {
 
     private void land() {
         velocity.y = 0;
-        if(actionState != ATTACKING){
+        if (actionState != ATTACKING) {
             actionState = GROUNDED;
         }
     }
 
-    private void dampen(){
-        if(Math.abs(velocity.x) < 1){
+    private void dampen() {
+        if (Math.abs(velocity.x) < 1) {
             velocity.x = 0;
-        }else{
+        } else {
             velocity.x *= JACK_DAMPING;
         }
     }
 
-    private void handleInput(){
+    private void handleInput() {
         left = Gdx.input.isKeyPressed(Keys.LEFT);
         right = Gdx.input.isKeyPressed(Keys.RIGHT);
         attack = Gdx.input.isKeyPressed(Keys.X);
 
-        if(Gdx.input.isKeyJustPressed(Keys.ENTER)){
+        if (Gdx.input.isKeyJustPressed(Keys.ENTER)) {
             level.debug = true;
         }
 
-        switch(actionState){
+        switch (actionState) {
             //Only allow attacks While grounded?
             case GROUNDED:
-                if(attack){
+                if (attack) {
                     initAttack();
                 } else {
                     if (left && !right) {
@@ -267,7 +272,7 @@ public class Jack {
                 }
             case FALLING:
                 //Allow air control?
-                if(attack){
+                if (attack) {
                     initAttack();
                 }
                 if (left && !right) {
@@ -277,25 +282,25 @@ public class Jack {
                 }
                 break;
             case GRABBING:
-                if(facing == RIGHT && left){
+                if (facing == RIGHT && left) {
                     actionState = FALLING;
                     //Gdx.app.log(TAG, "Let go");
-                }else if(facing == LEFT && right){
+                } else if (facing == LEFT && right) {
                     //Gdx.app.log(TAG,"let go");
                 }
                 break;
         }
 
         //If both left and right keys are active dont move
-        if(Gdx.input.isKeyPressed(Keys.UP)){
-            switch (actionState){
+        if (Gdx.input.isKeyPressed(Keys.UP)) {
+            switch (actionState) {
                 case GROUNDED:
                     actionState = FALLING;
                     velocity.y += JUMP_SPEED;
                     //Gdx.app.log(TAG, "Jumped");
                     break;
                 case GRABBING:
-                    switch(facing){
+                    switch (facing) {
                         case LEFT:
                             initClimb();
                             //Gdx.app.log(TAG, "Climbed Left");
@@ -309,8 +314,8 @@ public class Jack {
             }
         }
 
-        if(Gdx.input.isKeyPressed(Keys.DOWN)){
-            switch(actionState){
+        if (Gdx.input.isKeyPressed(Keys.DOWN)) {
+            switch (actionState) {
                 case GROUNDED:
                     //Gdx.app.log(TAG, "Ducking?");
                     break;
@@ -322,10 +327,10 @@ public class Jack {
         }
     }
 
-    private void initAttack(){
+    private void initAttack() {
         actionStartTime = TimeUtils.nanoTime();
         actionState = ATTACKING;
-        switch(random.nextInt(3) + 1){
+        switch (random.nextInt(3) + 1) {
             case 1:
                 animationState = AnimState.ATTACK1;
                 //Gdx.app.log(TAG, "Attack 1");
@@ -339,15 +344,30 @@ public class Jack {
                 //Gdx.app.log(TAG, "Attack 3");
                 break;
         }
+        //TODO: Clean this up
+        Rectangle rect = new Rectangle();
+        switch (facing) {
+            case LEFT:
+                rect.setPosition(position.x - Constants.JACK_ATTACK_RANGE, position.y);
+                rect.setWidth(Constants.JACK_ATTACK_RANGE);
+                rect.setHeight(JACK_HEIGHT);
+                break;
+            case RIGHT:
+                rect.setPosition(position.x + Constants.RVOS_WIDTH, position.y);
+                rect.setWidth(Constants.JACK_ATTACK_RANGE);
+                rect.setHeight(JACK_HEIGHT);
+                break;
+        }
+        level.attack(rect);
     }
 
-    private void attack(){
+    private void attack() {
         //End attack after 0.5s
-        if(Utils.secondsSince(actionStartTime) > 0.5){
+        if (Utils.secondsSince(actionStartTime) > 0.5) {
             actionState = GROUNDED;
         }
         attackBounds = bounds;
-        switch (facing){
+        switch (facing) {
             case LEFT:
                 attackBounds.x -= 10;
                 break;
@@ -357,31 +377,31 @@ public class Jack {
         }
     }
 
-    private void climb(float delta){
-        position.add(0,60*delta);
-        if(Utils.secondsSince(actionStartTime) > 0.5){
+    private void climb(float delta) {
+        position.add(0, 60 * delta);
+        if (Utils.secondsSince(actionStartTime) > 0.5) {
             //Gdx.app.log(TAG, "Climb ended");
             actionState = FALLING;
-            switch(facing){
+            switch (facing) {
                 case LEFT:
-                    position.add(-8,0);
+                    position.add(-8, 0);
                     break;
                 case RIGHT:
-                    position.add(8,0);
+                    position.add(8, 0);
                     break;
             }
         }
         velocity.setZero();
     }
 
-    private void initClimb(){
+    private void initClimb() {
         actionStartTime = TimeUtils.nanoTime();
         animationState = AnimState.CLIMB;
         actionState = CLIMBING;
     }
 
-    private void move(Direction direction){
-        switch(direction){
+    private void move(Direction direction) {
+        switch (direction) {
             case LEFT:
                 velocity.x = -Constants.JACK_MOVE_SPEED;
                 facing = LEFT;
@@ -393,7 +413,7 @@ public class Jack {
         }
     }
 
-    public Vector2 getPosition(){
+    public Vector2 getPosition() {
         return position;
     }
 }

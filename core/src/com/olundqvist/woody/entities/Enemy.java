@@ -54,9 +54,6 @@ public class Enemy {
             case ANDROMALIUS:
                 region = renderAndromalius();
                 break;
-            case HELLHOUND:
-                region = renderHellHound();
-                break;
             default:
                 region = renderHellHound();
         }
