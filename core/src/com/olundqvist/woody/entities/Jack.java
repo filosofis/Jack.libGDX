@@ -258,21 +258,24 @@ public class Jack {
         }
 
         switch (actionState) {
-            //Only allow attacks While grounded?
+            //Only allow attack initiation While grounded?
             case GROUNDED:
                 if (attack) {
+                    Gdx.app.log(TAG, "Initiating attack from Grounded");
                     initAttack();
-                } else {
+                }
+                else {
                     if (left && !right) {
                         move(LEFT);
                     } else if (right && !left) {
                         move(RIGHT);
                     }
-                    break;
                 }
+                break;
             case FALLING:
                 //Allow air control?
                 if (attack) {
+                    Gdx.app.log(TAG, "Initiating attack from Falling");
                     initAttack();
                 }
                 if (left && !right) {
@@ -289,9 +292,17 @@ public class Jack {
                     //Gdx.app.log(TAG,"let go");
                 }
                 break;
+            case ATTACKING:
+                //Allow moving attacks?
+                if (left && !right) {
+                    move(LEFT);
+                } else if (right && !left) {
+                    move(RIGHT);
+                }
+                break;
         }
 
-        //If both left and right keys are active dont move
+        //If both left and right keys are active don't move
         if (Gdx.input.isKeyPressed(Keys.UP)) {
             switch (actionState) {
                 case GROUNDED:

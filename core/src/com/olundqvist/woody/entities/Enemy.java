@@ -27,11 +27,13 @@ public class Enemy {
     private long idleStartTime;
     private long actionStartTime;
     private float idleTimeSec;
+    private int hitpoints;
 
     public Enemy(Vector2 spawnLocation, Enums.EnemyType enemyType, Rectangle bounds){
         position = new Vector2();
         this.enemyType = enemyType;
         velocity = new Vector2(10, 0);
+        hitpoints = 3;
         this.bounds = bounds;
         init(spawnLocation);
     }
@@ -65,6 +67,7 @@ public class Enemy {
                 direction
         );
     }
+
     private TextureAtlas.AtlasRegion renderAndromalius(){
         switch(animState){
             case TURN:
@@ -77,7 +80,6 @@ public class Enemy {
                 );
         }
     }
-
     private TextureAtlas.AtlasRegion renderHellHound(){
         return Assets.instance.hellHoundAssets.idleAnimation.getKeyFrame(idleTimeSec);
     }
@@ -102,6 +104,11 @@ public class Enemy {
             default:
                 animState = Enums.AnimState.IDLE;
         }
+    }
+
+    public void hit(){
+        hitpoints--;
+        Gdx.app.log(TAG, "Hitpoints: " + hitpoints);
     }
 
     public void turn(){
@@ -142,6 +149,7 @@ public class Enemy {
                 ", direction=" + direction +
                 ", enemyType=" + enemyType +
                 ", bounds=" + bounds +
+                ", hitpoints=" + hitpoints +
                 '}';
     }
 }

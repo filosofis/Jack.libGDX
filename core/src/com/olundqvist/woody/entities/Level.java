@@ -164,10 +164,10 @@ public class Level {
 
     public void attack(Rectangle bounds){
         for(Enemy enemy: enemies){
-            Gdx.app.log(TAG, "Attack rect : " + bounds.width + ", ");
             if(enemy.getBounds().overlaps(bounds)){
                 Gdx.app.log(TAG, "We got a Hit on " + enemy.getBounds().x +", " +
                         enemy.getBounds().x + enemy.getBounds().width);
+                        enemy.hit();
             }
         }
     }
