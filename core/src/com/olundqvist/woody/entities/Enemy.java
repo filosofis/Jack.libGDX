@@ -141,6 +141,9 @@ public class Enemy {
     public Vector2 getPosition() {
         return position;
     }
+    public int getHitpoints(){
+        return hitpoints;
+    }
 
     @Override
     public String toString() {

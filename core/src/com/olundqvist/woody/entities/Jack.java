@@ -20,6 +20,7 @@ import jdk.nashorn.internal.runtime.regexp.joni.ast.ConsAltNode;
 
 import static com.olundqvist.woody.util.Constants.JACK_DAMPING;
 import static com.olundqvist.woody.util.Constants.JACK_HEIGHT;
+import static com.olundqvist.woody.util.Constants.JACK_WIDTH;
 import static com.olundqvist.woody.util.Constants.JUMP_SPEED;
 import static com.olundqvist.woody.util.Constants.RVOS_WIDTH;
 import static com.olundqvist.woody.util.Enums.Direction.LEFT;
@@ -52,6 +53,18 @@ public class Jack {
         offset = new Vector2();
         this.level = level;
         init();
+    }
+
+    private void init() {
+        position = spawnLocation;
+        velocity.setZero();
+        facing = RIGHT;
+        random = new Random();
+        // TODO: Review Animation start times
+        idleStartTime = TimeUtils.nanoTime();
+        animationState = AnimState.IDLE;
+        actionState = FALLING;
+        bounds = new Rectangle(position.x, position.y, Constants.JACK_WIDTH, JACK_HEIGHT);
     }
 
     void render(Batch batch) {
@@ -111,16 +124,30 @@ public class Jack {
         Utils.drawTextureRegion(batch, region, position, facing, offset);
     }
 
-    private void init() {
-        position = spawnLocation;
-        velocity.setZero();
-        facing = RIGHT;
-        random = new Random();
-        // TODO: Review Animation start times
-        idleStartTime = TimeUtils.nanoTime();
-        animationState = AnimState.IDLE;
-        actionState = FALLING;
-        bounds = new Rectangle(position.x, position.y, Constants.JACK_WIDTH, JACK_HEIGHT);
+    void update(float delta) {
+        handleInput();
+        velocity.y -= Constants.GRAVITY;
+        velocity.scl(delta);
+        bounds.setPosition(position);
+        switch (actionState) {
+            case GRABBING:
+                velocity.setZero();
+                break;
+            case CLIMBING:
+                climb(delta);
+                break;
+            case ATTACKING:
+                attack();
+            case FALLING:
+            case RECOILING:
+            case GROUNDED:
+                collisionCheck();
+                break;
+        }
+        updateState();
+        position.add(velocity);
+        velocity.scl(1 / delta);
+        dampen();
     }
 
     private void updateState() {
@@ -151,29 +178,18 @@ public class Jack {
         }
     }
 
-    void update(float delta) {
-        handleInput();
-        velocity.y -= Constants.GRAVITY;
-        velocity.scl(delta);
-        bounds.setPosition(position);
-        switch (actionState) {
-            case GRABBING:
-                velocity.setZero();
-                break;
-            case CLIMBING:
-                climb(delta);
-                break;
-            case ATTACKING:
-                attack();
-            case FALLING:
-            case GROUNDED:
-                collisionCheck();
-                break;
+    public void knockback(Rectangle enemyBounds){
+        Gdx.app.log(TAG, "Knockback");
+        //If jack is on the right side of the enemy
+        if((enemyBounds.x+(enemyBounds.width/2)) < position.x + (bounds.width/2)){
+            position.x = enemyBounds.x + enemyBounds.width + 5;
+            velocity.x = 250;
+        }else{
+            position.x = enemyBounds.x - bounds.width - 5;
+            velocity.x = -250;
         }
-        updateState();
-        position.add(velocity);
-        velocity.scl(1 / delta);
-        dampen();
+        velocity.y += JUMP_SPEED/2;
+        actionState = RECOILING;
     }
 
     private void ledge(Rectangle rect) {
@@ -422,6 +438,10 @@ public class Jack {
                 facing = RIGHT;
                 break;
         }
+    }
+
+    public Rectangle getBounds() {
+        return bounds;
     }
 
     public Vector2 getPosition() {

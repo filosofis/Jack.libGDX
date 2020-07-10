@@ -15,6 +15,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -22,6 +23,8 @@ import com.olundqvist.woody.background.ParallaxBackground;
 import com.olundqvist.woody.util.Assets;
 import com.olundqvist.woody.util.Constants;
 import com.olundqvist.woody.util.Enums;
+
+import java.util.ArrayList;
 
 public class Level {
     private static final String TAG = Level.class.getName();
@@ -41,14 +44,14 @@ public class Level {
             return new Rectangle();
         }
     };
-    private Array<Enemy> enemies = new Array<>();
+    private DelayedRemovalArray<Enemy> enemies = new DelayedRemovalArray<>();
 
     public Level() {
         viewport = new ExtendViewport(Constants.WORLD_WIDTH, Constants.WORLD_HEIGHT);
         //createLayers();
         parallaxForground = Assets.instance.backgroundAssets.jungleForground;
         parallaxBackground = Assets.instance.backgroundAssets.jungleBackground;
-        map = new TmxMapLoader().load("maps/test_map.tmx");
+        map = new TmxMapLoader().load("maps/jungle_1.tmx");
         tileLayer = (TiledMapTileLayer)map.getLayers().get("TileLayer");
         tmr = new OrthogonalTiledMapRenderer(map);
         debugRenderer = new ShapeRenderer();
@@ -57,10 +60,24 @@ public class Level {
         for(Enemy enemy : enemies){
             Gdx.app.log(TAG, enemy.toString());
         }
+        spawn();
+    }
+
+    /*
+        Spawn the player at a SpawnPoint from the map
+     */
+    private void spawn(){
+        //MapObjects objects = map.getLayers().get("SpawnPoints").getObjects();
+        MapObject object = map.getLayers().get("SpawnPoints").getObjects().get("1");
+        Float x,y;
+        x = (Float)object.getProperties().get("x");
+        y = (Float)object.getProperties().get("y");
+        Gdx.app.log(TAG, "SpawnPoint 0 " +  x +" , " + y);
+        jack = new Jack(new Vector2(x,y), this);
     }
 
     //Enemies are stored as objects in the TMX file. These objects have
-    // A filed for X, and a for Y coordinate, as well as A Enemy Type
+    // A field for X, and Y coordinate, as well as A Enemy Type
     private void loadEnemies(){
         MapObjects objects = map.getLayers().get("Enemies").getObjects();
         Float x,y;
@@ -124,6 +141,8 @@ public class Level {
             //enemy.facing(jack.getPosition());
             enemy.update(delta);
         }
+        //Check for collisions between Jack and Enemies after updated position
+        enemyCollision();
     }
 
     private void getTiles (int startX, int startY, int endX, int endY) {
@@ -163,33 +182,28 @@ public class Level {
     }
 
     public void attack(Rectangle bounds){
+        enemies.begin();
         for(Enemy enemy: enemies){
             if(enemy.getBounds().overlaps(bounds)){
                 Gdx.app.log(TAG, "We got a Hit on " + enemy.getBounds().x +", " +
                         enemy.getBounds().x + enemy.getBounds().width);
                         enemy.hit();
+                        if(enemy.getHitpoints() < 0){
+                            enemies.removeValue(enemy, false);
+                        }
             }
         }
+        enemies.end();
     }
 
-    //TODO: Use rectpool for emeny bounds
-    public Rectangle collideY(Vector2 velocity, Rectangle bounds){
-        int startX, startY, endX, endY;
-        startX = (int)bounds.x;
-        endX = (int)(bounds.x + bounds.height);
-        if(velocity.y > 0){
-            startY = endY = (int)(bounds.y + bounds.height + velocity.y);
-        }else{
-            startY = endY = (int)(bounds.y + velocity.y);
-        }
-
-        getTiles(startX/16, startY/16, endX/16, endY/16);
-        for(Rectangle tile : tiles){
-            if(bounds.overlaps(tile)){
-                return tile;
+    public void enemyCollision(){
+        enemies.begin();
+        for(Enemy enemy : enemies){
+            if(enemy.getBounds().overlaps(jack.getBounds())){
+                jack.knockback(enemy.getBounds());
             }
         }
-        return null;
+        enemies.end();
     }
 
     public Rectangle collideX(Vector2 velocity, Rectangle bounds){
@@ -203,6 +217,25 @@ public class Level {
             startX = endX = (int)(bounds.x + velocity.x);
         }
 
+        getTiles(startX/16, startY/16, endX/16, endY/16);
+        for(Rectangle tile : tiles){
+            if(bounds.overlaps(tile)){
+                return tile;
+            }
+        }
+        return null;
+    }
+
+    //TODO: Use rectpool for emeny bounds
+    public Rectangle collideY(Vector2 velocity, Rectangle bounds){
+        int startX, startY, endX, endY;
+        startX = (int)bounds.x;
+        endX = (int)(bounds.x + bounds.height);
+        if(velocity.y > 0){
+            startY = endY = (int)(bounds.y + bounds.height + velocity.y);
+        }else{
+            startY = endY = (int)(bounds.y + velocity.y);
+        }
 
         getTiles(startX/16, startY/16, endX/16, endY/16);
         for(Rectangle tile : tiles){

@@ -54,7 +54,7 @@ public class GameplayScreen extends ScreenAdapter {
 
     private void startLevel(){
         level = new Level();
-        level.setJack(new Jack(Constants.DEFAULT_SPAWN_LOCATION, level));
+        //level.setJack(new Jack(Constants.DEFAULT_SPAWN_LOCATION, level));
         chaseCam.camera = level.viewport.getCamera();
         chaseCam.target = level.getJack();
         resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());

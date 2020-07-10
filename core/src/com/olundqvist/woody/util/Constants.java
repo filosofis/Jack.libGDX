@@ -9,7 +9,7 @@ public class Constants {
     public static final String TEXTURE_ATLAS = "images/woody.pack.atlas";
     public static final float WORLD_WIDTH = 384;
     public static final float WORLD_HEIGHT = 216;
-    public static final Vector2 DEFAULT_SPAWN_LOCATION = new Vector2(150, 20);
+    public static final Vector2 DEFAULT_SPAWN_LOCATION = new Vector2(24, 224);
     public static final Color BACKGROUND_COLOR = new Color(151826);
     public static final float GRAVITY = 8;
 
