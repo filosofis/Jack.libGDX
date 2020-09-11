@@ -313,6 +313,7 @@ public class Assets implements Disposable, AssetErrorListener {
         public final Animation<AtlasRegion> attack1Animation;
         public final Animation<AtlasRegion> attack2Animation;
         public final Animation<AtlasRegion> attack3Animation;
+        public final Animation<AtlasRegion> deathAnimation;
         public final TextureRegion jumpSprite;
 
         RvrosAssets(TextureAtlas atlas){
@@ -324,6 +325,7 @@ public class Assets implements Disposable, AssetErrorListener {
             attack1Animation = initAttack1(atlas);
             attack2Animation = initAttack2(atlas);
             attack3Animation = initAttack3(atlas);
+            deathAnimation = initDeathAnimation(atlas);
             jumpSprite = atlas.findRegion(Constants.RVROS_JUMP_2);
         }
 
@@ -371,9 +373,6 @@ public class Assets implements Disposable, AssetErrorListener {
                     Animation.PlayMode.NORMAL
             );
         }
-
-
-
         private Animation<AtlasRegion> initClimbAnimation(TextureAtlas atlas){
             Array<AtlasRegion> climbFrames = new Array<>();
             climbFrames.add(atlas.findRegion(Constants.RVROS_CRNR_CLMB_0));
@@ -437,6 +436,22 @@ public class Assets implements Disposable, AssetErrorListener {
                     Constants.RVROS_GRAB_DURATION,
                     grabFrames,
                     Animation.PlayMode.LOOP
+            );
+        }
+        private Animation<AtlasRegion> initDeathAnimation(TextureAtlas atlas){
+            Array<AtlasRegion> deathFrames = new Array<>();
+            deathFrames.add(atlas.findRegion(Constants.RVROS_DEATH_0));
+            deathFrames.add(atlas.findRegion(Constants.RVROS_DEATH_1));
+            deathFrames.add(atlas.findRegion(Constants.RVROS_DEATH_2));
+            deathFrames.add(atlas.findRegion(Constants.RVROS_DEATH_3));
+            deathFrames.add(atlas.findRegion(Constants.RVROS_DEATH_4));
+            deathFrames.add(atlas.findRegion(Constants.RVROS_DEATH_5));
+            deathFrames.add(atlas.findRegion(Constants.RVROS_DEATH_6));
+
+            return new Animation<>(
+                    Constants.RVROS_DEATH_DURATION,
+                    deathFrames,
+                    Animation.PlayMode.NORMAL
             );
         }
     }

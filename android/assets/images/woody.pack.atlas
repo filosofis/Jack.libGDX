@@ -653,62 +653,6 @@ rvros/adventurer-crouch-03
   orig: 20, 22
   offset: 0, 0
   index: -1
-rvros/adventurer-die-00
-  rotate: false
-  xy: 540, 62
-  size: 22, 24
-  orig: 22, 24
-  offset: 0, 0
-  index: -1
-rvros/adventurer-die-01
-  rotate: false
-  xy: 564, 62
-  size: 22, 24
-  orig: 22, 24
-  offset: 0, 0
-  index: -1
-rvros/adventurer-hurt-01
-  rotate: false
-  xy: 564, 62
-  size: 22, 24
-  orig: 22, 24
-  offset: 0, 0
-  index: -1
-rvros/adventurer-die-02
-  rotate: false
-  xy: 588, 62
-  size: 22, 24
-  orig: 22, 24
-  offset: 0, 0
-  index: -1
-rvros/adventurer-die-03
-  rotate: false
-  xy: 612, 62
-  size: 22, 24
-  orig: 22, 24
-  offset: 0, 0
-  index: -1
-rvros/adventurer-die-04
-  rotate: false
-  xy: 636, 62
-  size: 22, 24
-  orig: 22, 24
-  offset: 0, 0
-  index: -1
-rvros/adventurer-die-06
-  rotate: false
-  xy: 636, 62
-  size: 22, 24
-  orig: 22, 24
-  offset: 0, 0
-  index: -1
-rvros/adventurer-die-05
-  rotate: false
-  xy: 660, 62
-  size: 22, 24
-  orig: 22, 24
-  offset: 0, 0
-  index: -1
 rvros/adventurer-fall-00
   rotate: false
   xy: 149, 16
@@ -725,14 +669,28 @@ rvros/adventurer-fall-01
   index: -1
 rvros/adventurer-hurt-00
   rotate: false
-  xy: 684, 62
+  xy: 540, 62
+  size: 22, 24
+  orig: 22, 24
+  offset: 0, 0
+  index: -1
+rvros/adventurer-hurt-01
+  rotate: false
+  xy: 564, 62
+  size: 22, 24
+  orig: 22, 24
+  offset: 0, 0
+  index: -1
+rvros/die-01
+  rotate: false
+  xy: 564, 62
   size: 22, 24
   orig: 22, 24
   offset: 0, 0
   index: -1
 rvros/adventurer-hurt-02
   rotate: false
-  xy: 708, 62
+  xy: 588, 62
   size: 22, 24
   orig: 22, 24
   offset: 0, 0
@@ -879,28 +837,28 @@ rvros/adventurer-slide-01
   index: -1
 rvros/adventurer-smrslt-00
   rotate: false
-  xy: 732, 64
+  xy: 612, 64
   size: 24, 22
   orig: 24, 22
   offset: 0, 0
   index: -1
 rvros/adventurer-smrslt-01
   rotate: false
-  xy: 758, 64
+  xy: 638, 64
   size: 24, 22
   orig: 24, 22
   offset: 0, 0
   index: -1
 rvros/adventurer-smrslt-02
   rotate: false
-  xy: 784, 64
+  xy: 664, 64
   size: 24, 22
   orig: 24, 22
   offset: 0, 0
   index: -1
 rvros/adventurer-smrslt-03
   rotate: false
-  xy: 810, 64
+  xy: 690, 64
   size: 24, 22
   orig: 24, 22
   offset: 0, 0
@@ -926,224 +884,50 @@ rvros/adventurer-stand-02
   orig: 34, 17
   offset: 0, 0
   index: -1
+rvros/die-00
+  rotate: false
+  xy: 716, 62
+  size: 22, 24
+  orig: 22, 24
+  offset: 0, 0
+  index: -1
+rvros/die-02
+  rotate: false
+  xy: 740, 62
+  size: 22, 24
+  orig: 22, 24
+  offset: 0, 0
+  index: -1
+rvros/die-03
+  rotate: false
+  xy: 764, 62
+  size: 22, 24
+  orig: 22, 24
+  offset: 0, 0
+  index: -1
+rvros/die-04
+  rotate: false
+  xy: 788, 62
+  size: 22, 24
+  orig: 22, 24
+  offset: 0, 0
+  index: -1
+rvros/die-06
+  rotate: false
+  xy: 788, 62
+  size: 22, 24
+  orig: 22, 24
+  offset: 0, 0
+  index: -1
+rvros/die-05
+  rotate: false
+  xy: 812, 62
+  size: 22, 24
+  orig: 22, 24
+  offset: 0, 0
+  index: -1
 
 woody.pack4.png
-size: 128,256
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-woody/woody_falling0
-  rotate: false
-  xy: 2, 77
-  size: 22, 37
-  orig: 22, 37
-  offset: 0, 0
-  index: -1
-woody/woody_falling1
-  rotate: false
-  xy: 26, 121
-  size: 22, 37
-  orig: 22, 37
-  offset: 0, 0
-  index: -1
-woody/woody_grab0
-  rotate: false
-  xy: 2, 204
-  size: 22, 42
-  orig: 22, 42
-  offset: 0, 0
-  index: -1
-woody/woody_grab1
-  rotate: false
-  xy: 2, 160
-  size: 22, 42
-  orig: 22, 42
-  offset: 0, 0
-  index: -1
-woody/woody_grab2
-  rotate: false
-  xy: 26, 204
-  size: 22, 42
-  orig: 22, 42
-  offset: 0, 0
-  index: -1
-woody/woody_grab3
-  rotate: false
-  xy: 2, 116
-  size: 22, 42
-  orig: 22, 42
-  offset: 0, 0
-  index: -1
-woody/woody_grab4
-  rotate: false
-  xy: 26, 160
-  size: 22, 42
-  orig: 22, 42
-  offset: 0, 0
-  index: -1
-woody/woody_grab5
-  rotate: false
-  xy: 50, 204
-  size: 22, 42
-  orig: 22, 42
-  offset: 0, 0
-  index: -1
-woody/woody_idle00
-  rotate: false
-  xy: 2, 40
-  size: 21, 35
-  orig: 21, 35
-  offset: 0, 0
-  index: -1
-woody/woody_idle01
-  rotate: false
-  xy: 26, 84
-  size: 21, 35
-  orig: 21, 35
-  offset: 0, 0
-  index: -1
-woody/woody_idle02
-  rotate: false
-  xy: 50, 128
-  size: 21, 35
-  orig: 21, 35
-  offset: 0, 0
-  index: -1
-woody/woody_idle03
-  rotate: false
-  xy: 2, 3
-  size: 21, 35
-  orig: 21, 35
-  offset: 0, 0
-  index: -1
-woody/woody_idle04
-  rotate: false
-  xy: 25, 2
-  size: 21, 35
-  orig: 21, 35
-  offset: 0, 0
-  index: -1
-woody/woody_idle05
-  rotate: false
-  xy: 49, 84
-  size: 21, 35
-  orig: 21, 35
-  offset: 0, 0
-  index: -1
-woody/woody_idle06
-  rotate: false
-  xy: 48, 11
-  size: 21, 35
-  orig: 21, 35
-  offset: 0, 0
-  index: -1
-woody/woody_idle07
-  rotate: false
-  xy: 73, 128
-  size: 21, 35
-  orig: 21, 35
-  offset: 0, 0
-  index: -1
-woody/woody_idle08
-  rotate: false
-  xy: 72, 91
-  size: 21, 35
-  orig: 21, 35
-  offset: 0, 0
-  index: -1
-woody/woody_idle09
-  rotate: false
-  xy: 71, 47
-  size: 21, 35
-  orig: 21, 35
-  offset: 0, 0
-  index: -1
-woody/woody_idle10
-  rotate: false
-  xy: 71, 10
-  size: 21, 35
-  orig: 21, 35
-  offset: 0, 0
-  index: -1
-woody/woody_idle11
-  rotate: false
-  xy: 95, 91
-  size: 21, 35
-  orig: 21, 35
-  offset: 0, 0
-  index: -1
-woody/woody_jumping
-  rotate: false
-  xy: 25, 39
-  size: 19, 36
-  orig: 19, 36
-  offset: 0, 0
-  index: -1
-woody/woody_landing
-  rotate: false
-  xy: 50, 165
-  size: 22, 37
-  orig: 22, 37
-  offset: 0, 0
-  index: -1
-woody/woody_run0
-  rotate: false
-  xy: 74, 212
-  size: 23, 34
-  orig: 23, 34
-  offset: 0, 0
-  index: -1
-woody/woody_run1
-  rotate: false
-  xy: 74, 176
-  size: 23, 34
-  orig: 23, 34
-  offset: 0, 0
-  index: -1
-woody/woody_run2
-  rotate: false
-  xy: 99, 212
-  size: 23, 34
-  orig: 23, 34
-  offset: 0, 0
-  index: -1
-woody/woody_run3
-  rotate: false
-  xy: 99, 176
-  size: 23, 34
-  orig: 23, 34
-  offset: 0, 0
-  index: -1
-woody/woody_run4
-  rotate: false
-  xy: 46, 48
-  size: 23, 34
-  orig: 23, 34
-  offset: 0, 0
-  index: -1
-woody/woody_run5
-  rotate: false
-  xy: 96, 140
-  size: 23, 34
-  orig: 23, 34
-  offset: 0, 0
-  index: -1
-woody/woody_run6
-  rotate: false
-  xy: 94, 55
-  size: 23, 34
-  orig: 23, 34
-  offset: 0, 0
-  index: -1
-woody/woody_run7
-  rotate: false
-  xy: 94, 19
-  size: 23, 34
-  orig: 23, 34
-  offset: 0, 0
-  index: -1
-
-woody.pack5.png
 size: 1024,1024
 format: RGBA8888
 filter: Nearest,Nearest
@@ -1170,7 +954,7 @@ background/Layer_0010
   offset: 0, 0
   index: 1
 
-woody.pack6.png
+woody.pack5.png
 size: 1024,1024
 format: RGBA8888
 filter: Nearest,Nearest
@@ -1197,7 +981,7 @@ background/Layer_0009
   offset: 0, 0
   index: 2
 
-woody.pack7.png
+woody.pack6.png
 size: 1024,1024
 format: RGBA8888
 filter: Nearest,Nearest
@@ -1231,7 +1015,7 @@ background/Layer_0008
   offset: 0, 0
   index: 3
 
-woody.pack8.png
+woody.pack7.png
 size: 1024,256
 format: RGBA8888
 filter: Nearest,Nearest
@@ -1241,5 +1025,60 @@ background/Layer_0004_Lights
   xy: 2, 2
   size: 603, 220
   orig: 603, 220
+  offset: 0, 0
+  index: -1
+
+woody.pack8.png
+size: 256,32
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+test/die-00
+  rotate: false
+  xy: 2, 2
+  size: 22, 24
+  orig: 22, 24
+  offset: 0, 0
+  index: -1
+test/die-01
+  rotate: false
+  xy: 26, 2
+  size: 22, 24
+  orig: 22, 24
+  offset: 0, 0
+  index: -1
+test/die-02
+  rotate: false
+  xy: 50, 2
+  size: 22, 24
+  orig: 22, 24
+  offset: 0, 0
+  index: -1
+test/die-03
+  rotate: false
+  xy: 74, 2
+  size: 22, 24
+  orig: 22, 24
+  offset: 0, 0
+  index: -1
+test/die-04
+  rotate: false
+  xy: 98, 2
+  size: 22, 24
+  orig: 22, 24
+  offset: 0, 0
+  index: -1
+test/die-06
+  rotate: false
+  xy: 98, 2
+  size: 22, 24
+  orig: 22, 24
+  offset: 0, 0
+  index: -1
+test/die-05
+  rotate: false
+  xy: 122, 2
+  size: 22, 24
+  orig: 22, 24
   offset: 0, 0
   index: -1

@@ -23,7 +23,8 @@ public class Enums {
         GROUNDED,
         CLIMBING,
         ATTACKING,
-        RECOILING
+        RECOILING,
+        DIEING
     }
 
     public enum WH{
@@ -41,6 +42,7 @@ public class Enums {
         ATTACK1,
         ATTACK2,
         ATTACK3,
-        TURN
+        TURN,
+        DIE
     }
 }

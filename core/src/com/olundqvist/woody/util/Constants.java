@@ -27,6 +27,8 @@ public class Constants {
     public static final float JACK_ATTACK_RANGE = 25;
     public static final Vector2 KNOCKBACK_VELOCITY = new Vector2(200, 200);
     public static final float MAX_JUMP_DURATION = .2f;
+    public static final int JACK_HP = 5;
+    public static final int JACK_LIVES = 3;
 
     static final float SHORT_ANIMATION_DURATION = 0.10f;
     static final float LONG_ANIMATION_DURATION = 0.2f;
@@ -200,6 +202,16 @@ public class Constants {
     static final String RVROS_ATTACK_3_3 = "rvros/adventurer-attack3-03";
     static final String RVROS_ATTACK_3_4 = "rvros/adventurer-attack3-04";
     static final String RVROS_ATTACK_3_5 = "rvros/adventurer-attack3-05";
+
+    //Die
+    static final String RVROS_DEATH_0 = "test/die-00";
+    static final String RVROS_DEATH_1 = "test/die-01";
+    static final String RVROS_DEATH_2 = "test/die-02";
+    static final String RVROS_DEATH_3 = "test/die-03";
+    static final String RVROS_DEATH_4 = "test/die-04";
+    static final String RVROS_DEATH_5 = "test/die-05";
+    static final String RVROS_DEATH_6 = "test/die-06";
+    static final float RVROS_DEATH_DURATION = 0.10f;
 
     /*
         Woody

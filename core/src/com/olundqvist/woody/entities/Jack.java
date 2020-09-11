@@ -39,11 +39,13 @@ public class Jack {
     private AnimState animationState;
     private long idleStartTime;
     private long actionStartTime;
+    private long deathStartTime;
     private float idleTimeSec;
     boolean left, right, attack;
     private Level level;
     private Rectangle bounds, attackBounds;
     private Random random;
+    private int hp, lives;
 
 
     public Jack(Vector2 spawnLocation, Level level) {
@@ -65,6 +67,8 @@ public class Jack {
         animationState = AnimState.IDLE;
         actionState = FALLING;
         bounds = new Rectangle(position.x, position.y, Constants.JACK_WIDTH, JACK_HEIGHT);
+        hp = Constants.JACK_HP;
+        lives = Constants.JACK_LIVES;
     }
 
     void render(Batch batch) {
@@ -109,13 +113,16 @@ public class Jack {
                     offset.x = -25;
                 }
                 break;
-
             case ATTACK3:
                 region = Assets.instance.rvrosAssets.attack3Animation.getKeyFrame(
                         Utils.secondsSince(actionStartTime));
                 if (facing == LEFT) {
                     offset.x = -30;
                 }
+                break;
+            case DIE:
+                region = Assets.instance.rvrosAssets.deathAnimation.getKeyFrame(
+                        Utils.secondsSince(actionStartTime));
                 break;
             default:
                 region = Assets.instance.rvrosAssets.idleAnimation.getKeyFrame(idleTimeSec);
@@ -141,6 +148,10 @@ public class Jack {
             case FALLING:
             case RECOILING:
             case GROUNDED:
+                collisionCheck();
+                break;
+            case DIEING:
+                dieing();
                 collisionCheck();
                 break;
         }
@@ -175,6 +186,9 @@ public class Jack {
             case CLIMBING:
                 animationState = AnimState.CLIMB;
                 break;
+            case DIEING:
+                animationState = AnimState.DIE;
+                break;
         }
     }
 
@@ -190,6 +204,38 @@ public class Jack {
         }
         velocity.y += JUMP_SPEED/2;
         actionState = RECOILING;
+        takeDamage(1);
+    }
+
+    public void takeDamage(int dmg){
+        this.hp -= dmg;
+        if(hp < 0){
+            die();
+        }
+        Gdx.app.log(TAG, "took " + dmg + " dmg  HP:" + this.hp);
+    }
+
+    public void die(){
+        Gdx.app.log(TAG, "Died " + lives + " Lives remaining");
+        this.lives -= 1;
+        actionState = DIEING;
+        actionStartTime = TimeUtils.nanoTime();
+        if(this.lives < 0){
+            Gdx.app.log(TAG, "Game over");
+        }else{
+            this.hp = Constants.JACK_HP;
+        }
+    }
+
+    private void dieing(){
+        if(Utils.secondsSince(actionStartTime) > 2){
+            if(this.lives < 0){
+                Gdx.app.log(TAG, "Game over");
+            }else{
+                this.hp = Constants.JACK_HP;
+            }
+            actionState = FALLING;
+        }
     }
 
     private void ledge(Rectangle rect) {
@@ -251,7 +297,7 @@ public class Jack {
 
     private void land() {
         velocity.y = 0;
-        if (actionState != ATTACKING) {
+        if (actionState != ATTACKING && actionState != DIEING) {
             actionState = GROUNDED;
         }
     }
