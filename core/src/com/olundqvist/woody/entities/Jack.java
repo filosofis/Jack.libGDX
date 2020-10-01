@@ -45,7 +45,7 @@ public class Jack {
     private Level level;
     private Rectangle bounds, attackBounds;
     private Random random;
-    private int hp, lives;
+    private int hp, lives, spawnPoint;
 
 
     public Jack(Vector2 spawnLocation, Level level) {

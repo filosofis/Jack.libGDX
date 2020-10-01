@@ -18,6 +18,7 @@ public class GameplayScreen extends ScreenAdapter {
     private SpriteBatch batch;
     private ChaseCam chaseCam;
     private Level level;
+    private HUD hud;
 
     @Override
     public void show(){
@@ -25,6 +26,8 @@ public class GameplayScreen extends ScreenAdapter {
         AssetManager am = new AssetManager();
         Assets.instance.init(am);
         chaseCam = new ChaseCam();
+        hud = new HUD();
+        batch = new SpriteBatch();
         startLevel();
     }
 
@@ -39,11 +42,13 @@ public class GameplayScreen extends ScreenAdapter {
                 BACKGROUND_COLOR.a);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         level.render();
+        hud.render(batch,0, 0);
     }
 
     @Override
     public void resize(int width, int height) {
         level.viewport.update(width, height, true);
+        hud.viewport.update(width, height, true);
         chaseCam.camera = level.viewport.getCamera();
     }
 

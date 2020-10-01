@@ -17,6 +17,10 @@ public class Constants {
     public static final float CHASE_CAM_MOVE_SPEED = WORLD_WIDTH;
     public static final float CAMERA_PADDING = 80;
 
+    //HUD
+    public static final float HUD_WIDTH = 360;
+    public static final float HUD_HIEHGT = 640;
+
     //Jack
     public static final float JACK_MOVE_SPEED = 150;
     public static final float JUMP_SPEED = 200;
